@@ -33,6 +33,11 @@ public class utilisateurController {
 		return "identification";
 	}
 	
+	@GetMapping("/detail_vente")
+	public String detailVente(Integer id, Model model) {
+		Enchere enchere = enchereService;
+	}
+	
 	
 	@PostMapping("/nouvelle_vente")
 	public String ajouterVente(@Valid @ModelAttribute Enchere enchere, BindingResult validationResult) { 
