@@ -9,8 +9,8 @@ import jakarta.validation.constraints.Size;
 
 public class Utilisateur {
 	
-	// Id = noUtilisateur
-	private Long noUtilisateur;
+	// Id = no_utilisateur
+	private Long no_utilisateur;
 	
 	// Autres propriétés de l'utilisateur
 	@NotBlank(message = "Merci de saisir un pseudo valide")
@@ -38,7 +38,7 @@ public class Utilisateur {
 	
 	@NotNull(message="Merci de saisir un code postal")
 	@Size(max=10)
-	private String codePostal;
+	private String code_postal;
 	
 	@NotNull(message="Merci de saisir une ville")
 	@Size(max=30)
@@ -46,7 +46,7 @@ public class Utilisateur {
 	
 	@NotNull(message="Merci de saisir un mot de passe valide")
 	@Size(max=30)
-	private String motDePasse;
+	private String mot_de_passe;
 	
 	@NotNull(message="Merci de saisir un montant")
 	private Integer credit = 0;
@@ -59,57 +59,74 @@ public class Utilisateur {
 	private List<Enchere> encheres;
 	
 
-	//Constructeur(s)
+	//Constructeur vide
 	public Utilisateur() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Utilisateur(Long noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, Integer credit, Boolean adminsitrateur) {
+	// Constructeur sans association
+	public Utilisateur(Long no_utilisateur,
+			@NotBlank(message = "Merci de saisir un pseudo valide") @Size(max = 30) String pseudo,
+			@NotNull(message = "Merci de saisir un nom") @Size(max = 30) String nom,
+			@NotNull(message = "Merci de saisir un prenom") @Size(max = 30) String prenom,
+			@NotBlank(message = "Merci de saisir un email valide") @Size(max = 20) String email,
+			@Size(max = 15) String telephone,
+			@NotNull(message = "Merci de saisir une adresse") @Size(max = 30) String rue,
+			@NotNull(message = "Merci de saisir un code postal") @Size(max = 10) String code_postal,
+			@NotNull(message = "Merci de saisir une ville") @Size(max = 30) String ville,
+			@NotNull(message = "Merci de saisir un mot de passe valide") @Size(max = 30) String mot_de_passe,
+			@NotNull(message = "Merci de saisir un montant") Integer credit) {
 		super();
-		this.noUtilisateur = noUtilisateur;
+		this.no_utilisateur = no_utilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.telephone = telephone;
 		this.rue = rue;
-		this.codePostal = codePostal;
+		this.code_postal = code_postal;
 		this.ville = ville;
-		this.motDePasse = motDePasse;
+		this.mot_de_passe = mot_de_passe;
 		this.credit = credit;
-		this.adminsitrateur = adminsitrateur;
 	}
 	
-	
-	public Utilisateur(Long noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, Integer credit, Boolean adminsitrateur,
+	// Constructeur avec associations
+	public Utilisateur(Long no_utilisateur,
+			@NotBlank(message = "Merci de saisir un pseudo valide") @Size(max = 30) String pseudo,
+			@NotNull(message = "Merci de saisir un nom") @Size(max = 30) String nom,
+			@NotNull(message = "Merci de saisir un prenom") @Size(max = 30) String prenom,
+			@NotBlank(message = "Merci de saisir un email valide") @Size(max = 20) String email,
+			@Size(max = 15) String telephone,
+			@NotNull(message = "Merci de saisir une adresse") @Size(max = 30) String rue,
+			@NotNull(message = "Merci de saisir un code postal") @Size(max = 10) String code_postal,
+			@NotNull(message = "Merci de saisir une ville") @Size(max = 30) String ville,
+			@NotNull(message = "Merci de saisir un mot de passe valide") @Size(max = 30) String mot_de_passe,
+			@NotNull(message = "Merci de saisir un montant") Integer credit, @NotNull Boolean adminsitrateur,
 			List<ArticleVendu> articlesVendus, List<Enchere> encheres) {
 		super();
-		this.noUtilisateur = noUtilisateur;
+		this.no_utilisateur = no_utilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.telephone = telephone;
 		this.rue = rue;
-		this.codePostal = codePostal;
+		this.code_postal = code_postal;
 		this.ville = ville;
-		this.motDePasse = motDePasse;
+		this.mot_de_passe = mot_de_passe;
 		this.credit = credit;
 		this.adminsitrateur = adminsitrateur;
 		this.articlesVendus = articlesVendus;
 		this.encheres = encheres;
 	}
-	
 
 	// Getters et Setters
-	public Long getNoUtilisateur() {
-		return noUtilisateur;
+	public Long getno_utilisateur() {
+		return no_utilisateur;
 	}
 
-	public void setNoUtilisateur(Long noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setno_utilisateur(Long no_utilisateur) {
+		this.no_utilisateur = no_utilisateur;
 	}
 
 	public String getPseudo() {
@@ -160,12 +177,12 @@ public class Utilisateur {
 		this.rue = rue;
 	}
 
-	public String getCodePostal() {
-		return codePostal;
+	public String getcode_postal() {
+		return code_postal;
 	}
 
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
+	public void setcode_postal(String code_postal) {
+		this.code_postal = code_postal;
 	}
 
 	public String getVille() {
@@ -176,12 +193,12 @@ public class Utilisateur {
 		this.ville = ville;
 	}
 
-	public String getMotDePasse() {
-		return motDePasse;
+	public String getmot_de_passe() {
+		return mot_de_passe;
 	}
 
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
+	public void setmot_de_passe(String mot_de_passe) {
+		this.mot_de_passe = mot_de_passe;
 	}
 
 	public Integer getCredit() {
@@ -220,13 +237,13 @@ public class Utilisateur {
 	@Override
 	public String toString() {
 		return "Utilisateur [pseudo=" + pseudo + ", nom=" + nom + ", prenom="
-				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
-				+ codePostal + ", ville=" + ville;
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", code postal="
+				+ code_postal + ", ville=" + ville;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(noUtilisateur);
+		return Objects.hash(no_utilisateur);
 	}
 
 	@Override
@@ -238,7 +255,7 @@ public class Utilisateur {
 		if (getClass() != obj.getClass())
 			return false;
 		Utilisateur other = (Utilisateur) obj;
-		return Objects.equals(noUtilisateur, other.noUtilisateur);
+		return Objects.equals(no_utilisateur, other.no_utilisateur);
 	}
 	
 	
