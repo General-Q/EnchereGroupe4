@@ -13,7 +13,7 @@ public class utilisateurController {
 	
 	@GetMapping({"/", "/accueil"})
 	public String afficherEncheres(Model model){
-		List<Enchere> encheres = enchereService.consulterEncheres();
+		List<ArticleVendu> encheres = ArticleVenduService.consulterAV();
 		return "accueil";
 	}
 	
