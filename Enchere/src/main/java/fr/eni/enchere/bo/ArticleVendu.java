@@ -4,7 +4,12 @@ import java.time.LocalDate;
 
 public class ArticleVendu {
 
+	
+	// Id = noArticle
 	private Integer noArticle;
+	
+	// Autres propriétés de l'article
+	
 	private String nomArticle;
 	private String description;
 	private LocalDate dateDebutEncheres;
