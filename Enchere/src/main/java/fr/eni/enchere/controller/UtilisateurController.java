@@ -6,14 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import fr.eni.enchere.bo.Enchere;
+import fr.eni.enchere.bll.ArticleVenduService;
+import fr.eni.enchere.bo.ArticleVendu;
 
 @Controller
-public class utilisateurController {
+public class UtilisateurController {
 	
 	@GetMapping({"/", "/accueil"})
 	public String afficherEncheres(Model model){
-		List<ArticleVendu> encheres = ArticleVenduService.consulterAV();
+		List<ArticleVendu> articlesV = ArticleVenduService.consulterAV();
+		model.addAttribute("articlesV", articlesV);
 		return "accueil";
 	}
 	
@@ -23,7 +25,7 @@ public class utilisateurController {
 	}
 	
 
-	public utilisateurController() {
+	public UtilisateurController() {
 		// TODO Auto-generated constructor stub
 	}
 
