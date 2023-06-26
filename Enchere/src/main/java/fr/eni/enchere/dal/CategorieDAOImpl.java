@@ -1,6 +1,5 @@
 package fr.eni.enchere.dal;
 
-public class ArticleDAO {
+public class CategorieDAOImpl {
 
-	
 }
