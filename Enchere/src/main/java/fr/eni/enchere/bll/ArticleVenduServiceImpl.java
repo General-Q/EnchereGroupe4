@@ -21,5 +21,9 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 		List<ArticleVendu> articlesVendus = articleVenduDAO.findAll();
 		return articlesVendus;
 	}
+	
+	public void ajoutArticle() {
+		articleVenduDAO.ajoutArticle();
+	}
 
 }

@@ -1,5 +1,6 @@
 package fr.eni.enchere.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.enchere.bll.ArticleVenduService;
-import fr.eni.enchere.bll.EnchereService;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Enchere;
 import jakarta.validation.Valid;
@@ -52,6 +53,22 @@ public class utilisateurController {
 	 * 
 	 * }
 	 */
+
+	@GetMapping("/nouvel_article")
+	public String ajoutArticle() {
+		return "nouvel_article";
+	}
+
+	@PostMapping("/creat_article")
+	public void ajoutArticle(@RequestParam("nom_article") String nom_article, @RequestParam("description") String description,
+			@RequestParam("date_fin_encheres") LocalDate date_fin_encheres,
+			@RequestParam("prix_initial") int prix_initial, @RequestParam("prix_vente") int prix_vente) {
+		articleVenduService.ajoutArticle();
+	}
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();//SpringSecurity
+//        boolean utilisateurConnecte = auth.isAuthenticated();
+//        model.addAttribute("utilisateurConnecte", utilisateurConnecte);
+//        return "nom-de-votre-page";
 
 	@PostMapping("/nouvelle_vente")
 	public String ajouterVente(@Valid @ModelAttribute Enchere enchere, BindingResult validationResult) {

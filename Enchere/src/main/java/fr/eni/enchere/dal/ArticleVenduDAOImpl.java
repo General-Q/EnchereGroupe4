@@ -13,13 +13,19 @@ import fr.eni.enchere.bo.ArticleVendu;
 @Repository
 public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	private final String FIND_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente FROM ARTICLES_VENDUS";
-
+	private final String INSERT_INTO
+	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Override
 	public List<ArticleVendu> findAll() {
 		return jdbcTemplate.query(FIND_ALL, new ArticleVenduRowMapper());
+	}
+	
+	@Override
+	public void ajoutArticle() {
+		
 	}
 	
 	class ArticleVenduRowMapper implements RowMapper<ArticleVendu> {

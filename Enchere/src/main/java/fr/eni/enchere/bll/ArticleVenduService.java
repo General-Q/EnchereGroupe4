@@ -6,4 +6,5 @@ import fr.eni.enchere.bo.ArticleVendu;
 
 public interface ArticleVenduService {
 	List<ArticleVendu> consulterAV();
+	void ajoutArticle();
 }
