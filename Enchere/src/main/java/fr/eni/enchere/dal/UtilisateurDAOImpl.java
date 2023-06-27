@@ -16,6 +16,11 @@ import fr.eni.enchere.bo.Utilisateur;
 public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private final String FIND_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE no_utilisateur=no_utilisateur";
 	private final String FIND_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE email =:email";
+	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
+            + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
+
+
+	
 	
 	@Autowired 
 	NamedParameterJdbcTemplate jdbcTemplate;
@@ -46,6 +51,24 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 			user.setAdministrateur(rs.getBoolean("administrateur"));
 			return user;
 		}
+		
+	}
+
+	@Override
+	public void save(Utilisateur utilisateur) {
+		//Valorisation des paramètres nommés 
+		MapSqlParameterSource paramSrc = new MapSqlParameterSource("pseudo", utilisateur.getPseudo() );
+		paramSrc.addValue("nom", utilisateur.getNom());
+		paramSrc.addValue("prenom", utilisateur.getPrenom());
+		paramSrc.addValue("email", utilisateur.getEmail());
+		paramSrc.addValue("telephone", utilisateur.getTelephone());
+		paramSrc.addValue("rue", utilisateur.getRue());
+		paramSrc.addValue("code_postal", utilisateur.getcode_postal());
+		paramSrc.addValue("ville", utilisateur.getVille());
+		paramSrc.addValue("mot_de_passe", utilisateur.getmot_de_passe());
+		paramSrc.addValue("credit", 0);
+		paramSrc.addValue("administrateur", false);		
+		jdbcTemplate.update(INSERT, paramSrc);
 		
 	}
 		
