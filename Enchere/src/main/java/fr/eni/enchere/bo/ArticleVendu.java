@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Size;
 public class ArticleVendu {
 
 	
+	
 	// Id = no_article
 	private Integer no_article;
 	
