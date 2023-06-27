@@ -52,7 +52,7 @@ public class Utilisateur {
 	private Integer credit = 0;
 	
 	@NotNull
-	private Boolean adminsitrateur;
+	private Boolean administrateur;
 	
 	// Associations
 	private List<ArticleVendu> articlesVendus;
@@ -101,7 +101,7 @@ public class Utilisateur {
 			@NotNull(message = "Merci de saisir un code postal") @Size(max = 10) String code_postal,
 			@NotNull(message = "Merci de saisir une ville") @Size(max = 30) String ville,
 			@NotNull(message = "Merci de saisir un mot de passe valide") @Size(max = 30) String mot_de_passe,
-			@NotNull(message = "Merci de saisir un montant") Integer credit, @NotNull Boolean adminsitrateur,
+			@NotNull(message = "Merci de saisir un montant") Integer credit, @NotNull Boolean administrateur,
 			List<ArticleVendu> articlesVendus, List<Enchere> encheres) {
 		super();
 		this.no_utilisateur = no_utilisateur;
@@ -115,7 +115,7 @@ public class Utilisateur {
 		this.ville = ville;
 		this.mot_de_passe = mot_de_passe;
 		this.credit = credit;
-		this.adminsitrateur = adminsitrateur;
+		this.administrateur = administrateur;
 		this.articlesVendus = articlesVendus;
 		this.encheres = encheres;
 	}
@@ -209,12 +209,12 @@ public class Utilisateur {
 		this.credit = credit;
 	}
 
-	public Boolean getAdminsitrateur() {
-		return adminsitrateur;
+	public Boolean getAdministrateur() {
+		return administrateur;
 	}
 
-	public void setAdminsitrateur(Boolean adminsitrateur) {
-		this.adminsitrateur = adminsitrateur;
+	public void setAdministrateur(Boolean administrateur) {
+		this.administrateur = administrateur;
 	}
 
 	public List<ArticleVendu> getArticlesVendus() {

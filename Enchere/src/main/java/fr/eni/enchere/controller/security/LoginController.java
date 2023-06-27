@@ -26,11 +26,33 @@ public class LoginController {
 	}
 	
 	@GetMapping("/session")
-	String chargerUtilisateurEnSession(@ModelAttribute("utilisateurEnSession")Utilisateur utilisateur, Principal principal) {
+	String chargerUtilisateurEnSession(@ModelAttribute("utilisateurEnSession")Utilisateur utilisateurEnSession, Principal principal) {
 		String email=principal.getName();
 		Utilisateur aCharger = contexteService.charger(email);
+		if (aCharger !=null) {
+			utilisateurEnSession.setno_utilisateur(aCharger.getno_utilisateur());
+			utilisateurEnSession.setPseudo(aCharger.getPseudo());
+			utilisateurEnSession.setNom(aCharger.getNom());
+			utilisateurEnSession.setPrenom(aCharger.getPrenom());
+			utilisateurEnSession.setAdministrateur(aCharger.getAdministrateur());
+			
+		}else {
+			utilisateurEnSession.setno_utilisateur((long) 0);
+			utilisateurEnSession.setPseudo("Test");
+			utilisateurEnSession.setNom("Test");
+			utilisateurEnSession.setPrenom("Test");
+			utilisateurEnSession.setAdministrateur(false);
+		}
+		System.out.println(utilisateurEnSession);
+		return "redirect:/accueil";
 	}
 	
+	// méthode permettant un nouvel utilisateur en session par défaut
+	@ModelAttribute("utilisateurEnSession")
+	public Utilisateur utilisateurEnSession() {
+		System.out.println("Ajout attribute session");
+		return new Utilisateur();
+	}
 	
 	
 }

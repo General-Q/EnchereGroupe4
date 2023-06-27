@@ -23,6 +23,7 @@ public class EnchereSecurityConfig {
 	private final String SELECT_USER = "select email, password, 1 from membre where email=?";
 	private final String SELECT_ROLES = "select m.email, r.role from MEMBRE m inner join ROLES r on r.IS_ADMIN = m.admin where m.email = ?";
 
+	// Récupération des utilisateurs de l'application via la base de données
 	@Bean
 	UserDetailsManager userDetailsManager(DataSource dataSource) {
 		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
@@ -33,15 +34,24 @@ public class EnchereSecurityConfig {
 		return jdbcUserDetailsManager;
 	}
 
+	/*
+	 * Tout le monde doit accéder à la vue principale 
+	 * Restreindre l’accès des autres
+	 * vues à un membre connecté pour le moment
+	 */
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    http.authorizeHttpRequests(auth -> {
 	        auth
+	        // Permettre aux visiteurs d'accéder à la liste des enchères
 	            .requestMatchers(HttpMethod.GET, "/accueil").permitAll()
+	        // Permettre aux visiteurs de s'identifier
 	            .requestMatchers(HttpMethod.GET, "/identification").permitAll()
+	        // Accès à la vue principale
 	            .requestMatchers("/").permitAll()
-	            .requestMatchers("/css/*").permitAll()
-	            .requestMatchers("/images/*").permitAll()
+	        // Permettre à tous d'afficher correctement les images et le CSS
+	            .requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
+	        // Pour toutes les autres vues, il faut être connecté
 	            .anyRequest().authenticated();
 	    });
 
