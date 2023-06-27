@@ -20,11 +20,12 @@ public class utilisateurController {
 	
 	
 	private EnchereService enchereService;
+	private ArticleVenduService articleVenduService;
 	
 	
 	@GetMapping({"/", "/accueil"})
 	public String afficherEncheres(Model model){
-		List<ArticleVendu> encheres = ArticleVenduService.consulterAV();
+		List<ArticleVendu> articlesVendus = articleVenduService.consulterAV();
 		return "accueil";
 	}
 	

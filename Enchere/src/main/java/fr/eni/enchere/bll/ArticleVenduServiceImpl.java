@@ -12,13 +12,15 @@ import fr.eni.enchere.dal.ArticleVenduDAO;
 @Primary
 public class ArticleVenduServiceImpl implements ArticleVenduService{
 	private ArticleVendu articleVendu;
+	private ArticleVenduDAO articleVenduDAO;
 
 	public ArticleVenduServiceImpl(ArticleVendu articleVendu) {
 		this.articleVendu = articleVendu;
 	}
 	
 	public List<ArticleVendu> consulterAV(){
-		List<ArticleVendu> articlesVendus = ArticleVenduDAO.findAll();
+		List<ArticleVendu> articlesVendus = articleVenduDAO.findAll();
+		return articlesVendus;
 	}
 
 }
