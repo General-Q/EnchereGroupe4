@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<title>EniEnchere</title>
+<link rel="stylesheet" data-th-href="@{/layout.css}">
+</head>
+<body>
+<header>
+		<h1 id="nav-title">
+			<a href="/">Enchère et en os !</a>
+		</h1>
+		<nav>
+			<ul>
+				<li><a th:href="@{/identification}">S'inscrire-Se connecter</a></li>
+				
+			</ul>
+		</nav>
+	</header>
+<main layout:fragment="main"></main>
+
+<footer>ENI</footer>
+
+</body>
+</html>
