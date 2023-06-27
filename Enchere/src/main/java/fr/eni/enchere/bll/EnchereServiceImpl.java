@@ -2,6 +2,7 @@ package fr.eni.enchere.bll;
 
 import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.dal.EnchereDAO;
+import fr.eni.enchere.execptions.EnchereNotFoundException;
 import jakarta.validation.Valid;
 
 public class EnchereServiceImpl implements EnchereService{
@@ -10,13 +11,18 @@ public class EnchereServiceImpl implements EnchereService{
 	
 	@Override
 	public Enchere findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	Enchere enchere = null;
+	try {
+		enchere = enchereDAO.read(id);
+	}catch (EnchereNotFoundException e) {
+		
+	}
+		return enchere;
 	}
 
 	@Override
 	public void ajouterVente(@Valid Enchere enchere) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

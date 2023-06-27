@@ -1,7 +1,14 @@
 package fr.eni.enchere.dal;
 
+<<<<<<< HEAD
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class UtilisateurDAOImpl {
+=======
 import java.sql.ResultSet;
 import java.sql.SQLException;
+>>>>>>> branch 'master' of https://github.com/General-Q/EnchereGroupe4.git
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
