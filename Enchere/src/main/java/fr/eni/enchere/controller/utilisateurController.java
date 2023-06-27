@@ -35,7 +35,10 @@ public class utilisateurController {
 	
 	@GetMapping("/detail_vente")
 	public String detailVente(Integer id, Model model) {
-		Enchere enchere = enchereService;
+		Enchere enchere = enchereService.findById(id);
+		model.addAttribute("enchere", enchere);
+		return "detail_vente";
+		
 	}
 	
 	
