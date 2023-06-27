@@ -16,7 +16,11 @@ repositories {
 }
 
 dependencies {
+<<<<<<< HEAD
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.+'
+=======
+ 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.+'
+>>>>>>> branch 'master' of https://github.com/General-Q/EnchereGroupe4.git
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
