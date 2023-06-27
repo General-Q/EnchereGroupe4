@@ -8,6 +8,6 @@ public interface EnchereDAO {
 
 	
 List<Enchere>findAll();
-Enchere read(Integer )
+//Enchere read(Integer )
 
 }

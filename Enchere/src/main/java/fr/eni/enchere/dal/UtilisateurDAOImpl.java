@@ -1,22 +1,22 @@
 package fr.eni.enchere.dal;
 
-<<<<<<< HEAD
+
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class UtilisateurDAOImpl {
-=======
+
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
->>>>>>> branch 'master' of https://github.com/General-Q/EnchereGroupe4.git
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Repository;
+
 
 import fr.eni.enchere.bo.Utilisateur;
+
 
 @Repository
 public class UtilisateurDAOImpl implements UtilisateurDAO{
@@ -49,7 +49,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 			user.setNom(rs.getString("nom"));
 			user.setPrenom(rs.getString("prenom"));
 			user.setEmail(rs.getString("email"));
-			user.setAdminsitrateur(rs.getBoolean("administrateur"));
+			user.setAdministrateur(rs.getBoolean("administrateur"));
 			return user;
 		}
 		

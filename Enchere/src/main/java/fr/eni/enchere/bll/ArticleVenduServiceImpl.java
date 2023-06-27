@@ -11,11 +11,14 @@ import fr.eni.enchere.dal.ArticleVenduDAO;
 @Service
 @Primary
 public class ArticleVenduServiceImpl implements ArticleVenduService{
-	private ArticleVendu articleVendu;
+	
+	
+	
+
 	private ArticleVenduDAO articleVenduDAO;
 
-	public ArticleVenduServiceImpl(ArticleVendu articleVendu) {
-		this.articleVendu = articleVendu;
+	public ArticleVenduServiceImpl(ArticleVenduDAO articleVenduDAO) {
+		this.articleVenduDAO = articleVenduDAO;
 	}
 	
 	public List<ArticleVendu> consulterAV(){
