@@ -11,10 +11,6 @@ import fr.eni.enchere.dal.ArticleVenduDAO;
 @Service
 @Primary
 public class ArticleVenduServiceImpl implements ArticleVenduService{
-	
-	
-	
-
 	private ArticleVenduDAO articleVenduDAO;
 
 	public ArticleVenduServiceImpl(ArticleVenduDAO articleVenduDAO) {

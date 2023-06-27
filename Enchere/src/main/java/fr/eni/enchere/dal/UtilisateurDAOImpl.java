@@ -1,10 +1,6 @@
 package fr.eni.enchere.dal;
 
-
 import org.springframework.stereotype.Repository;
-
-
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -14,9 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-
 import fr.eni.enchere.bo.Utilisateur;
-
 
 @Repository
 public class UtilisateurDAOImpl implements UtilisateurDAO{
