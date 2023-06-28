@@ -30,11 +30,7 @@ public class UtilisateurController {
 	}
 	
 	@PostMapping("/creerProfil")
-	public String creerProfil(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult validationResult) {
-		
-		if (validationResult.hasErrors()) {
-			return "inscription";
-		}
+	public String creerProfil(Utilisateur utilisateur) {
 		utilisateurService.creerProfil(utilisateur);
 		return"redirect:/accueil";
 	}
