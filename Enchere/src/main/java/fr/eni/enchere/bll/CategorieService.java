@@ -1,5 +1,9 @@
 package fr.eni.enchere.bll;
 
-public interface CategorieService {
+import java.util.List;
 
+import fr.eni.enchere.bo.Categorie;
+
+public interface CategorieService {
+	List<Categorie> categories();
 }

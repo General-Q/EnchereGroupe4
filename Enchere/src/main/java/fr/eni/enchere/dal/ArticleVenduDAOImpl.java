@@ -16,8 +16,8 @@ import fr.eni.enchere.bo.ArticleVendu;
 @Repository
 public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	private final String FIND_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente FROM ARTICLES_VENDUS";
-	private final String INSERT = "INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)";
-	
+	private final String INSERT = "insert into articles_vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente)"
+			+ " values (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente)";
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -38,9 +38,11 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 		namedParameters.addValue("date_fin_encheres", articleVendu.getDate_fin_encheres());
 		namedParameters.addValue("prix_initial", articleVendu.getPrix_initial());
 		namedParameters.addValue("prix_vente", articleVendu.getPrix_vente());
-		namedParameters.addValue("etatVente", articleVendu.getEtatVente());
-
+		namedParameters.addValue("no_utilisateur", articleVendu.getNo_utilisateur());
+		namedParameters.addValue("no_categorie", articleVendu.getCategorie().getno_categorie());
+		System.out.println("trace1");
 		jdbcTemplate.update(INSERT, namedParameters, keyHolder);
+		System.out.println("trace");
 
 		if (keyHolder != null && keyHolder.getKey() != null) {
 			articleVendu.setNo_article(keyHolder.getKey().intValue());
@@ -58,7 +60,6 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 			aV.setDate_fin_encheres(rs.getDate("date_fin_encheres"));
 			aV.setPrix_initial(rs.getInt("prix_initial"));
 			aV.setPrix_vente(rs.getInt("prix_vente"));
-			aV.setEtatVente(rs.getBoolean("etat_vente"));
 			
 			return aV;
 		}

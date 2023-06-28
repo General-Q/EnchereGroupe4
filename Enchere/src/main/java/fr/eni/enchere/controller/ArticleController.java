@@ -1,6 +1,6 @@
 package fr.eni.enchere.controller;
 
-import java.time.LocalDate;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.enchere.bll.ArticleVenduService;
+import fr.eni.enchere.bll.CategorieService;
 import fr.eni.enchere.bo.ArticleVendu;
+import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.bo.Enchere;
 import jakarta.validation.Valid;
 
@@ -21,6 +22,7 @@ import jakarta.validation.Valid;
 public class ArticleController {
 
 	private ArticleVenduService articleVenduService;
+	private CategorieService categorieService;
 
 	@Autowired
 	public ArticleController(ArticleVenduService articleVenduService) {
@@ -30,7 +32,6 @@ public class ArticleController {
 	@GetMapping({ "/", "/accueil" })
 	public String afficherEncheres(Model model) {
 		List<ArticleVendu> articlesVendus = articleVenduService.consulterAV();
-
 		if (articlesVendus == null) {
 			// Gérer le cas où la liste est nulle, par exemple, afficher un message d'erreur
 			model.addAttribute("message", "Aucun article vendu disponible.");
@@ -51,21 +52,20 @@ public class ArticleController {
 	 */
 
 	@GetMapping("/nouvel_article")
-	public String ajoutArticle(Model model) {
-		model.addAttribute("articleVendu", new ArticleVendu());
+	public String ajoutArticle(@ModelAttribute ArticleVendu articleVendu, Model model) {
+		List<Categorie> categories = categorieService.categories();
+		model.addAttribute("categories", categories);
 		return "nouvel_article";
 	}
 
 	@PostMapping("/nouvel_article")
-	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult bindingResult) {
+	public String ajoutArticle(@Valid Model model, ArticleVendu articleVendu, BindingResult bindingResult, Principal principal) {
 		if(!bindingResult.hasErrors()) {
-			try {
+				System.out.println("Bien vu !");
+				String no_utilisateur = principal.getName();
+	            articleVendu.setNo_utilisateur(no_utilisateur);
 				articleVenduService.ajoutArticle(articleVendu);
 				return "redirect:/accueil";
-			} catch (Exception e) {
-				System.out.println("Ajout de la vente impossible, nous sommes désolés");
-				return "redirect:/nouvel_article";
-			}
 		}else {
 			System.out.println("Formulaire de création non conforme");
 			return "redirect:/nouvel_article";

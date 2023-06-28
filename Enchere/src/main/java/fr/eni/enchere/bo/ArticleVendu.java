@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.context.annotation.Primary;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -11,6 +13,7 @@ public class ArticleVendu {
 	
 	// Id = no_article
 	private Integer no_article;
+	private String no_utilisateur;	
 	
 	// Autres propriétés de l'article
 	@NotNull(message = "Merci de saisir un nom d'article")
@@ -35,12 +38,18 @@ public class ArticleVendu {
 	private List<Enchere>encheres;
 	private Utilisateur utilisateur;
 	private Categorie categorie;
-	private Retrait retrait;
+	private Retrait retrait;	
 	
-	
-	// Constructeur vide
 	public ArticleVendu() {
-		
+	}
+
+	public ArticleVendu(String nomE, String description, Date dateD, Date dateF, Integer prixI, Integer prixV) {
+		this.nom_article = nomE;
+		this.description = description;
+		this.date_debut_encheres = dateD;
+		this.date_fin_encheres = dateF;
+		this.prix_initial = prixI;
+		this.prix_vente = prixV;
 	}
 
 	// Constructeur sans association
@@ -180,6 +189,16 @@ public class ArticleVendu {
 	public void setRetrait(Retrait retrait) {
 		this.retrait = retrait;
 	}
+	
+	public String getNo_utilisateur() {
+		return no_utilisateur;
+	}
+
+	public void setNo_utilisateur(String no_utilisateur) {
+		this.no_utilisateur = no_utilisateur;
+	}
+	
+	
 	
 	// Autres méthodes
 	@Override
