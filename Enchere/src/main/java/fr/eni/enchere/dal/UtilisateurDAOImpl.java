@@ -1,6 +1,8 @@
 package fr.eni.enchere.dal;
 
 import org.springframework.stereotype.Repository;
+
+import java.security.Principal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -53,6 +55,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 
 	@Override
 	public void save(Utilisateur utilisateur) {
+		if (utilisateur.getNoUtilisateur()==null) {
+			
+		}
 		//Valorisation des paramètres nommés 
 		MapSqlParameterSource paramSrc = new MapSqlParameterSource("pseudo", utilisateur.getPseudo() );
 		paramSrc.addValue("nom", utilisateur.getNom());
@@ -67,6 +72,24 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		paramSrc.addValue("administrateur", false);		
 		jdbcTemplate.update(INSERT, paramSrc);
 		
+	}
+
+	@Override
+	public Utilisateur findById(Principal principal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(Principal principal) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Utilisateur findByPseudo(String pseudo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 		
 }
