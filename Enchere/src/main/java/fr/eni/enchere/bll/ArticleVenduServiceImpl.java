@@ -22,8 +22,8 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 		return articlesVendus;
 	}
 	
-	public void ajoutArticle() {
-		articleVenduDAO.ajoutArticle();
+	public void ajoutArticle(ArticleVendu articleVendu) {
+		articleVenduDAO.ajoutArticle(articleVendu);
 	}
 
 }
