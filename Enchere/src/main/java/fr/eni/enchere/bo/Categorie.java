@@ -44,7 +44,7 @@ public class Categorie {
 	}
 	
 	// Getters et Setters
-	public Integer getno_categorie() {
+	public Integer getNo_categorie() {
 		return no_categorie;
 	}
 

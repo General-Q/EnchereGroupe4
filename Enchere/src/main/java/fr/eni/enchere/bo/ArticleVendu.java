@@ -13,7 +13,6 @@ public class ArticleVendu {
 	
 	// Id = no_article
 	private Integer no_article;
-	private String no_utilisateur;	
 	
 	// Autres propriétés de l'article
 	@NotNull(message = "Merci de saisir un nom d'article")
@@ -32,7 +31,6 @@ public class ArticleVendu {
 	
 	private Integer prix_initial;
 	private Integer prix_vente;
-	private Boolean etatVente;
 	
 	// Associations
 	private List<Enchere>encheres;
@@ -67,7 +65,6 @@ public class ArticleVendu {
 		this.date_fin_encheres = date_fin_encheres;
 		this.prix_initial = prix_initial;
 		this.prix_vente = prix_vente;
-		this.etatVente = etatVente;
 	}
 
 	// Constructeur avec associations
@@ -86,7 +83,6 @@ public class ArticleVendu {
 		this.date_fin_encheres = date_fin_encheres;
 		this.prix_initial = prix_initial;
 		this.prix_vente = prix_vente;
-		this.etatVente = etatVente;
 		this.encheres = encheres;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
@@ -150,14 +146,6 @@ public class ArticleVendu {
 		this.prix_vente = prix_vente;
 	}
 
-	public Boolean getEtatVente() {
-		return etatVente;
-	}
-
-	public void setEtatVente(Boolean etatVente) {
-		this.etatVente = etatVente;
-	}
-
 	public List<Enchere> getEncheres() {
 		return encheres;
 	}
@@ -189,17 +177,7 @@ public class ArticleVendu {
 	public void setRetrait(Retrait retrait) {
 		this.retrait = retrait;
 	}
-	
-	public String getNo_utilisateur() {
-		return no_utilisateur;
-	}
 
-	public void setNo_utilisateur(String no_utilisateur) {
-		this.no_utilisateur = no_utilisateur;
-	}
-	
-	
-	
 	// Autres méthodes
 	@Override
 	public String toString() {

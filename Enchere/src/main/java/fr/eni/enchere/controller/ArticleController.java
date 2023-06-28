@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import fr.eni.enchere.bll.CategorieService;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.bo.Enchere;
+import fr.eni.enchere.bo.Utilisateur;
 import jakarta.validation.Valid;
 
 @Controller
@@ -25,8 +27,9 @@ public class ArticleController {
 	private CategorieService categorieService;
 
 	@Autowired
-	public ArticleController(ArticleVenduService articleVenduService) {
+	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService) {
 		this.articleVenduService = articleVenduService;
+		this.categorieService = categorieService;
 	}
 
 	@GetMapping({ "/", "/accueil" })
@@ -52,23 +55,29 @@ public class ArticleController {
 	 */
 
 	@GetMapping("/nouvel_article")
-	public String ajoutArticle(@ModelAttribute ArticleVendu articleVendu, Model model) {
+	public String ajoutArticle(Model model) {
 		List<Categorie> categories = categorieService.categories();
 		model.addAttribute("categories", categories);
+		model.addAttribute("articleVendu", new ArticleVendu());
 		return "nouvel_article";
 	}
 
 	@PostMapping("/nouvel_article")
-	public String ajoutArticle(@Valid Model model, ArticleVendu articleVendu, BindingResult bindingResult, Principal principal) {
+	public String ajoutArticle(@Valid @ModelAttribute("articlevendu") ArticleVendu articleVendu, BindingResult bindingResult, Principal principal) {
 		if(!bindingResult.hasErrors()) {
 				System.out.println("Bien vu !");
 				String no_utilisateur = principal.getName();
-	            articleVendu.setNo_utilisateur(no_utilisateur);
+				Utilisateur util = Utilisateur.findById(no_utilisateur);
+	            articleVendu.setUtilisateur(util);
 				articleVenduService.ajoutArticle(articleVendu);
 				return "redirect:/accueil";
 		}else {
 			System.out.println("Formulaire de création non conforme");
-			return "redirect:/nouvel_article";
+			System.out.println(bindingResult.getErrorCount());
+			for (ObjectError err : bindingResult.getAllErrors()) {
+				System.out.println(err.toString());
+			}
+			return "nouvel_article";
 		}
 	}
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();//SpringSecurity
