@@ -19,9 +19,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
 
-
-	
-	
 	@Autowired 
 	NamedParameterJdbcTemplate jdbcTemplate;
 	

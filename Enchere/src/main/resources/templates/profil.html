@@ -1,6 +1,10 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html layout:decoration="~{layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <html xmlns:th="http://www.thymeleaf.org">
+=======
+<html layout:decorate="~{/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+>>>>>>> branch 'master' of https://github.com/General-Q/EnchereGroupe4.git
 <head>
 <meta charset="UTF-8">
 <title>EniEnchere</title>
@@ -11,68 +15,6 @@
 
 <h1>Mon profil</h1>
 
-<form th:action="@{/creerprofil}" th:object="${utilisateur}" method="post">
-
-
-<ul>
-<li><label for="inputNoUtilisateur"></label><input type="hidden" 
-	name ="noUtilisateur" id="inputNoUtilisateur" required
-	data-th-value="${utilisateur.noUtilisateur}"/></li>
-	<br>
-
-	<li><label for="inputPseudo">Pseudo : </label><input type="text" 
-	name ="pseudo" id="inputPseudo" required
-	data-th-value="${utilisateur.pseudo}"/></li>
-<br>
-
-<li><label for="inputNom">Nom : </label><input type="text" 
-	name ="nom" id="inputNom" required
-	data-th-value="${utilisateur.nom}"/></li>
-<br>
-
-<li><label for="inputPrenom">Prénom : </label><input type="text" 
-	name ="prenom" id="inputPrenom" required
-	data-th-value="${utilisateur.prenom}"/></li>
-<br>
-
-<li><label for="inputEmail">Email : </label><input type="text" 
-	name ="email" id="inputEmail" required
-	data-th-value="${utilisateur.email}"/></li>
-<br>
-
-<li><label for="inputTelephone">Téléphone : </label><input type="text" 
-	name ="telephone" id="inputTelephone" required
-	data-th-value="${utilisateur.telephone}"/></li>
-<br>
-
-<li><label for="inputRue">Rue : </label><input type="text" 
-	name ="rue" id="inputRue" required
-	data-th-value="${utilisateur.rue}"/></li>
-<br>
-
-<li><label for="inputCodePostal">Code Postal : </label><input type="text" 
-	name ="codePostal" id="inputCodePostal" required
-	data-th-value="${utilisateur.codePostal}"/></li>
-<br>
-
-<li><label for="inputVille">Ville : </label><input type="text" 
-	name ="ville" id="inputVille" required
-	data-th-value="${utilisateur.ville}"/></li>
-<br>
-	
-<li><label for="inputMdp">Mot de passe : </label><input type="password" 
-	name ="Mdp" id="inputMdp" required
-	data-th-value="${utilisateur.mdp}"/></li>
-<br>	
-
-<li><label for="inputMdp">Confirmation : </label><input type="password" 
-	name ="Mdp" id="inputMdp" required
-	data-th-value="${utilisateur.mdp}"/></li>
-<br>
-
-
-</ul>
-</form>
 
 </main>
 
