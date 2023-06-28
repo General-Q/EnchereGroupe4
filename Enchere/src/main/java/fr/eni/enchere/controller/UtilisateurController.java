@@ -1,5 +1,6 @@
 package fr.eni.enchere.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ public class UtilisateurController {
 
 	private UtilisateurService utilisateurService;
 
+	@Autowired
 	public UtilisateurController(UtilisateurService utilisateurService) {
 		this.utilisateurService = utilisateurService;
 	}
@@ -25,7 +27,7 @@ public class UtilisateurController {
 	}
 	
 	@GetMapping("/inscription")
-	public String  inscription( @ModelAttribute Utilisateur utilisateur) {
+	public String inscription( @ModelAttribute Utilisateur utilisateur) {
 		return "inscription";
 	}
 	
@@ -33,6 +35,11 @@ public class UtilisateurController {
 	public String creerProfil(Utilisateur utilisateur) {
 		utilisateurService.creerProfil(utilisateur);
 		return"redirect:/accueil";
+	}
+	
+	@GetMapping("/profil")
+	public String profil() {
+		return "profil";
 	}
 	
 }

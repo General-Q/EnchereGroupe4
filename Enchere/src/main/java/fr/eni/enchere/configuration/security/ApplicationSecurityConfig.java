@@ -1,3 +1,85 @@
+package fr.eni.enchere.configuration.security;
+
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.context.annotation.*;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.dao.*;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.*;
+import org.springframework.security.config.annotation.web.builders.*;
+import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.core.userdetails.*;
+import org.springframework.security.crypto.bcrypt.*;
+import org.springframework.security.crypto.password.*;
+import org.springframework.security.web.*;
+import javax.sql.DataSource;
+
+
+@Configuration
+@EnableWebSecurity
+public class ApplicationSecurityConfig {
+	
+	@Autowired
+	private DataSource dataSource;
+	private final PasswordEncoder passwordEncoder  = new BCryptPasswordEncoder() ;
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return passwordEncoder;
+	}
+	
+	  @Autowired
+	  public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
+	        auth.jdbcAuthentication()
+	            .dataSource( dataSource )
+	            .usersByUsernameQuery( "SELECT pseudo, mot_de_passe, 1 FROM utilisateurs WHERE pseudo = ? " )
+	            .authoritiesByUsernameQuery( "SELECT ?, 'admin' " )
+	            .passwordEncoder( passwordEncoder )
+	            ;
+	  }
+	
+		@Bean
+		SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+			http.authorizeHttpRequests(auth -> {
+				auth
+						//Permettre aux visiteurs d'accéder à certaines pages
+						.requestMatchers(HttpMethod.GET, "/", "/accueil", "/inscription").permitAll()
+						//Permettre aux membres d'accéder au formulaire ajout de film
+						//.requestMatchers(HttpMethod.GET, "/VueAjouter").hasAuthority("MEMBRE")
+						// Accès à la vue principale
+						.requestMatchers("/creerProfil").permitAll()
+						// Permettre à tous d'afficher correctement les images et CSS
+						//.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
+						// Il faut être connecté pour toutes autres URLs
+						.anyRequest().authenticated();
+			});
+			//formulaire de connexion par défaut
+			http.formLogin(Customizer.withDefaults());
+			return http.build();
+		}
+	  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //package fr.eni.enchere.configuration.security;
 //
 //import javax.sql.DataSource;

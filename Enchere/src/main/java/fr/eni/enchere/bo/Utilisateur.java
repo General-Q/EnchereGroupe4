@@ -48,6 +48,10 @@ public class Utilisateur {
 	@Size(max=30)
 	private String motDePasse;
 	
+	@NotNull(message="Merci de saisir un mot de passe valide")
+	@Size(max=30)
+	private String confirmMotDePasse;
+	
 	@NotNull(message="Merci de saisir un montant")
 	private Integer credit = 0;
 	
@@ -75,7 +79,8 @@ public class Utilisateur {
 			@NotNull(message = "Merci de saisir un code postal") @Size(max = 10) String codePostal,
 			@NotNull(message = "Merci de saisir une ville") @Size(max = 30) String ville,
 			@NotNull(message = "Merci de saisir un mot de passe valide") @Size(max = 30) String motDePasse,
-			@NotNull(message = "Merci de saisir un montant") Integer credit) {
+			@NotNull(message = "Merci de saisir un mot de passe valide") @Size(max = 30) String confirmMotDePasse,
+			@NotNull(message = "Merci de saisir un montant") Integer credit, @NotNull Boolean administrateur) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -87,7 +92,9 @@ public class Utilisateur {
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.motDePasse = motDePasse;
+		this.confirmMotDePasse = confirmMotDePasse;
 		this.credit = credit;
+		this.administrateur = administrateur;
 	}
 	
 	// Constructeur avec associations
@@ -199,6 +206,15 @@ public class Utilisateur {
 
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
+	}
+	
+	
+	public String getConfirmMotDePasse() {
+		return confirmMotDePasse;
+	}
+
+	public void setConfirmMotDePasse(String confirmMotDePasse) {
+		this.confirmMotDePasse = confirmMotDePasse;
 	}
 
 	public Integer getCredit() {
