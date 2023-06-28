@@ -11,11 +11,11 @@ import fr.eni.enchere.bo.Utilisateur;
 import jakarta.validation.Valid;
 
 @Controller
-public class Utilisateur2Controller {
+public class UtilisateurController {
 
 	private UtilisateurService utilisateurService;
 
-	public Utilisateur2Controller(UtilisateurService utilisateurService) {
+	public UtilisateurController(UtilisateurService utilisateurService) {
 		this.utilisateurService = utilisateurService;
 	}
 	

@@ -18,12 +18,12 @@ import fr.eni.enchere.bo.Enchere;
 import jakarta.validation.Valid;
 
 @Controller
-public class utilisateurController {
+public class ArticleController {
 
 	private ArticleVenduService articleVenduService;
 
 	@Autowired
-	public utilisateurController(ArticleVenduService articleVenduService) {
+	public ArticleController(ArticleVenduService articleVenduService) {
 		this.articleVenduService = articleVenduService;
 	}
 
