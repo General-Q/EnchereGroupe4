@@ -7,5 +7,5 @@ import fr.eni.enchere.bo.ArticleVendu;
 public interface ArticleVenduDAO {
 
 		List<ArticleVendu> findAll();
-		void ajoutArticle();
+		void ajoutArticle(ArticleVendu articleVendu);
 }

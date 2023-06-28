@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import fr.eni.enchere.bo.ArticleVendu;
 @Repository
 public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	private final String FIND_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente FROM ARTICLES_VENDUS";
-	private final String INSERT_INTO
+	private final String INSERT = "INSERT INTO ARTICLES_VENDUS(no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)";
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
@@ -24,8 +27,24 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	}
 	
 	@Override
-	public void ajoutArticle() {
-		
+	public void ajoutArticle(ArticleVendu articleVendu) {
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		namedParameters.addValue("no_article", articleVendu.getNo_article());
+		namedParameters.addValue("nom_article", articleVendu.getNom_article());
+		namedParameters.addValue("description", articleVendu.getDescription());
+		namedParameters.addValue("date_debut_encheres", articleVendu.getDate_debut_encheres());
+		namedParameters.addValue("date_fin_encheres", articleVendu.getDate_fin_encheres());
+		namedParameters.addValue("prix_initial", articleVendu.getPrix_initial());
+		namedParameters.addValue("prix_vente", articleVendu.getPrix_vente());
+		namedParameters.addValue("etatVente", articleVendu.getEtatVente());
+
+		jdbcTemplate.update(INSERT, namedParameters, keyHolder);
+
+		if (keyHolder != null && keyHolder.getKey() != null) {
+			articleVendu.setNo_article(keyHolder.getKey().intValue());
+		}
 	}
 	
 	class ArticleVenduRowMapper implements RowMapper<ArticleVendu> {

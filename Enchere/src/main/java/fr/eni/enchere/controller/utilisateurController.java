@@ -55,15 +55,25 @@ public class utilisateurController {
 	 */
 
 	@GetMapping("/nouvel_article")
-	public String ajoutArticle() {
+	public String ajoutArticle(Model model) {
+		model.addAttribute("articleVendu", new ArticleVendu());
 		return "nouvel_article";
 	}
 
-	@PostMapping("/creat_article")
-	public void ajoutArticle(@RequestParam("nom_article") String nom_article, @RequestParam("description") String description,
-			@RequestParam("date_fin_encheres") LocalDate date_fin_encheres,
-			@RequestParam("prix_initial") int prix_initial, @RequestParam("prix_vente") int prix_vente) {
-		articleVenduService.ajoutArticle();
+	@PostMapping("/nouvel_article")
+	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult bindingResult) {
+		if(!bindingResult.hasErrors()) {
+			try {
+				articleVenduService.ajoutArticle(articleVendu);
+				return "redirect:/accueil";
+			} catch (Exception e) {
+				System.out.println("Ajout de la vente impossible, nous sommes désolés");
+				return "redirect:/nouvel_article";
+			}
+		}else {
+			System.out.println("Formulaire de création non conforme");
+			return "redirect:/nouvel_article";
+		}
 	}
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();//SpringSecurity
 //        boolean utilisateurConnecte = auth.isAuthenticated();
