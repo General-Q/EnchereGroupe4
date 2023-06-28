@@ -19,6 +19,11 @@ public class UtilisateurController {
 		this.utilisateurService = utilisateurService;
 	}
 	
+	@GetMapping("/identification")
+	public String identUser() {
+		return "identification";
+	}
+	
 	@GetMapping("/inscription")
 	public String  inscription( @ModelAttribute Utilisateur utilisateur) {
 		return "inscription";

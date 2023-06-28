@@ -42,10 +42,6 @@ public class ArticleController {
 		return "accueil";
 	}
 
-	@GetMapping("/identification")
-	public String identUser() {
-		return "identification";
-	}
 	/*
 	 * @GetMapping("/detail_vente") public String detailVente(Integer id, Model
 	 * model) { Enchere enchere = enchereService.findById(id);
