@@ -17,7 +17,7 @@ import fr.eni.enchere.execptions.CategorieNotFoundException;
 public class CategorieDAOImpl implements CategorieDAO{
 
 	private static final String FIND_ALL = "select no_categorie, libelle FROM CATEGORIES";
-	
+	private static final String FIND_BY_ID= "Select * from CATEGORIES where id=:id";
 	@Autowired
 	private NamedParameterJdbcTemplate npjt;
 	
@@ -34,7 +34,7 @@ public class CategorieDAOImpl implements CategorieDAO{
 		params.put("no_categorie", no_categorie);
 		Categorie categorie = null;
 		try {
-			categorie = npjt.queryForObject(FIND_ALL, params, new BeanPropertyRowMapper<>(Categorie.class));
+			categorie = npjt.queryForObject(FIND_BY_ID, params, new BeanPropertyRowMapper<>(Categorie.class));
 			}catch(EmptyResultDataAccessException exc) {
 				throw new CategorieNotFoundException();
 			}
