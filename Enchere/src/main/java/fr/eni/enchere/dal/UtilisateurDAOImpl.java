@@ -43,7 +43,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		@Override
 		public Utilisateur mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Utilisateur user = new Utilisateur();
-			user.setno_utilisateur(rs.getLong("no_utilisateur"));
+			user.setNoUtilisateur(rs.getLong("no_utilisateur"));
 			user.setPseudo(rs.getString("pseudo"));
 			user.setNom(rs.getString("nom"));
 			user.setPrenom(rs.getString("prenom"));
@@ -63,9 +63,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		paramSrc.addValue("email", utilisateur.getEmail());
 		paramSrc.addValue("telephone", utilisateur.getTelephone());
 		paramSrc.addValue("rue", utilisateur.getRue());
-		paramSrc.addValue("code_postal", utilisateur.getcode_postal());
+		paramSrc.addValue("code_postal", utilisateur.getCodePostal());
 		paramSrc.addValue("ville", utilisateur.getVille());
-		paramSrc.addValue("mot_de_passe", utilisateur.getmot_de_passe());
+		paramSrc.addValue("mot_de_passe", utilisateur.getMotDePasse());
 		paramSrc.addValue("credit", 0);
 		paramSrc.addValue("administrateur", false);		
 		jdbcTemplate.update(INSERT, paramSrc);
