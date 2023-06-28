@@ -8,8 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class ArticleVendu {
-
-	
 	
 	// Id = no_article
 	private Integer no_article;
@@ -42,7 +40,7 @@ public class ArticleVendu {
 	
 	// Constructeur vide
 	public ArticleVendu() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	// Constructeur sans association

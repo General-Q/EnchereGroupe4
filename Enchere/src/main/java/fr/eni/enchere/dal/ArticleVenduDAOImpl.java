@@ -16,7 +16,7 @@ import fr.eni.enchere.bo.ArticleVendu;
 @Repository
 public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	private final String FIND_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente FROM ARTICLES_VENDUS";
-	private final String INSERT = "INSERT INTO ARTICLES_VENDUS(no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)";
+	private final String INSERT = "INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)";
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
@@ -31,7 +31,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-		namedParameters.addValue("no_article", articleVendu.getNo_article());
+//		namedParameters.addValue("no_article", articleVendu.getNo_article());
 		namedParameters.addValue("nom_article", articleVendu.getNom_article());
 		namedParameters.addValue("description", articleVendu.getDescription());
 		namedParameters.addValue("date_debut_encheres", articleVendu.getDate_debut_encheres());
