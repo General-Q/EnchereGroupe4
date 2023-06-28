@@ -39,7 +39,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 		namedParameters.addValue("prix_initial", articleVendu.getPrix_initial());
 		namedParameters.addValue("prix_vente", articleVendu.getPrix_vente());
 		namedParameters.addValue("no_utilisateur", articleVendu.getNo_utilisateur());
-		namedParameters.addValue("no_categorie", articleVendu.getCategorie().getno_categorie());
+		namedParameters.addValue("no_categorie", articleVendu.getCategorie().getNo_categorie());
 		System.out.println("trace1");
 		jdbcTemplate.update(INSERT, namedParameters, keyHolder);
 		System.out.println("trace");

@@ -12,6 +12,11 @@ public class CategorieServiceImpl implements CategorieService {
 	
 	private CategorieDAO categorieDAO;
 	
+	public CategorieServiceImpl(CategorieDAO categorieDAO) {
+		this.categorieDAO = categorieDAO;
+	}
+	
+	@Override
 	public List<Categorie> categories(){
 		return categorieDAO.findAll();
 	}

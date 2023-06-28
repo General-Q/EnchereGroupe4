@@ -37,11 +37,12 @@
 					id="prix_vente" name="prix_vente" required>
 			</div>
 			<div>
-				<label for="categorie">Catégorie :</label> <select id="categorie"
-					name="categorie" class="form-control">
+				<label for="categorie">Catégorie :</label> 
+				<select id="categorie"
+					name="categorie">
 					<option value="">Sélectionnez une catégorie</option>
 					<option th:each="categorie : ${categories}"
-						th:value="${categorie.id}" th:text="${categorie.nom}"></option>
+						th:value="${categorie.no_categorie}" th:text="${categorie.libelle}"></option>
 				</select>
 			</div>
 			<button type="submit">Créer l'article</button>
