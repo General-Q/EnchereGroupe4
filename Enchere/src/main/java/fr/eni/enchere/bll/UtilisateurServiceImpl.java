@@ -21,21 +21,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public void creerProfil(Utilisateur utilisateur) {
-		utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
-		utilisateurDAO.save(utilisateur);
-		
-	}
-
-	@Override
 	public void supprimerProfil(Principal principal) {
 		utilisateurDAO.delete(principal);
-		
-	}
-
-	@Override
-	public void enregistrerProfil(Utilisateur utilisateur) {
-		utilisateurDAO.save(utilisateur);
 		
 	}
 
@@ -54,6 +41,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Override
 	public Utilisateur findByPseudo(String pseudo) {
 		return utilisateurDAO.findByPseudo(pseudo);
+	}
+
+	@Override
+	public void saveProfil(Utilisateur utilisateur) {
+		utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
+		utilisateurDAO.save(utilisateur);
 	}
 
 }

@@ -48,7 +48,7 @@ public class ApplicationSecurityConfig {
 						//Permettre aux membres d'accéder au formulaire ajout de film
 						//.requestMatchers(HttpMethod.GET, "/VueAjouter").hasAuthority("MEMBRE")
 						// Accès à la vue principale
-						.requestMatchers("/creerProfil").permitAll()
+						.requestMatchers("/enregistrerProfil").permitAll()
 						// Permettre à tous d'afficher correctement les images et CSS
 						//.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
 						// Il faut être connecté pour toutes autres URLs

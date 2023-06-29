@@ -13,6 +13,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import fr.eni.enchere.bo.Utilisateur;
 
@@ -20,9 +22,10 @@ import fr.eni.enchere.bo.Utilisateur;
 public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private final String FIND_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE no_utilisateur=?";
 	private final String FIND_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE email =:email";
+	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe from UTILISATEURS WHERE pseudo=?";
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
-	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe from UTILISATEURS WHERE pseudo=?";
+	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo=:pseudo;nom=:nom, prenom=:prenom, email=:email, telephone=:telephone,rue=:rue, code_postal=:code_postal,ville=:ville,mot_de_passe=:mot_de_passe where no_utilisateur=:no_utilisateur";
 
 	
 	@Autowired 
@@ -46,7 +49,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		@Override
 		public Utilisateur mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Utilisateur user = new Utilisateur();
-			user.setNoUtilisateur(rs.getLong("no_utilisateur"));
+			user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 			user.setPseudo(rs.getString("pseudo"));
 			user.setNom(rs.getString("nom"));
 			user.setPrenom(rs.getString("prenom"));
@@ -59,10 +62,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 
 	@Override
 	public void save(Utilisateur utilisateur) {
-		if (utilisateur.getNoUtilisateur()==null) {
-			
-		}
-		//Valorisation des paramètres nommés 
+		
 		MapSqlParameterSource paramSrc = new MapSqlParameterSource("pseudo", utilisateur.getPseudo() );
 		paramSrc.addValue("nom", utilisateur.getNom());
 		paramSrc.addValue("prenom", utilisateur.getPrenom());
@@ -73,9 +73,23 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		paramSrc.addValue("ville", utilisateur.getVille());
 		paramSrc.addValue("mot_de_passe", utilisateur.getMotDePasse());
 		paramSrc.addValue("credit", 0);
-		paramSrc.addValue("administrateur", false);		
-		jdbcTemplate.update(INSERT, paramSrc);
+		paramSrc.addValue("administrateur", false);
+		System.out.println(utilisateur.getNoUtilisateur());
 		
+		if (utilisateur.getNoUtilisateur()==null) {
+			// insert
+			/*KeyHolder keyHolder = new GeneratedKeyHolder();
+			utilisateur.setNoUtilisateur(keyHolder.getKey().intValue());*/
+				
+			jdbcTemplate.update(INSERT, paramSrc);
+			
+			//jdbcTemplate.update(INSERT,new BeanPropertySqlParameterSource(utilisateur),keyHolder);
+			
+			System.out.println("Insert utilisateur : " + utilisateur);
+		}else {
+			// update
+			jdbcTemplate.update(UPDATE, paramSrc);
+		}
 	}
 
 	@Override
