@@ -7,12 +7,11 @@
 <body>
 	<header>
 		<h1>Nouvel Article</h1>
-<<<<<<< HEAD
+
 	</header>
 	<main>
 		<form th:action="@{/nouvel_article}" method="post">
 			<div>
-=======
 	
 		<form th:action="@{/nouvel_article}" th:object ="${articleVendu}" method="post">
 			 <ul> <li th:each="err : ${#fields.allErrors()}" th:text="${err}" /> </ul>

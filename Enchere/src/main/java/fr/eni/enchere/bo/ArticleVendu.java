@@ -154,12 +154,13 @@ public class ArticleVendu {
 		this.encheres = encheres;
 	}
 
-	public Utilisateur getUtilisateur() {
+	public Long getUtilisateur() {
+		
 		return utilisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+		this.utilisateur = utilisateur.getNoUtilisateur();
 	}
 
 	public Categorie getCategorie() {
