@@ -9,8 +9,11 @@ import jakarta.validation.constraints.Size;
 
 public class Utilisateur {
 	
+	public static final boolean MEMBRE = false;
+	public static final boolean ADMINISTRATEUR = true;
+	
 	// Id = no_utilisateur
-	private Long noUtilisateur;
+	private Integer noUtilisateur;
 	
 	// Autres propriétés de l'utilisateur
 	@NotBlank(message = "Merci de saisir un pseudo valide")
@@ -53,7 +56,7 @@ public class Utilisateur {
 	private String confirmMotDePasse;
 	
 	@NotNull(message="Merci de saisir un montant")
-	private Integer credit = 0;
+	private Integer credit;
 	
 	@NotNull
 	private Boolean administrateur;
@@ -65,11 +68,12 @@ public class Utilisateur {
 
 	//Constructeur vide
 	public Utilisateur() {
-		// TODO Auto-generated constructor stub
+		this.credit=0;
+		this.administrateur=MEMBRE;
 	}
 
 	// Constructeur sans association
-	public Utilisateur(Long noUtilisateur,
+	public Utilisateur(Integer noUtilisateur,
 			@NotBlank(message = "Merci de saisir un pseudo valide") @Size(max = 30) String pseudo,
 			@NotNull(message = "Merci de saisir un nom") @Size(max = 30) String nom,
 			@NotNull(message = "Merci de saisir un prenom") @Size(max = 30) String prenom,
@@ -98,7 +102,7 @@ public class Utilisateur {
 	}
 	
 	// Constructeur avec associations
-	public Utilisateur(Long noUtilisateur,
+	public Utilisateur(Integer noUtilisateur,
 			@NotBlank(message = "Merci de saisir un pseudo valide") @Size(max = 30) String pseudo,
 			@NotNull(message = "Merci de saisir un nom") @Size(max = 30) String nom,
 			@NotNull(message = "Merci de saisir un prenom") @Size(max = 30) String prenom,
@@ -132,16 +136,16 @@ public class Utilisateur {
 	}
 
 	public Utilisateur(Integer id) {
-		this.noUtilisateur=(long)id;
+		this.noUtilisateur=id;
 	}
 
 	// Getters et Setters
-	public Long getNoUtilisateur() {
+	public Integer getNoUtilisateur() {
 		return noUtilisateur;
 	}
 
-	public void setNoUtilisateur(Long noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setNoUtilisateur(Integer i) {
+		this.noUtilisateur = i;
 	}
 
 	public String getPseudo() {
