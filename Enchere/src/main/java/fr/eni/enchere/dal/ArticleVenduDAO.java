@@ -8,4 +8,5 @@ public interface ArticleVenduDAO {
 
 		List<ArticleVendu> findAll();
 		void ajoutArticle(ArticleVendu articleVendu);
+		ArticleVendu findById(Integer id);
 }

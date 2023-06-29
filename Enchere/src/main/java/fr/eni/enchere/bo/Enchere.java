@@ -12,10 +12,11 @@ public class Enchere {
 	
 	@NotNull(message="Merci de saisir un montant")
 	private Integer montant_enchere;
+	private long noUtil;
 	private Integer noArticleVendu;	
 	
 	// Associations
-
+	private ArticleVendu articleVendu;
 	
 	// Constructeur vide
 	public Enchere() {
@@ -31,10 +32,11 @@ public class Enchere {
 
 	
 	// Constructeur avec associations
-	public Enchere(Date dateEnchere, Integer montant_enchere, ArticleVendu articleVendu) {
+	public Enchere(ArticleVendu articleVendu) {
 		super();
-		this.dateEnchere = dateEnchere;
-		this.montant_enchere = montant_enchere;
+		this.noUtil = articleVendu.getNoUtilisateur();
+		this.dateEnchere = articleVendu.getDate_debut_encheres();
+		this.montant_enchere = articleVendu.getPrix_vente();
 		this.noArticleVendu = articleVendu.getNo_article();
 	}
 
@@ -64,11 +66,11 @@ public class Enchere {
 	}
 
 	// Autres méthodes
-	@Override
-	public String toString() {
-		return "Enchere [dateEnchere=" + dateEnchere + ", montant_enchere=" + montant_enchere + ", utilisateur="
-				+ utilisateur + ", articleVendu=" + articleVendu + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Enchere [dateEnchere=" + dateEnchere + ", montant_enchere=" + montant_enchere + ", utilisateur="
+//				+ utilisateur + ", articleVendu=" + articleVendu + "]";
+//	}
 	
 	
 	

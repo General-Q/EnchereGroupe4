@@ -17,13 +17,20 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 		this.articleVenduDAO = articleVenduDAO;
 	}
 	
+	@Override
 	public List<ArticleVendu> consulterAV(){
 		List<ArticleVendu> articlesVendus = articleVenduDAO.findAll();
 		return articlesVendus;
 	}
 	
+	@Override
 	public void ajoutArticle(ArticleVendu articleVendu) {
 		articleVenduDAO.ajoutArticle(articleVendu);
+	}
+	
+	@Override
+	public ArticleVendu findById(Integer id) {
+		return articleVenduDAO.findById(id);
 	}
 
 }

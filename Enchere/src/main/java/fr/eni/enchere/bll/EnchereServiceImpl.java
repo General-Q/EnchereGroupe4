@@ -1,5 +1,10 @@
 package fr.eni.enchere.bll;
 
+import java.util.Date;
+
+import org.springframework.scheduling.annotation.Async;
+
+import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.dal.EnchereDAO;
 import jakarta.validation.Valid;
@@ -7,6 +12,12 @@ import jakarta.validation.Valid;
 public class EnchereServiceImpl implements EnchereService{
 
 	private EnchereDAO enchereDAO;
+	private ArticleVenduService articleVenduService;
+	
+	public EnchereServiceImpl(ArticleVenduService articleVenduService) {
+		this.articleVenduService = articleVenduService;
+	}
+
 	/*
 	@Override
 	public Enchere findById(Integer id) {
@@ -19,11 +30,14 @@ public class EnchereServiceImpl implements EnchereService{
 		return enchere;
 	}
 */
+	
 	@Override
-	public void ajouterVente(@Valid Enchere enchere) {
-		
-		
+	@Async
+	public void debutEnchere(@Valid Enchere enchere, Date date) {
+		Integer noA = enchere.getNoArticleVendu();
+		ArticleVendu aV = articleVenduService.
 	}
+	
 	@Override
 	public Enchere findById(Integer id) {
 		// TODO Auto-generated method stub
