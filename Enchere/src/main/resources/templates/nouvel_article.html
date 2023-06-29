@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="~{/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>EniEnchere</title>
@@ -9,7 +9,7 @@
 		<h1>Nouvel Article</h1>
 
 	</header>
-	<main>
+	<main layout:fragment="main">
 		<form th:action="@{/nouvel_article}" method="post">
 			<div>
 	
