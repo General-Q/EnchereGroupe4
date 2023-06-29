@@ -11,9 +11,11 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.enchere.bll.ArticleVenduService;
 import fr.eni.enchere.bll.CategorieService;
+import fr.eni.enchere.bll.UtilisateurService;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.bo.Enchere;
@@ -26,12 +28,15 @@ public class ArticleController {
 
 	private ArticleVenduService articleVenduService;
 	private CategorieService categorieService;
+	private UtilisateurService utilisateurService;
+	@Autowired
 	private StringToUtilisateurConverter stringToUtilisateurConverter;
 
 	@Autowired
-	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService) {
+	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService, UtilisateurService utilisateurService) {
 		this.articleVenduService = articleVenduService;
 		this.categorieService = categorieService;
+		this.utilisateurService = utilisateurService;
 	}
 
 	@GetMapping({ "/", "/accueil" })
@@ -65,12 +70,15 @@ public class ArticleController {
 	}
 
 	@PostMapping("/nouvel_article")
-	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult bindingResult, Principal principal) {
+	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult bindingResult, Principal principal, @RequestParam("categorie") int noCategorie) {
 		if(!bindingResult.hasErrors()) {
 				System.out.println("Bien vu !");
-				String no_utilisateur = principal.getName();
-				Utilisateur util = stringToUtilisateurConverter.convert(no_utilisateur);
-	            articleVendu.setUtilisateur(util);
+				System.out.println(noCategorie);
+				String pseudoUtil = principal.getName();
+				Utilisateur util = utilisateurService.findByPseudo(pseudoUtil);
+	            articleVendu.setNoUtilisateur(util);
+	            articleVendu.setNoCategorie(noCategorie);
+	            System.out.println("Méthode ajoutArticle appelée");
 				articleVenduService.ajoutArticle(articleVendu);
 				return "redirect:/accueil";
 		}else {
