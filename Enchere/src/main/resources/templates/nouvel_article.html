@@ -11,7 +11,7 @@
 <main layout:fragment="main">
 		<h1>Nouvel Article</h1>
 	
-		<form th:action="@{/nouvel_article}" th:object ="{articleVendu}" method="post">
+		<form th:action="@{/nouvel_article}" th:object ="${articleVendu}" method="post">
 			 <ul> <li th:each="err : ${#fields.allErrors()}" th:text="${err}" /> </ul>
 			 
 			 <div class="articleVendu">
