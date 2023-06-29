@@ -41,13 +41,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	public Utilisateur findById(Integer id) {
-		Utilisateur utilisateur = null;
+		/*Utilisateur utilisateur = null;
 		try {
 			utilisateur = utilisateurDAO.read(id);
 		}catch(UtilisateurNotFoundException e) {
 			
-		}
-		return utilisateur;
+		}*/
+		
+		return utilisateurDAO.findById(id);
 	}
 
 	@Override

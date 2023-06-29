@@ -11,7 +11,7 @@ public interface UtilisateurDAO {
 
 	void save(Utilisateur utilisateur);
 
-	Utilisateur findById(Principal principal);
+	Utilisateur findById(Integer id);
 
 	void delete(Principal principal);
 

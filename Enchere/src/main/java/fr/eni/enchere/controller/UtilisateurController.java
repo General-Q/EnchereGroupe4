@@ -27,7 +27,7 @@ public class UtilisateurController {
 		this.utilisateurService = utilisateurService;
 	}
 	
-	@GetMapping("/inscription")
+	@GetMapping({"/inscription","/profil"})
 	public String inscription(@ModelAttribute Utilisateur utilisateur) {
 		return "profil-form";
 	}
@@ -44,6 +44,7 @@ public class UtilisateurController {
 	        if (authentication != null && authentication.isAuthenticated()) {
 	            // L'utilisateur est connecté, récupérez ses informations et passez-les au modèle
 	            String pseudo = authentication.getName();
+	            System.out.println(pseudo);
 	            modele.addAttribute("utilisateur",utilisateurService.findByPseudo(pseudo));
 	        } else {
 	            // Aucun utilisateur n'est connecté, redirigez vers le formulaire d'inscription ou une autre page appropriée

@@ -18,11 +18,11 @@ import fr.eni.enchere.bo.Utilisateur;
 
 @Repository
 public class UtilisateurDAOImpl implements UtilisateurDAO{
-	private final String FIND_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE no_utilisateur=no_utilisateur";
+	private final String FIND_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE no_utilisateur=?";
 	private final String FIND_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE email =:email";
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
-	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe from UTILISATEURS WHERE pseudo=pseudo";
+	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe from UTILISATEURS WHERE pseudo=?";
 
 	
 	@Autowired 
@@ -79,9 +79,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	}
 
 	@Override
-	public Utilisateur findById(Principal principal) {
-		// TODO Auto-generated method stub
-		return null;
+	public Utilisateur findById(Integer id) {
+		Utilisateur src = new Utilisateur(id);
+		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_ID, new BeanPropertyRowMapper<>(Utilisateur.class),id);
+		return utilisateur;
 	}
 
 	@Override
@@ -93,7 +94,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	@Override
 	public Utilisateur findByPseudo(String pseudo) {
 		Utilisateur src = new Utilisateur(pseudo);
-		Utilisateur utilisateur = jdbcTemplate.queryForObject(SELECT_BY_PSEUDO, new BeanPropertySqlParameterSource(src),new BeanPropertyRowMapper<>(Utilisateur.class));
+		System.out.println(src);
+		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
+		System.out.println("USER RECUPERE "+utilisateur);
 		return utilisateur;
 	}
 		
