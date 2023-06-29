@@ -1,44 +1,46 @@
 <!DOCTYPE html>
-
-<html layout:decorate="~{layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
+<html>
 <head>
 <meta charset="UTF-8">
 <title>EniEnchere</title>
 </head>
 <body>
-
-<main layout:fragment="main">
+	<header>
 		<h1>Nouvel Article</h1>
+
+	</header>
+	<main>
+		<form th:action="@{/nouvel_article}" method="post">
+			<div>
 	
-		<form th:action="@{/nouvel_article}" th:object ="{articleVendu}" method="post">
+		<form th:action="@{/nouvel_article}" th:object ="${articleVendu}" method="post">
 			 <ul> <li th:each="err : ${#fields.allErrors()}" th:text="${err}" /> </ul>
 			 
 			 <div class="articleVendu">
 				<label for="nom_article">Nom de l'article :</label> <input
-					type="text" th:field="*{nom_article}" required>
+					type="text" id="nom_article" name="nom_article" required>
 			</div>
 			<div>
 				<label for="description">Précisions sur l'article :</label> <input
-					type="text" th:field="*{description}" required>
+					type="text" id="description" name="description" required>
 			</div>
 			<div>
 				<label for="date_debut_encheres">Début des enchères :</label> <input
-					type="date" th:field="*{date_debut_encheres}"
+					type="date" id="date_debut_encheres" name="date_debut_encheres"
 					required>
 			</div>
 			<div>
 				<label for="date_fin_encheres">Fin des enchères :</label> <input
-					type="date" th:field="*{date_fin_encheres}"
+					type="date" id="date_fin_encheres" name="date_fin_encheres"
 					required>
 			</div>
 			<div>
 				<label for="prix_initial">Prix initial :</label> <input
-					type="number" th:field="*{prix_initial}" required>
+					type="number" id="prix_initial" name="prix_initial" required>
 			</div>
 			<div>
 				<label for="prix_vente">Prix de vente :</label> <input type="number"
-					th:field="*{prix_vente}" required>
+					id="prix_vente" name="prix_vente" required>
 			</div>
 			<div>
 				<label for="categorie">Catégorie :</label> 

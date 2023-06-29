@@ -34,8 +34,8 @@ public class ArticleVendu {
 	
 	// Associations
 	private List<Enchere>encheres;
-	private Utilisateur utilisateur;
-	private Categorie categorie;
+	private Long utilisateur;
+	private Integer categorie;
 	private Retrait retrait;	
 	
 	public ArticleVendu() {
@@ -154,20 +154,21 @@ public class ArticleVendu {
 		this.encheres = encheres;
 	}
 
-	public Utilisateur getUtilisateur() {
+	public Long getNoUtilisateur() {
+		
 		return utilisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
+		this.utilisateur = utilisateur.getNoUtilisateur();
 	}
 
-	public Categorie getCategorie() {
+	public Integer getNoCategorie() {
 		return categorie;
 	}
 
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
+	public void setNoCategorie(Integer cat) {
+		this.categorie = cat;
 	}
 
 	public Retrait getRetrait() {

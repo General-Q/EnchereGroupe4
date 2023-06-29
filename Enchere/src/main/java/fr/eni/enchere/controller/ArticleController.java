@@ -18,6 +18,7 @@ import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
 import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.bo.Utilisateur;
+import fr.eni.enchere.controller.converter.StringToUtilisateurConverter;
 import jakarta.validation.Valid;
 
 @Controller
@@ -25,6 +26,7 @@ public class ArticleController {
 
 	private ArticleVenduService articleVenduService;
 	private CategorieService categorieService;
+	private StringToUtilisateurConverter stringToUtilisateurConverter;
 
 	@Autowired
 	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService) {
@@ -63,11 +65,11 @@ public class ArticleController {
 	}
 
 	@PostMapping("/nouvel_article")
-	public String ajoutArticle(@Valid @ModelAttribute("articlevendu") ArticleVendu articleVendu, BindingResult bindingResult, Principal principal) {
+	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult bindingResult, Principal principal) {
 		if(!bindingResult.hasErrors()) {
 				System.out.println("Bien vu !");
 				String no_utilisateur = principal.getName();
-				Utilisateur util = Utilisateur.findById(no_utilisateur);
+				Utilisateur util = stringToUtilisateurConverter.convert(no_utilisateur);
 	            articleVendu.setUtilisateur(util);
 				articleVenduService.ajoutArticle(articleVendu);
 				return "redirect:/accueil";
