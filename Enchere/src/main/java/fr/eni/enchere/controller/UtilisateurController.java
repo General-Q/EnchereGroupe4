@@ -48,7 +48,7 @@ public class UtilisateurController {
 	            modele.addAttribute("utilisateur",utilisateurService.findByPseudo(pseudo));
 	        } else {
 	            // Aucun utilisateur n'est connecté, redirigez vers le formulaire d'inscription ou une autre page appropriée
-	            return "redirect:/inscription";
+	            return "redirect:/login";
 	        }
 		return "profil-form";
 	}
