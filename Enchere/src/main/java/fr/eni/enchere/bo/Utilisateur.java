@@ -131,6 +131,10 @@ public class Utilisateur {
 		this.pseudo=pseudo;
 	}
 
+	public Utilisateur(Integer id) {
+		this.noUtilisateur=(long)id;
+	}
+
 	// Getters et Setters
 	public Long getNoUtilisateur() {
 		return noUtilisateur;
