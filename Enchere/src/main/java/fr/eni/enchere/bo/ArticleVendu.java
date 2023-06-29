@@ -67,27 +67,27 @@ public class ArticleVendu {
 		this.prix_vente = prix_vente;
 	}
 
-	// Constructeur avec associations
-	public ArticleVendu(Integer no_article,
-			@NotNull(message = "Merci de saisir un nom d'article") @Size(max = 30) String nom_article,
-			@NotNull(message = "Merci de saisir une description d'article") @Size(max = 300) String description,
-			@NotNull(message = "Merci de saisir une date valide") @NotNull(message = "Merci de saisir une date valide") Date date_debut_encheres,
-			@NotNull(message = "Merci de saisir une date valide") @NotNull(message = "Merci de saisir une date valide") Date date_fin_encheres, Integer prix_initial,
-			Integer prix_vente, Boolean etatVente, List<Enchere> encheres, Utilisateur utilisateur, Categorie categorie,
-			Retrait retrait) {
-		super();
-		this.no_article = no_article;
-		this.nom_article = nom_article;
-		this.description = description;
-		this.date_debut_encheres = date_debut_encheres;
-		this.date_fin_encheres = date_fin_encheres;
-		this.prix_initial = prix_initial;
-		this.prix_vente = prix_vente;
-		this.encheres = encheres;
-		this.utilisateur = utilisateur;
-		this.categorie = categorie;
-		this.retrait = retrait;
-	}
+//	// Constructeur avec associations
+//	public ArticleVendu(Integer no_article,
+//			@NotNull(message = "Merci de saisir un nom d'article") @Size(max = 30) String nom_article,
+//			@NotNull(message = "Merci de saisir une description d'article") @Size(max = 300) String description,
+//			@NotNull(message = "Merci de saisir une date valide") @NotNull(message = "Merci de saisir une date valide") Date date_debut_encheres,
+//			@NotNull(message = "Merci de saisir une date valide") @NotNull(message = "Merci de saisir une date valide") Date date_fin_encheres, Integer prix_initial,
+//			Integer prix_vente, Boolean etatVente, List<Enchere> encheres, Utilisateur utilisateur, Categorie categorie,
+//			Retrait retrait) {
+//		super();
+//		this.no_article = no_article;
+//		this.nom_article = nom_article;
+//		this.description = description;
+//		this.date_debut_encheres = date_debut_encheres;
+//		this.date_fin_encheres = date_fin_encheres;
+//		this.prix_initial = prix_initial;
+//		this.prix_vente = prix_vente;
+//		this.encheres = encheres;
+//		this.utilisateur = utilisateur;
+//		this.categorie = categorie;
+//		this.retrait = retrait;
+//	}
 
 	// Getters et Setters
 	public Integer getNo_article() {

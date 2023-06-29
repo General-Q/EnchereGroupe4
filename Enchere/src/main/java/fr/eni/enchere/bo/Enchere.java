@@ -12,11 +12,10 @@ public class Enchere {
 	
 	@NotNull(message="Merci de saisir un montant")
 	private Integer montant_enchere;
-	
+	private Integer noArticleVendu;	
 	
 	// Associations
-	private Utilisateur utilisateur;
-	private ArticleVendu articleVendu;
+
 	
 	// Constructeur vide
 	public Enchere() {
@@ -32,13 +31,11 @@ public class Enchere {
 
 	
 	// Constructeur avec associations
-	public Enchere(Date dateEnchere, Integer montant_enchere, Utilisateur utilisateur,
-			ArticleVendu articleVendu) {
+	public Enchere(Date dateEnchere, Integer montant_enchere, ArticleVendu articleVendu) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montant_enchere = montant_enchere;
-		this.utilisateur = utilisateur;
-		this.articleVendu = articleVendu;
+		this.noArticleVendu = articleVendu.getNo_article();
 	}
 
 	// Getters et Setters
@@ -58,20 +55,12 @@ public class Enchere {
 		this.montant_enchere = montant_enchere;
 	}
 
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
+	public Integer getNoArticleVendu() {
+		return noArticleVendu;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
-	}
-
-	public ArticleVendu getArticleVendu() {
-		return articleVendu;
-	}
-
-	public void setArticleVendu(ArticleVendu articleVendu) {
-		this.articleVendu = articleVendu;
+	public void setNoArticleVendu(Integer noArticleVendu) {
+		this.noArticleVendu = noArticleVendu;
 	}
 
 	// Autres méthodes
