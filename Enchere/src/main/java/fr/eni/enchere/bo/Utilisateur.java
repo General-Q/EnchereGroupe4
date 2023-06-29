@@ -127,6 +127,10 @@ public class Utilisateur {
 		this.encheres = encheres;
 	}
 
+	public Utilisateur(String pseudo) {
+		this.pseudo=pseudo;
+	}
+
 	// Getters et Setters
 	public Long getNoUtilisateur() {
 		return noUtilisateur;

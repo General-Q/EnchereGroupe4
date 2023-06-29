@@ -8,7 +8,9 @@ import java.sql.SQLException;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -20,7 +22,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private final String FIND_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE email =:email";
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
+	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe from UTILISATEURS WHERE pseudo=pseudo";
 
+	
 	@Autowired 
 	NamedParameterJdbcTemplate jdbcTemplate;
 	
@@ -88,8 +92,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 
 	@Override
 	public Utilisateur findByPseudo(String pseudo) {
-		// TODO Auto-generated method stub
-		return null;
+		Utilisateur src = new Utilisateur(pseudo);
+		Utilisateur utilisateur = jdbcTemplate.queryForObject(SELECT_BY_PSEUDO, new BeanPropertySqlParameterSource(src),new BeanPropertyRowMapper<>(Utilisateur.class));
+		return utilisateur;
 	}
 		
 }

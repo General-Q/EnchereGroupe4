@@ -3,6 +3,8 @@ package fr.eni.enchere.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,8 +39,16 @@ public class UtilisateurController {
 	}
 	
 	@GetMapping("/modifierProfil")
-	public String modifierProfil(@RequestParam Principal principal, Model modele) {
-		modele.addAttribute("utilisateur",utilisateurService.findByPseudo(principal.getName()));
+	public String modifierProfil(Model modele) {
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	        if (authentication != null && authentication.isAuthenticated()) {
+	            // L'utilisateur est connecté, récupérez ses informations et passez-les au modèle
+	            String pseudo = authentication.getName();
+	            modele.addAttribute("utilisateur",utilisateurService.findByPseudo(pseudo));
+	        } else {
+	            // Aucun utilisateur n'est connecté, redirigez vers le formulaire d'inscription ou une autre page appropriée
+	            return "redirect:/inscription";
+	        }
 		return "profil-form";
 	}
 	
