@@ -34,8 +34,8 @@ public class ArticleVendu {
 	
 	// Associations
 	private List<Enchere>encheres;
-	private Long utilisateur;
-	private Integer categorie;
+	private Long noUtilisateur;
+	private Integer noCategorie;
 	private Retrait retrait;	
 	
 	public ArticleVendu() {
@@ -155,20 +155,19 @@ public class ArticleVendu {
 	}
 
 	public Long getNoUtilisateur() {
-		
-		return utilisateur;
+		return noUtilisateur;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur.getNoUtilisateur();
+	public void setNoUtilisateur(Utilisateur utilisateur) {
+		this.noUtilisateur = utilisateur.getNoUtilisateur();
 	}
 
 	public Integer getNoCategorie() {
-		return categorie;
+		return noCategorie;
 	}
 
 	public void setNoCategorie(Integer cat) {
-		this.categorie = cat;
+		this.noCategorie = cat;
 	}
 
 	public Retrait getRetrait() {
@@ -184,7 +183,7 @@ public class ArticleVendu {
 	public String toString() {
 		return "ArticleVendu [nom_article=" + nom_article + ", description=" + description + ", date_debut_encheres="
 				+ date_debut_encheres + ", date_fin_encheres=" + date_fin_encheres + ", prix_initial=" + prix_initial
-				+ ", prix_vente=" + prix_vente + ", utilisateur=" + utilisateur + ", categorie=" + categorie
+				+ ", prix_vente=" + prix_vente + ", utilisateur=" + noUtilisateur + ", categorie=" + noCategorie
 				+ ", retrait=" + retrait + "]";
 	}
 
