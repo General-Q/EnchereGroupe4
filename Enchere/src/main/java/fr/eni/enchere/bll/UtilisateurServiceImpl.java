@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.dal.UtilisateurDAO;
+import fr.eni.enchere.execptions.UtilisateurNotFoundException;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
@@ -40,8 +41,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	public Utilisateur findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		Utilisateur utilisateur = null;
+		try {
+			utilisateur = utilisateurDAO.read(id);
+		}catch(UtilisateurNotFoundException e) {
+			
+		}
+		return utilisateur;
 	}
 
 	@Override
