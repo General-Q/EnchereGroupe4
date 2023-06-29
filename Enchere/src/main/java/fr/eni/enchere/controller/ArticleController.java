@@ -63,7 +63,7 @@ public class ArticleController {
 	}
 
 	@PostMapping("/nouvel_article")
-	public String ajoutArticle(@Valid @ModelAttribute("articlevendu") ArticleVendu articleVendu, BindingResult bindingResult, Principal principal) {
+	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult bindingResult, Principal principal) {
 		if(!bindingResult.hasErrors()) {
 				System.out.println("Bien vu !");
 				String no_utilisateur = principal.getName();
