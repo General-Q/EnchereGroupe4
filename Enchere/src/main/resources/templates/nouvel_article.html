@@ -7,10 +7,17 @@
 <body>
 	<header>
 		<h1>Nouvel Article</h1>
+<<<<<<< HEAD
 	</header>
 	<main>
 		<form th:action="@{/nouvel_article}" method="post">
 			<div>
+=======
+	
+		<form th:action="@{/nouvel_article}" th:object ="${articleVendu}" method="post">
+			 <ul> <li th:each="err : ${#fields.allErrors()}" th:text="${err}" /> </ul>
+			 
+			 <div class="articleVendu">
 				<label for="nom_article">Nom de l'article :</label> <input
 					type="text" id="nom_article" name="nom_article" required>
 			</div>
