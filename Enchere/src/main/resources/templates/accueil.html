@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html layout:decorate="~{layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decorate="~{layout.html}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
 <meta charset="UTF-8">
@@ -8,39 +9,47 @@
 </head>
 <body>
 
-<main layout:fragment="main">
+	<main layout:fragment="main">
 
-<h1>Liste des enchères</h1>
+		<h1>Liste des enchères</h1>
 
-<div id="searchbar">
-                
-   <h2>Filtres :</h2>                     
-  <form action="" class="formulaire">
-      <input class="champ" type="text" placeholder="Le nom de l'article contient ?"/>
-      <input class="bouton" type="button" value="Valider" />
-  </form>
-  	<a href="nouvel_article">Vendre un article</a>
-	<!-- <a th:if="${utilisateurConnecte}" href="nouvel_article">Vendre un article</a><a th:unless="${utilisateurConnecte}" href="inscription">Vendre un article</a> -->
+		<div id="searchbar">
 
-</div>
+			<h2>Filtres :</h2>
+			<form action="" class="formulaire">
+				<input class="champ" type="text"
+					placeholder="Le nom de l'article contient ?" /> <input
+					class="bouton" type="button" value="Valider" />
+			</form>
+			<a href="nouvel_article">Vendre un article</a>
+			<!-- <a th:if="${utilisateurConnecte}" href="nouvel_article">Vendre un article</a><a th:unless="${utilisateurConnecte}" href="inscription">Vendre un article</a> -->
 
- <div id="articleList">
-            <table>
-                <tr>
-                    <th>Nom de l'article</th>
-                    <th>Description</th>
-                    <!-- Add more table headers as needed -->
-                </tr>
-                <tr th:each="article : ${articlesVendus}">
-                    <td th:text="${article.nom_article}"></td>
-                    <td th:text="${article.description}"></td>
-<!--                 	<td><a th:text="@{/detail_vente(noArticleVendu=${enchere.noArticleVendu})}">Détail de la Vente</a></td> -->
-                </tr>
-            </table>
-            <p th:if="${message}" th:text="${message}"></p>
-        </div>
+		</div>
 
-</main>
+		<div id="articleList">
+			<table>
+				<tr>
+					<th>Nom de l'article</th>
+					<th>Description</th>
+					<!-- Add more table headers as needed -->
+				</tr>
+				<tr th:each="article : ${articlesVendus}">
+					<td th:text="${article.nom_article}"></td>
+					<td th:text="${article.description}"></td>
+					<th>Détails de l'enchère :</th>
+					<p>
+						Prix de départ : <span th:text="${enchere.prixDepart}"></span>
+					</p>
+					<p>
+						Date de début : <span th:text="${enchere.dateDebut}"></span>
+					</p>
+					<a th:href="@{/detail_vente(articleVendu=${article})}">Voir le détail</a>
+				</tr>
+			</table>
+			<p th:if="${message}" th:text="${message}"></p>
+		</div>
+
+	</main>
 
 
 </body>

@@ -19,6 +19,7 @@ import fr.eni.enchere.bll.EnchereService;
 import fr.eni.enchere.bll.UtilisateurService;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
+import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.controller.converter.StringToUtilisateurConverter;
 import jakarta.validation.Valid;
@@ -34,7 +35,8 @@ public class ArticleController {
 	private StringToUtilisateurConverter stringToUtilisateurConverter;
 
 	@Autowired
-	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService, UtilisateurService utilisateurService, EnchereService enchereService) {
+	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService,
+			UtilisateurService utilisateurService, EnchereService enchereService) {
 		this.articleVenduService = articleVenduService;
 		this.categorieService = categorieService;
 		this.utilisateurService = utilisateurService;
@@ -72,19 +74,20 @@ public class ArticleController {
 	}
 
 	@PostMapping("/nouvel_article")
-	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult bindingResult, Principal principal, @RequestParam("categorie") int noCategorie) {
-		if(!bindingResult.hasErrors()) {
-				System.out.println("Bien vu !");
-				System.out.println(noCategorie);
-				String pseudoUtil = principal.getName();
-				Utilisateur util = utilisateurService.findByPseudo(pseudoUtil);
-	            articleVendu.setNoUtilisateur(util);
-	            articleVendu.setNoCategorie(noCategorie);
-	            System.out.println("Méthode ajoutArticle appelée");
-				articleVenduService.ajoutArticle(articleVendu);
-				enchereService.ajouterVente(articleVendu);
-				return "redirect:/accueil";
-		}else {
+	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu,
+			BindingResult bindingResult, Principal principal, @RequestParam("categorie") int noCategorie) {
+		if (!bindingResult.hasErrors()) {
+			System.out.println("Bien vu !");
+			System.out.println(noCategorie);
+			String pseudoUtil = principal.getName();
+			Utilisateur util = utilisateurService.findByPseudo(pseudoUtil);
+			articleVendu.setNoUtilisateur(util);
+			articleVendu.setNoCategorie(noCategorie);
+			System.out.println("Méthode ajoutArticle appelée");
+			articleVenduService.ajoutArticle(articleVendu);
+			enchereService.ajouterVente(articleVendu);
+			return "redirect:/accueil";
+		} else {
 			System.out.println("Formulaire de création non conforme");
 			System.out.println(bindingResult.getErrorCount());
 			for (ObjectError err : bindingResult.getAllErrors()) {
@@ -98,16 +101,11 @@ public class ArticleController {
 //        model.addAttribute("utilisateurConnecte", utilisateurConnecte);
 //        return "nom-de-votre-page";
 
-	@PostMapping("/nouvelle_vente")
-	
-	
 	@GetMapping("/detail_vente")
-	public String detailVente(Model model, Principal principal) {
-		String pseudoUtil = principal.getName();
-		Integer idUtil = utilisateurService.findByPseudo(pseudoUtil).getNoUtilisateur();
-		model.addAttribute(idUtil);
-		
+	public String detailVente(Model model, Principal principal, @RequestParam("articleVendu") ArticleVendu articleVendu) {
+		Integer idA = articleVendu.getNo_article();
+		Enchere enchere = enchereService.findById(idA);	
+		model.addAttribute("enchere", enchere);
 		return "detail_vente";
 	}
-
 }
