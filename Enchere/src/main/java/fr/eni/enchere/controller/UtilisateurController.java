@@ -66,7 +66,7 @@ public class UtilisateurController {
 		String pseudo = SecurityContextHolder.getContext().getAuthentication().getName();
 		System.out.println("postmapping supprimerProfil sur " + pseudo);
 		utilisateurService.supprimerProfil(pseudo);
-		return "redirect:/accueil";
+		return "redirect:/logout";
 	}
 	
 }
