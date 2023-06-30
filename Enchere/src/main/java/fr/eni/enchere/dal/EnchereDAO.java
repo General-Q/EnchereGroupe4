@@ -6,8 +6,6 @@ import fr.eni.enchere.bo.Enchere;
 
 public interface EnchereDAO {
 
-	
-List<Enchere>findAll();
-	/*Enchere read(Integer);*/
-
-}
+	List<Enchere> findAll();
+	/* Enchere read(Integer); */
+	void ajouterVente(Enchere enchere);	}

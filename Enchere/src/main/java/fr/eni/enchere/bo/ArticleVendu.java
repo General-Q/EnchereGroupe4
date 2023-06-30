@@ -34,12 +34,17 @@ public class ArticleVendu {
 	
 	// Associations
 	private List<Enchere>encheres;
-	private Long noUtilisateur;
+	private Integer noUtilisateur;
 	private Integer noCategorie;
 	private Retrait retrait;	
 	
 	public ArticleVendu() {
 	}
+	
+	public ArticleVendu(Integer noArticle) {
+        super();
+        this.no_article = noArticle;
+    }
 
 	public ArticleVendu(String nomE, String description, Date dateD, Date dateF, Integer prixI, Integer prixV) {
 		this.nom_article = nomE;
@@ -154,7 +159,7 @@ public class ArticleVendu {
 		this.encheres = encheres;
 	}
 
-	public Long getNoUtilisateur() {
+	public Integer getNoUtilisateur() {
 		return noUtilisateur;
 	}
 

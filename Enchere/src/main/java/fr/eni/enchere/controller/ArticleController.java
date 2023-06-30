@@ -19,7 +19,6 @@ import fr.eni.enchere.bll.EnchereService;
 import fr.eni.enchere.bll.UtilisateurService;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
-import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.controller.converter.StringToUtilisateurConverter;
 import jakarta.validation.Valid;
@@ -34,15 +33,13 @@ public class ArticleController {
 	@Autowired
 	private StringToUtilisateurConverter stringToUtilisateurConverter;
 
-	
-	
 	@Autowired
 	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService, UtilisateurService utilisateurService, EnchereService enchereService) {
 		this.articleVenduService = articleVenduService;
 		this.categorieService = categorieService;
 		this.utilisateurService = utilisateurService;
-		this.enchereService=enchereService;
-}
+		this.enchereService = enchereService;
+	}
 
 	@GetMapping({ "/", "/accueil" })
 	public String afficherEncheres(Model model) {
@@ -58,16 +55,13 @@ public class ArticleController {
 		return "accueil";
 	}
 
-	
-//	 @GetMapping("/detail_vente")
-//	 public String detailVente(Integer noArticleVendu, Model model) { 
-//		 Enchere enchere = enchereService.findById(noArticleVendu);
-//		 model.addAttribute("enchere", enchere); 
-//		 
-//		 return "detail_vente";
-//	  
-//	 }
-	 
+	/*
+	 * @GetMapping("/detail_vente") public String detailVente(Integer id, Model
+	 * model) { Enchere enchere = enchereService.findById(id);
+	 * model.addAttribute("enchere", enchere); return "detail_vente";
+	 * 
+	 * }
+	 */
 
 	@GetMapping("/nouvel_article")
 	public String ajoutArticle(Model model) {
@@ -88,6 +82,7 @@ public class ArticleController {
 	            articleVendu.setNoCategorie(noCategorie);
 	            System.out.println("Méthode ajoutArticle appelée");
 				articleVenduService.ajoutArticle(articleVendu);
+				enchereService.ajouterVente(articleVendu);
 				return "redirect:/accueil";
 		}else {
 			System.out.println("Formulaire de création non conforme");
@@ -104,15 +99,15 @@ public class ArticleController {
 //        return "nom-de-votre-page";
 
 	@PostMapping("/nouvelle_vente")
-	public String ajouterVente(@Valid @ModelAttribute Enchere enchere, BindingResult validationResult) {
-		if (validationResult.hasErrors()) {
-			return "nouvelle_vente";
-
-		}
-		// enchereService.ajouterVente(enchere);
-
-		return "redirection:/accueil";
-
+	
+	
+	@GetMapping("/detail_vente")
+	public String detailVente(Model model, Principal principal) {
+		String pseudoUtil = principal.getName();
+		Integer idUtil = utilisateurService.findByPseudo(pseudoUtil).getNoUtilisateur();
+		model.addAttribute(idUtil);
+		
+		return "detail_vente";
 	}
 
 }
