@@ -3,12 +3,14 @@ package fr.eni.enchere.bll;
 import java.util.Date;
 
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.dal.EnchereDAO;
 import jakarta.validation.Valid;
 
+@Service
 public class EnchereServiceImpl implements EnchereService{
 
 	private EnchereDAO enchereDAO;

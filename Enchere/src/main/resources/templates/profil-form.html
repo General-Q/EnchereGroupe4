@@ -12,7 +12,14 @@
 
 <form th:action="enregistrerProfil" th:object="${utilisateur}" method="post">
 
+
+
 <ul>
+<label for="inputNoUtilisateur"></label><input type="hidden" 
+	name ="noUtilisateur" id="inputNoUtilisateur" required
+	data-th-value="${utilisateur.noUtilisateur}"/>
+<br>
+
 	<li><label for="inputPseudo">Pseudo : </label><input type="text" 
 	name ="pseudo" id="inputPseudo" required
 	data-th-value="${utilisateur.pseudo}"/></li>
