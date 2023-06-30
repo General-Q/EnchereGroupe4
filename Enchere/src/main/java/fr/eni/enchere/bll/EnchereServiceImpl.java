@@ -16,8 +16,9 @@ public class EnchereServiceImpl implements EnchereService{
 	private EnchereDAO enchereDAO;
 	private ArticleVenduService articleVenduService;
 	
-	public EnchereServiceImpl(ArticleVenduService articleVenduService) {
+	public EnchereServiceImpl(ArticleVenduService articleVenduService, EnchereDAO enchereDAO) {
 		this.articleVenduService = articleVenduService;
+		this.enchereDAO = enchereDAO;
 	}
 
 	/*
@@ -32,12 +33,10 @@ public class EnchereServiceImpl implements EnchereService{
 		return enchere;
 	}
 */
-	
 	@Override
-	@Async
-	public void debutEnchere(@Valid Enchere enchere, Date date) {
-		Integer noA = enchere.getNoArticleVendu();
-		ArticleVendu aV = articleVenduService.
+	public void ajouterVente(ArticleVendu articleVendu) {
+			Enchere enchere = new Enchere(articleVendu);
+			enchereDAO.ajouterVente(enchere);
 	}
 	
 	@Override

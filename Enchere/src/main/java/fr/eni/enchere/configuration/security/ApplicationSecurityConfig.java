@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.security.web.*;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 import javax.sql.DataSource;
 
 
@@ -59,9 +61,42 @@ public class ApplicationSecurityConfig {
 			return http.build();
 		}
 	  
+	  /*
+	  @Bean
+	  public SecurityFilterChain configure(HttpSecurity http) throws Exception {
+	      http.authorizeRequests(auth -> {
+	          auth
+	        //Permettre aux visiteurs d'accéder à certaines pages
+				.requestMatchers(HttpMethod.GET, "/", "/accueil", "/inscription").permitAll()
+				//Permettre aux membres d'accéder au formulaire ajout de film
+				//.requestMatchers(HttpMethod.GET, "/VueAjouter").hasAuthority("MEMBRE")
+				// Accès à la vue principale
+				.requestMatchers("/enregistrerProfil").permitAll()
+				// Permettre à tous d'afficher correctement les images et CSS
+				//.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
+				// Il faut être connecté pour toutes autres URLs
+				.anyRequest().authenticated();
+	      });
+
+	   // Customiser le formulaire
+			http.formLogin(form -> {
+				form.loginPage("/login").permitAll();
+				form.defaultSuccessUrl("/accueil").permitAll();
+			});
+
+			// /logout --> vider la session et le contexte de sécurité
+			http.logout(logout -> 
+					logout
+					.invalidateHttpSession(true)
+					.clearAuthentication(true)
+					.deleteCookies("JSESSIONID")
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+					.logoutSuccessUrl("/").permitAll())
+			.httpBasic(Customizer.withDefaults());
+
+			return http.build();
+	  }*/
 }
-
-
 
 
 

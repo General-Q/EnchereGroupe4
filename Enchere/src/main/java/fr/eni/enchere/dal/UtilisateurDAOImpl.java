@@ -25,7 +25,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe from UTILISATEURS WHERE pseudo=?";
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
-	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo=:pseudo;nom=:nom, prenom=:prenom, email=:email, telephone=:telephone,rue=:rue, code_postal=:code_postal,ville=:ville,mot_de_passe=:mot_de_passe where no_utilisateur=:no_utilisateur";
+	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo=:pseudo,nom=:nom, prenom=:prenom, email=:email, telephone=:telephone,rue=:rue, code_postal=:code_postal,ville=:ville,mot_de_passe=:mot_de_passe where no_utilisateur=:no_utilisateur";
 
 	
 	@Autowired 
@@ -54,6 +54,12 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 			user.setNom(rs.getString("nom"));
 			user.setPrenom(rs.getString("prenom"));
 			user.setEmail(rs.getString("email"));
+			user.setTelephone(rs.getString("telephone"));
+			user.setRue(rs.getString("rue"));
+			user.setCodePostal(rs.getString("code_postal"));
+			user.setVille(rs.getString("ville"));
+			user.setMotDePasse(rs.getString("mot_de_passe"));
+			user.setCredit(rs.getInt("credit"));
 			user.setAdministrateur(rs.getBoolean("administrateur"));
 			return user;
 		}
@@ -63,7 +69,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	@Override
 	public void save(Utilisateur utilisateur) {
 		
-		MapSqlParameterSource paramSrc = new MapSqlParameterSource("pseudo", utilisateur.getPseudo() );
+		MapSqlParameterSource paramSrc = new MapSqlParameterSource("no_utilisateur", utilisateur.getNoUtilisateur());
+		paramSrc.addValue("pseudo", utilisateur.getPseudo());
 		paramSrc.addValue("nom", utilisateur.getNom());
 		paramSrc.addValue("prenom", utilisateur.getPrenom());
 		paramSrc.addValue("email", utilisateur.getEmail());
@@ -78,13 +85,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		
 		if (utilisateur.getNoUtilisateur()==null) {
 			// insert
-			/*KeyHolder keyHolder = new GeneratedKeyHolder();
-			utilisateur.setNoUtilisateur(keyHolder.getKey().intValue());*/
-				
-			jdbcTemplate.update(INSERT, paramSrc);
-			
-			//jdbcTemplate.update(INSERT,new BeanPropertySqlParameterSource(utilisateur),keyHolder);
-			
+			KeyHolder keyHolder = new GeneratedKeyHolder();
+			jdbcTemplate.update(INSERT, paramSrc, keyHolder);
+			utilisateur.setNoUtilisateur(keyHolder.getKey().intValue());
 			System.out.println("Insert utilisateur : " + utilisateur);
 		}else {
 			// update
