@@ -106,6 +106,7 @@ public class ArticleController {
 		Integer idA = articleVendu.getNo_article();
 		Enchere enchere = enchereService.findById(idA);	
 		model.addAttribute("enchere", enchere);
+		model.addAttribute("articleVendu", articleVendu);
 		return "detail_vente";
 	}
 }
