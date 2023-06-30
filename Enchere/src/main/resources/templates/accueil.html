@@ -38,12 +38,14 @@
 					<td th:text="${article.description}"></td>
 					<th>Détails de l'enchère :</th>
 					<p>
-						Prix de départ : <span th:text="${enchere.prixDepart}"></span>
+						Prix de départ : <span
+							th:text="${article.enchere.montant_enchere}"></span>
 					</p>
 					<p>
-						Date de début : <span th:text="${enchere.dateDebut}"></span>
+						Date de début : <span th:text="${article.enchere.dateEnchere}"></span>
 					</p>
-					<a th:href="@{/detail_vente(articleVendu=${article})}">Voir le détail</a>
+					</td>
+					<td><a th:href="@{/detail_vente(articleVendu=${article})}">Voir le détail</a></td>
 				</tr>
 			</table>
 			<p th:if="${message}" th:text="${message}"></p>
