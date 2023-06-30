@@ -31,6 +31,13 @@ public class ApplicationSecurityConfig {
 		return passwordEncoder;
 	}
 	
+	/*@Autowired
+	public void configure(WebSecurity web) throws Exception {
+	    web
+	            .ignoring().antMatchers("/resources/**");
+	}*/
+	
+	
 	  @Autowired
 	  public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
 	        auth.jdbcAuthentication()
@@ -39,6 +46,7 @@ public class ApplicationSecurityConfig {
 	            .authoritiesByUsernameQuery( "SELECT ?, 'admin' " )
 	            .passwordEncoder( passwordEncoder )
 	            ;
+	        
 	  }
 	
 		@Bean
@@ -52,13 +60,35 @@ public class ApplicationSecurityConfig {
 						// Accès à la vue principale
 						.requestMatchers("/enregistrerProfil").permitAll()
 						// Permettre à tous d'afficher correctement les images et CSS
-						//.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
+						.requestMatchers("/css/*").permitAll()
+						.requestMatchers("/layout.css").permitAll()
+						.requestMatchers("/images/*").permitAll()
+						.requestMatchers("/resources/*").permitAll()
 						// Il faut être connecté pour toutes autres URLs
 						.anyRequest().authenticated();
 			});
 			//formulaire de connexion par défaut
 			http.formLogin(Customizer.withDefaults());
+			//return http.build();
+			
+			  // Customiser le formulaire
+			/*http.formLogin(form -> {
+				form.loginPage("/login").permitAll();
+				form.defaultSuccessUrl("/accueil").permitAll();
+			});*/
+
+			// /logout --> vider la session et le contexte de sécurité
+			http.logout(logout -> 
+					logout
+					.invalidateHttpSession(true)
+					.clearAuthentication(true)
+					.deleteCookies("JSESSIONID")
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+					.logoutSuccessUrl("/").permitAll())
+			.httpBasic(Customizer.withDefaults());
+
 			return http.build();
+			
 		}
 	  
 	  /*
@@ -76,26 +106,10 @@ public class ApplicationSecurityConfig {
 				//.requestMatchers("/css/*").permitAll().requestMatchers("/images/*").permitAll()
 				// Il faut être connecté pour toutes autres URLs
 				.anyRequest().authenticated();
-	      });
+	      });*/
 
-	   // Customiser le formulaire
-			http.formLogin(form -> {
-				form.loginPage("/login").permitAll();
-				form.defaultSuccessUrl("/accueil").permitAll();
-			});
-
-			// /logout --> vider la session et le contexte de sécurité
-			http.logout(logout -> 
-					logout
-					.invalidateHttpSession(true)
-					.clearAuthentication(true)
-					.deleteCookies("JSESSIONID")
-					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-					.logoutSuccessUrl("/").permitAll())
-			.httpBasic(Customizer.withDefaults());
-
-			return http.build();
-	  }*/
+	 
+	  
 }
 
 

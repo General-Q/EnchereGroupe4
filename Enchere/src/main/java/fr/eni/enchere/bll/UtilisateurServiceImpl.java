@@ -21,8 +21,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public void supprimerProfil(Principal principal) {
-		utilisateurDAO.delete(principal);
+	public void supprimerProfil(String pseudo) {
+		utilisateurDAO.delete(pseudo);
 		
 	}
 

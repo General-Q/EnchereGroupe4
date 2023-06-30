@@ -13,7 +13,7 @@ public interface UtilisateurDAO {
 
 	Utilisateur findById(Integer id);
 
-	void delete(Principal principal);
+	void delete(String pseudo);
 
 	Utilisateur findByPseudo(String pseudo);
 
