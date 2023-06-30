@@ -8,6 +8,6 @@ import jakarta.validation.Valid;
 public interface EnchereService {
 
 	
-Enchere findById(Integer id);
+Enchere findById(Integer noArticleVendu);
 void debutEnchere(@Valid Enchere enchere, java.util.Date date);
 }

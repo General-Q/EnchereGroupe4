@@ -34,6 +34,7 @@
                 <tr th:each="article : ${articlesVendus}">
                     <td th:text="${article.nom_article}"></td>
                     <td th:text="${article.description}"></td>
+<!--                 	<td><a th:text="@{/detail_vente(noArticleVendu=${enchere.noArticleVendu})}">Détail de la Vente</a></td> -->
                 </tr>
             </table>
             <p th:if="${message}" th:text="${message}"></p>

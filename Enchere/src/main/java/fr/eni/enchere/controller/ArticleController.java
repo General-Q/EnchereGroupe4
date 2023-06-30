@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.enchere.bll.ArticleVenduService;
 import fr.eni.enchere.bll.CategorieService;
+import fr.eni.enchere.bll.EnchereService;
 import fr.eni.enchere.bll.UtilisateurService;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
@@ -29,15 +30,19 @@ public class ArticleController {
 	private ArticleVenduService articleVenduService;
 	private CategorieService categorieService;
 	private UtilisateurService utilisateurService;
+	private EnchereService enchereService;
 	@Autowired
 	private StringToUtilisateurConverter stringToUtilisateurConverter;
 
+	
+	
 	@Autowired
-	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService, UtilisateurService utilisateurService) {
+	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService, UtilisateurService utilisateurService, EnchereService enchereService) {
 		this.articleVenduService = articleVenduService;
 		this.categorieService = categorieService;
 		this.utilisateurService = utilisateurService;
-	}
+		this.enchereService=enchereService;
+}
 
 	@GetMapping({ "/", "/accueil" })
 	public String afficherEncheres(Model model) {
@@ -53,13 +58,16 @@ public class ArticleController {
 		return "accueil";
 	}
 
-	/*
-	 * @GetMapping("/detail_vente") public String detailVente(Integer id, Model
-	 * model) { Enchere enchere = enchereService.findById(id);
-	 * model.addAttribute("enchere", enchere); return "detail_vente";
-	 * 
-	 * }
-	 */
+	
+//	 @GetMapping("/detail_vente")
+//	 public String detailVente(Integer noArticleVendu, Model model) { 
+//		 Enchere enchere = enchereService.findById(noArticleVendu);
+//		 model.addAttribute("enchere", enchere); 
+//		 
+//		 return "detail_vente";
+//	  
+//	 }
+	 
 
 	@GetMapping("/nouvel_article")
 	public String ajoutArticle(Model model) {

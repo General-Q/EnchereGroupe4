@@ -13,15 +13,15 @@
 </div>
 <div class ="detail_vente">
 
-<h2 class ="NomArticle" th:text="${articleVendu.nom_article}"></h2>
+<h2 class ="NomArticle" th:text="${enchere.noArticleVendu}"></h2>
 
-<p><a data-th-text="${articleVendu.description}"></a>Description : </p>
-<p><a data-th-text="${articleVendu.categorie?.libelle}"></a>Catégorie : </p>
-<p><a data-th-text="${articleVendu.enchere?.montant_enchere}">Meilleure offre : </a></p>
-<p><a data-th-text="${articleVendu.prix_initial}">Mise à prix : </a></p>
-<p><a data-th-text="${articleVendu.date_fin_encheres}">Fin de l'enchère : </a></p>
-<p><a data-th-text="${articleVendu.retrait?.adresseRetrait}">Retrait :</a></p>
-<p><a data-th-text="${articleVendu.utilisateur?.noUtilisateur}">Vendeur :</a></p>
+<p><a data-th-text="${enchere.articleVendu?.description}"></a>Description : </p>
+<p><a data-th-text="${enchere.categorie?.libelle}"></a>Catégorie : </p>
+<p><a data-th-text="${enchere.montant_enchere}">Meilleure offre : </a></p>
+<p><a data-th-text="${enchere.articleVendu?.prix_initial}">Mise à prix : </a></p>
+<p><a data-th-text="${enchere.articleVendu?.date_fin_encheres}">Fin de l'enchère : </a></p>
+<p><a data-th-text="${enchere.retrait?.adresseRetrait}">Retrait :</a></p>
+<p><a data-th-text="${enchere.utilisateur?.noUtilisateur}">Vendeur :</a></p>
 
 <br>
  <form action="/encherir" th:object ="${enchere}" method="post"><!-- a modifier lorsque la methode sera faite -->
