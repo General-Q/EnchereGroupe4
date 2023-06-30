@@ -33,6 +33,11 @@ public class UtilisateurController {
 		return "profil-form";
 	}
 	
+	@GetMapping("/layout.css")
+	public String RenvoiApresConnexion() {
+		return"redirect:/accueil";
+	}
+	
 	@PostMapping("/enregistrerProfil")
 	public String EnregistrerProfil(Utilisateur utilisateur) {
 		System.out.println("postmapping enregistrerProfil OK");
@@ -57,8 +62,10 @@ public class UtilisateurController {
 	}
 	
 	@GetMapping("/supprimerProfil")
-	public String supprimerProfil(@RequestParam Principal principal) {
-		utilisateurService.supprimerProfil(principal);
+	public String supprimerProfil() {
+		String pseudo = SecurityContextHolder.getContext().getAuthentication().getName();
+		System.out.println("postmapping supprimerProfil sur " + pseudo);
+		utilisateurService.supprimerProfil(pseudo);
 		return "redirect:/accueil";
 	}
 	
