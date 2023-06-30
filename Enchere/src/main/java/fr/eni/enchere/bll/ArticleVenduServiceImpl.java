@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import fr.eni.enchere.bo.ArticleVendu;
+import fr.eni.enchere.bo.Enchere;
 import fr.eni.enchere.dal.ArticleVenduDAO;
+import jakarta.validation.Valid;
 
 @Service
 @Primary
@@ -32,5 +36,7 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 	public ArticleVendu findById(Integer id) {
 		return articleVenduDAO.findById(id);
 	}
+	
+	
 
 }

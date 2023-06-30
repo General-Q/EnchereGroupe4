@@ -5,12 +5,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.stereotype.Repository;
 
 import fr.eni.enchere.bo.ArticleVendu;
 @Repository
@@ -28,9 +29,14 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	}
 	
 	@Override
-	ArticleVendu findById(Integer id) {
-		
-	}
+    public ArticleVendu findById(Integer id) {
+
+        ArticleVendu src = new ArticleVendu(id);
+
+        ArticleVendu articleVendu = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_ID, new BeanPropertyRowMapper<>(ArticleVendu.class),id);
+
+        return articleVendu;
+    } 
 	
 	@Override
 	public void ajoutArticle(ArticleVendu articleVendu) {

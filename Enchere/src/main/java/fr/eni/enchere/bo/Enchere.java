@@ -65,6 +65,16 @@ public class Enchere {
 		this.noArticleVendu = noArticleVendu;
 	}
 
+	public long getNoUtil() {
+		return noUtil;
+	}
+
+	public void setNoUtil(long noUtil) {
+		this.noUtil = noUtil;
+	}
+	
+	
+
 	// Autres méthodes
 //	@Override
 //	public String toString() {
