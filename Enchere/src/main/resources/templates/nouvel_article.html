@@ -51,19 +51,30 @@
 					type="date" id="date_fin_encheres" name="date_fin_encheres"
 					required>
 			</div>
-			<table>
-			<caption align="top">Retrait</caption>
-				<thead>
-					
-					<tbody>
-					<tr>Rue</tr>
-					<td	th:text="${utilisateur.rue}"></td>
-					<tr>Code postal</tr>
-					<td	th:text="${utilisateur.codePostal}"></td>
-					<tr>Ville</tr>
-					<td	th:text="${utilisateur.ville}"></td>
-					</tbody>
-			</table>
+<table>
+	<caption align="top">Retrait</caption>
+	<thead>
+		<tr>
+			<th>Adresse</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Rue</td>
+			<td th:text="${utilisateur.rue}"></td>
+		</tr>
+		<tr>
+			<td>Code postal</td>
+			<td th:text="${utilisateur.codePostal}"></td>
+		</tr>
+		<tr>
+			<td>Ville</td>
+			<td th:text="${utilisateur.ville}"></td>
+		</tr>
+	</tbody>
+</table>
+
 			
 			<button type="submit">Créer l'article</button>
 		</form>

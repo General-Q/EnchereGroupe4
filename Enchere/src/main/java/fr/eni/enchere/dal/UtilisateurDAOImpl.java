@@ -26,7 +26,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
 	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo=:pseudo,nom=:nom, prenom=:prenom, email=:email, telephone=:telephone,rue=:rue, code_postal=:code_postal,ville=:ville,mot_de_passe=:mot_de_passe where no_utilisateur=:no_utilisateur";
-
+	private static final String DELETE = "DELETE UTILISATEURS where pseudo=:pseudo";
 	
 	@Autowired 
 	NamedParameterJdbcTemplate jdbcTemplate;
@@ -103,9 +103,11 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	}
 
 	@Override
-	public void delete(Principal principal) {
-		// TODO Auto-generated method stub
-		
+	public void delete(String pseudo) {
+		System.out.println(pseudo);
+		Utilisateur user = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
+		System.out.println(user);
+		jdbcTemplate.update(DELETE, new BeanPropertySqlParameterSource(user));
 	}
 
 	@Override

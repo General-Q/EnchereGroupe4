@@ -8,7 +8,7 @@ public interface UtilisateurService {
 
 	Utilisateur findById(Integer id);
 
-	void supprimerProfil(Principal principal);
+	void supprimerProfil(String pseudo);
 
 	Utilisateur findByPseudo(String pseudo);
 
