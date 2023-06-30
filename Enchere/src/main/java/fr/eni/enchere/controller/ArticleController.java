@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -65,12 +67,20 @@ public class ArticleController {
 
 	@GetMapping("/nouvel_article")
 	public String ajoutArticle(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
 		List<Categorie> categories = categorieService.categories();
 		model.addAttribute("categories", categories);
 		model.addAttribute("articleVendu", new ArticleVendu());
+		  if (authentication != null && authentication.isAuthenticated()) {
+            String pseudo = authentication.getName();
+        model.addAttribute("utilisateur",utilisateurService.findByPseudo(pseudo));
 		return "nouvel_article";
+		  }else {
+			  return "nouvel_article"; 
+		  }
 	}
-
+	
 	@PostMapping("/nouvel_article")
 	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, BindingResult bindingResult, Principal principal, @RequestParam("categorie") int noCategorie) {
 		if(!bindingResult.hasErrors()) {
