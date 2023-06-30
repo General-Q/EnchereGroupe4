@@ -102,7 +102,7 @@ public class ArticleController {
 //        return "nom-de-votre-page";
 
 	@GetMapping("/detail_vente")
-	public String detailVente(Model model, Principal principal, @RequestParam("articleVendu") ArticleVendu articleVendu) {
+	public String detailVente(Model model, @RequestParam("articleVendu") ArticleVendu articleVendu) {
 		Integer idA = articleVendu.getNo_article();
 		Enchere enchere = enchereService.findById(idA);	
 		model.addAttribute("enchere", enchere);

@@ -40,9 +40,8 @@ public class EnchereServiceImpl implements EnchereService{
 	}
 	
 	@Override
-	public Enchere findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Enchere findById(Integer noE) {
+		return enchereDAO.findById(noE);
 	}
 
 }

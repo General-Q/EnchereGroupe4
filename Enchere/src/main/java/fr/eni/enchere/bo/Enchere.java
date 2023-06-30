@@ -22,6 +22,10 @@ public class Enchere {
 	public Enchere() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Enchere(Integer noE) {
+		this.noArticleVendu = noE;
+	}
 
 	//Constructeur sans associations
 	public Enchere(Date dateEnchere, Integer montant_enchere) {
