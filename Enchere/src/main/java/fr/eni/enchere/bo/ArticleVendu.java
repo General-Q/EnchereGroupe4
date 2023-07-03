@@ -39,6 +39,8 @@ public class ArticleVendu {
 	// TODO Categorie categorie
 	private Retrait retrait;	
 	
+	
+	
 	public ArticleVendu() {
 	}
 	
@@ -209,6 +211,8 @@ public class ArticleVendu {
 		ArticleVendu other = (ArticleVendu) obj;
 		return Objects.equals(no_article, other.no_article);
 	}
+
+
 
 	
 }

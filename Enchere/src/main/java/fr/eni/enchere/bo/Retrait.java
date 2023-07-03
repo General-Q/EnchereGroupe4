@@ -1,5 +1,7 @@
 package fr.eni.enchere.bo;
 
+import org.springframework.jdbc.core.RowMapper;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -40,9 +42,13 @@ public class Retrait {
 		this.rue = rue;
 		this.code_postal = code_postal;
 		this.ville = ville;
-		this.articleVendu = articleVendu;
+		this.setArticleVendu(articleVendu);
 	}
 	
+	public Retrait(Integer no_article) {
+		// TODO Auto-generated constructor stub
+	}
+
 	// Getters et Setters	
 	public String getRue() {
 		return rue;
@@ -67,10 +73,20 @@ public class Retrait {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
+	
+	public ArticleVendu getArticleVendu() {
+		return articleVendu;
+	}
 
+	public void setArticleVendu(ArticleVendu articleVendu) {
+		this.articleVendu = articleVendu;
+	}
 	// Autres méthodes
 	@Override
 	public String toString() {
 		return "Retrait [rue=" + rue + ", code_postal=" + code_postal + ", ville=" + ville + "]";
 	}
+
+
+	
 }

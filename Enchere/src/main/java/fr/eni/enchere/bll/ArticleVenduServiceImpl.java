@@ -1,5 +1,6 @@
 package fr.eni.enchere.bll;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.context.annotation.Primary;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Enchere;
+import fr.eni.enchere.bo.Retrait;
 import fr.eni.enchere.dal.ArticleVenduDAO;
 import jakarta.validation.Valid;
 
@@ -16,7 +18,8 @@ import jakarta.validation.Valid;
 @Primary
 public class ArticleVenduServiceImpl implements ArticleVenduService{
 	private ArticleVenduDAO articleVenduDAO;
-
+	private Retrait retrait;
+	
 	public ArticleVenduServiceImpl(ArticleVenduDAO articleVenduDAO) {
 		this.articleVenduDAO = articleVenduDAO;
 	}
@@ -28,15 +31,20 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 	}
 	
 	@Override
-	public void ajoutArticle(ArticleVendu articleVendu) {
-		articleVenduDAO.ajoutArticle(articleVendu);
+	public void ajoutArticle(ArticleVendu articleVendu, Retrait retrait, Principal principal) {
+		articleVenduDAO.ajoutArticle(articleVendu, retrait, principal);
 	}
 	
 	@Override
 	public ArticleVendu findById(Integer id) {
 		return articleVenduDAO.findById(id);
 	}
-	
+
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+
 	
 
 }

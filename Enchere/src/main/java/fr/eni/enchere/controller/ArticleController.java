@@ -21,7 +21,11 @@ import fr.eni.enchere.bll.EnchereService;
 import fr.eni.enchere.bll.UtilisateurService;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
+
+import fr.eni.enchere.bo.Retrait;
+
 import fr.eni.enchere.bo.Enchere;
+
 import fr.eni.enchere.bo.Utilisateur;
 import fr.eni.enchere.controller.converter.StringToUtilisateurConverter;
 import jakarta.validation.Valid;
@@ -82,22 +86,37 @@ public class ArticleController {
 			  return "nouvel_article"; 
 		  }
 	}
-	
 	@PostMapping("/nouvel_article")
-	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu,
-			BindingResult bindingResult, Principal principal, @RequestParam("categorie") int noCategorie) {
+//	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("retrait")Retrait retrait, BindingResult bindingResult, Principal principal, @RequestParam("categorie") int noCategorie) {
+//		if(!bindingResult.hasErrors()) {
+//				System.out.println("Bien vu !");
+//				System.out.println(noCategorie);
+//				String pseudoUtil = principal.getName();
+//				Utilisateur util = utilisateurService.findByPseudo(pseudoUtil);
+//	            articleVendu.setNoUtilisateur(util);
+//	            articleVendu.setNoCategorie(noCategorie);
+//	            System.out.println("Méthode ajoutArticle appelée");
+//				articleVenduService.ajoutArticle(articleVendu, retrait, principal);
+//				enchereService.ajouterVente(articleVendu);
+//				return "redirect:/accueil";
+//		}else {
+			
+			public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu,
+			BindingResult bindingResult, Retrait retrait, Principal principal) {
+			//,@RequestParam("categorie") int noCategorie
 		if (!bindingResult.hasErrors()) {
 			System.out.println("Bien vu !");
-			System.out.println(noCategorie);
+			//System.out.println(noCategorie);
 			String pseudoUtil = principal.getName();
 			Utilisateur util = utilisateurService.findByPseudo(pseudoUtil);
 			articleVendu.setNoUtilisateur(util);
-			articleVendu.setNoCategorie(noCategorie);
+			//articleVendu.setNoCategorie(noCategorie);
 			System.out.println("Méthode ajoutArticle appelée");
-			articleVenduService.ajoutArticle(articleVendu);
+			articleVenduService.ajoutArticle(articleVendu,retrait, principal);
 			enchereService.ajouterVente(articleVendu);
 			return "redirect:/accueil";
 		} else {
+
 			System.out.println("Formulaire de création non conforme");
 			System.out.println(bindingResult.getErrorCount());
 			for (ObjectError err : bindingResult.getAllErrors()) {
