@@ -38,6 +38,8 @@ public class ArticleVendu {
 	private Integer noCategorie;
 	private Retrait retrait;	
 	
+	
+	
 	public ArticleVendu() {
 	}
 	
@@ -208,6 +210,8 @@ public class ArticleVendu {
 		ArticleVendu other = (ArticleVendu) obj;
 		return Objects.equals(no_article, other.no_article);
 	}
+
+
 
 	
 }

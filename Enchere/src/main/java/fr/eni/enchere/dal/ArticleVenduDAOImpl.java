@@ -1,5 +1,6 @@
 package fr.eni.enchere.dal;
 
+import java.security.Principal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,15 +14,25 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import fr.eni.enchere.bll.UtilisateurService;
 import fr.eni.enchere.bo.ArticleVendu;
+import fr.eni.enchere.bo.Retrait;
+import fr.eni.enchere.bo.Utilisateur;
 @Repository
 public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	private final String FIND_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_utilisateur=?";
 	private final String FIND_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente FROM ARTICLES_VENDUS";
 	private final String INSERT = "insert into articles_vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"
 			+ " values (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
+	
+	private static final String INSERT_RETRAIT ="insert into RETRAITS (no_article,rue,code_postal, ville)"
+			+ " values (:no_article, :rue, :code_postal, :ville)";
+	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private UtilisateurService utilisateurService;
 	
 	@Override
 	public List<ArticleVendu> findAll() {
@@ -39,11 +50,11 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
     } 
 	
 	@Override
-	public void ajoutArticle(ArticleVendu articleVendu) {
+	public void ajoutArticle(ArticleVendu articleVendu, Retrait retrait, Principal principal) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-
+		Utilisateur utilisateur = utilisateurService.findByPseudo(principal.getName());
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-//		namedParameters.addValue("no_article", articleVendu.getNo_article());
+
 		namedParameters.addValue("nom_article", articleVendu.getNom_article());
 		namedParameters.addValue("description", articleVendu.getDescription());
 		namedParameters.addValue("date_debut_encheres", articleVendu.getDate_debut_encheres());
@@ -52,14 +63,27 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 		namedParameters.addValue("prix_vente", articleVendu.getPrix_vente());
 		namedParameters.addValue("no_utilisateur", articleVendu.getNoUtilisateur());
 		namedParameters.addValue("no_categorie", articleVendu.getNoCategorie());
-		System.out.println("trace1");
+		
+	    namedParameters.addValue("rue", utilisateur.getRue());
+	    namedParameters.addValue("code_postal", utilisateur.getCodePostal());
+	    namedParameters.addValue("ville", utilisateur.getVille());
+
+	    System.out.println(retrait);
+	    System.out.println(articleVendu);
+
+	    System.out.println("trace1");
+	    
 		jdbcTemplate.update(INSERT, namedParameters, keyHolder);
 		System.out.println("trace");
 
 		if (keyHolder != null && keyHolder.getKey() != null) {
 			articleVendu.setNo_article(keyHolder.getKey().intValue());
 		}
+		namedParameters.addValue("no_article", articleVendu.getNo_article());
+		jdbcTemplate.update(INSERT_RETRAIT, namedParameters);
 	}
+	
+	
 	
 	class ArticleVenduRowMapper implements RowMapper<ArticleVendu> {
 		@Override
@@ -76,4 +100,5 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 			return aV;
 		}
 	}
+
 }

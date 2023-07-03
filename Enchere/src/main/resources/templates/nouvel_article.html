@@ -51,7 +51,10 @@
 					type="date" id="date_fin_encheres" name="date_fin_encheres"
 					required>
 			</div>
-<table>
+
+<table >
+<!-- <table> -->
+<!-- <div th:action="@{/adresseRetrait}" th:object ="${retrait}" method="post"> -->
 	<caption align="top">Retrait</caption>
 	<thead>
 		<tr>
@@ -61,16 +64,22 @@
 	</thead>
 	<tbody>
 		<tr>
+			
 			<td>Rue</td>
-			<td th:text="${utilisateur.rue}"></td>
+<!-- 			<td th:text="${utilisateur.rue}"> -->
+			
+			<td > <input type ="text" id="rue" name="rue" th:value = "${utilisateur.rue}" ></td>
 		</tr>
 		<tr>
 			<td>Code postal</td>
-			<td th:text="${utilisateur.codePostal}"></td>
+			<td > <input type ="text" id="codePostal" name="codePostal" th:value = "${utilisateur.codePostal}" ></td>
+<!-- 			<td th:text="${utilisateur.codePostal}"></td> -->
 		</tr>
 		<tr>
 			<td>Ville</td>
-			<td th:text="${utilisateur.ville}"></td>
+			<td > <input type ="text" id="ville" name="ville" th:value = "${utilisateur.ville}" ></td>
+<!-- 			<td th:text="${utilisateur.ville}"></td> -->
+<!-- 		</div> -->
 		</tr>
 	</tbody>
 </table>
