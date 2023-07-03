@@ -69,4 +69,16 @@ public class UtilisateurController {
 		return "redirect:/logout";
 	}
 	
+	@GetMapping("/usersList")
+	public String afficherListeUtilisateurs(Model modele) {
+		modele.addAttribute("utilisateurs",utilisateurService.findAllUsers());
+		return"users-list";
+	}
+	
+	@GetMapping("/afficherUtilisateur")
+	public String afficherUtilisateur(@RequestParam String pseudo, Model modele) {
+		modele.addAttribute("utilisateur",utilisateurService.findByPseudo(pseudo));
+		return "users-details";
+	}
+	
 }

@@ -1,6 +1,7 @@
 package fr.eni.enchere.bll;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	public void saveProfil(Utilisateur utilisateur) {
 		utilisateur.setMotDePasse(passwordEncoder.encode(utilisateur.getMotDePasse()));
 		utilisateurDAO.save(utilisateur);
+	}
+
+	@Override
+	public List<Utilisateur> findAllUsers() {
+		return utilisateurDAO.findAll();
 	}
 
 }

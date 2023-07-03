@@ -1,6 +1,7 @@
 package fr.eni.enchere.dal;
 
 import java.security.Principal;
+import java.util.List;
 
 import fr.eni.enchere.bo.Utilisateur;
 
@@ -16,5 +17,7 @@ public interface UtilisateurDAO {
 	void delete(String pseudo);
 
 	Utilisateur findByPseudo(String pseudo);
+
+	List<Utilisateur> findAll();
 
 }

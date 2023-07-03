@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html layout:decorate="~{layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>EniEnchere</title>
+</head>
+<body>
+<main layout:fragment="main">
+
+<h1>Liste des utilisateurs</h1>
+
+ <div id="usersList">
+            <table>
+        <tr th:each="utilisateur:${utilisateurs}">
+        <td>[[${utilisateur.pseudo}]]</td>
+        <td><a th:href="@{/afficherUtilisateur(pseudo=${utilisateur.pseudo})}">Afficher le profil de l'utilisateur</a>
+            </table>
+        </div>
+
+</main>
+
+
+</body>
+</html>
