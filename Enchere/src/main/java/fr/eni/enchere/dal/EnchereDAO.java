@@ -8,4 +8,6 @@ public interface EnchereDAO {
 
 	List<Enchere> findAll();
 	/* Enchere read(Integer); */
-	void ajouterVente(Enchere enchere);	}
+	void ajouterVente(Enchere enchere);
+	public Enchere findById(Integer noE);
+}

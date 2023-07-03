@@ -36,6 +36,7 @@ public class ArticleVendu {
 	private List<Enchere>encheres;
 	private Integer noUtilisateur;
 	private Integer noCategorie;
+	// TODO Categorie categorie
 	private Retrait retrait;	
 	
 	public ArticleVendu() {
