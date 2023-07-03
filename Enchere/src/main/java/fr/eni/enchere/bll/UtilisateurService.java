@@ -16,4 +16,6 @@ public interface UtilisateurService {
 	void saveProfil(Utilisateur utilisateur);
 
 	List<Utilisateur> findAllUsers();
+
+	Utilisateur findByEmail(String email);
 }

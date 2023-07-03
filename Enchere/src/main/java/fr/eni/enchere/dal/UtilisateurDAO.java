@@ -20,4 +20,6 @@ public interface UtilisateurDAO {
 
 	List<Utilisateur> findAll();
 
+	Utilisateur findByEmail(String email);
+
 }

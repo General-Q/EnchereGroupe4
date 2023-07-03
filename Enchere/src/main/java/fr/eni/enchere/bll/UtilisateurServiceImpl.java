@@ -55,4 +55,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return utilisateurDAO.findAll();
 	}
 
+	@Override
+	public Utilisateur findByEmail(String email) {
+		return utilisateurDAO.findByEmail(email);
+	}
+
 }
