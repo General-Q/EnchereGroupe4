@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout.html}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>EniEnchere</title>
+</head>
+<body>
+	<main layout:fragment="main">
+
+		<table>
+			<form th:object="${utilisateur}">
+				<ul>
+
+					<p>Pseudo : [[${utilisateur.pseudo}]]</p>
+
+					<p>Nom : [[${utilisateur.nom}]]</p>
+
+					<p>Prenom : [[${utilisateur.prenom}]]</p>
+
+					<p>Email : [[${utilisateur.email}]]</p>
+
+					<p>Telephone : [[${utilisateur.telephone}]]</p>
+
+					<p>Rue : [[${utilisateur.rue}]]</p>
+
+					<p>Code postal : [[${utilisateur.codePostal}]]</p>
+
+					<p>Ville : [[${utilisateur.ville}]]</p>
+
+
+				</ul>
+			</form>
+	</main>
+</body>
+</html>

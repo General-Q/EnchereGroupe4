@@ -9,5 +9,5 @@ import jakarta.validation.Valid;
 public interface EnchereService {
 
 void ajouterVente(@Valid ArticleVendu articleVendu);
-Enchere findById(Integer noArticleVendu);
+Enchere findById(Integer noE);
 }

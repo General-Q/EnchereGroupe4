@@ -40,11 +40,23 @@ public class ApplicationSecurityConfig {
 	
 	  @Autowired
 	  public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
-	        auth.jdbcAuthentication()
+		  String userByMailQuery = "SELECT email, mot_de_passe, 1 FROM UTILISATEURS WHERE email = ?;";
+		  String userByUsernameQuery = "SELECT pseudo, mot_de_passe, 1 FROM utilisateurs WHERE pseudo = ?";
+		  
+		  // Connexion via le mail
+		  auth.jdbcAuthentication()
+		  		.dataSource(dataSource)
+		  		.passwordEncoder(passwordEncoder)
+		  		.usersByUsernameQuery(userByMailQuery)
+		  		.authoritiesByUsernameQuery("SELECT ?,'admin' ")
+		  		;
+		  
+		  // Connexion via le pseudo
+		  auth.jdbcAuthentication()
 	            .dataSource( dataSource )
-	            .usersByUsernameQuery( "SELECT pseudo, mot_de_passe, 1 FROM utilisateurs WHERE pseudo = ? " )
-	            .authoritiesByUsernameQuery( "SELECT ?, 'admin' " )
 	            .passwordEncoder( passwordEncoder )
+	            .usersByUsernameQuery(userByUsernameQuery)
+	            .authoritiesByUsernameQuery( "SELECT ?, 'admin' " ) 
 	            ;
 	        
 	  }
@@ -69,7 +81,6 @@ public class ApplicationSecurityConfig {
 			});
 			//formulaire de connexion par défaut
 			http.formLogin(Customizer.withDefaults());
-			//return http.build();
 			
 			  // Customiser le formulaire
 			/*http.formLogin(form -> {

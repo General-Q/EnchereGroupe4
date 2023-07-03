@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.security.Principal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -27,6 +27,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
 	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo=:pseudo,nom=:nom, prenom=:prenom, email=:email, telephone=:telephone,rue=:rue, code_postal=:code_postal,ville=:ville,mot_de_passe=:mot_de_passe where no_utilisateur=:no_utilisateur";
 	private static final String DELETE = "DELETE UTILISATEURS where pseudo=:pseudo";
+	private static final String SELECT_ALL = "select pseudo from UTILISATEURS";
+	private static final String VERIF_PSEUDO = "select count(*) FROM UTILISATEURS where pseudo =?";
+	private static final String VERIF_EMAIL = "select count(*) FROM UTILISATEURS where email =?";
+	private static final String SELECT_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe from UTILISATEURS WHERE email=?";
 	
 	@Autowired 
 	NamedParameterJdbcTemplate jdbcTemplate;
@@ -84,6 +88,21 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		System.out.println(utilisateur.getNoUtilisateur());
 		
 		if (utilisateur.getNoUtilisateur()==null) {
+			/*StringBuilder error = new StringBuilder();
+			Integer nbPseudo = jdbcTemplate.getJdbcOperations().queryForObject(VERIF_PSEUDO, Integer.class, utilisateur.getPseudo());
+			Integer nbEmail = jdbcTemplate.getJdbcOperations().queryForObject(VERIF_EMAIL, Integer.class, utilisateur.getEmail());
+			
+			if (nbPseudo > 0) {
+				error.append("Le pseudo n'est pas disponible");
+			}
+			if (nbEmail>0) {
+				error.append("L'e-mail n'est pas disponible");
+			}
+			if (error.length()>0) {
+				throw new IllegalStateException(error.toString());
+			}*/
+			
+			
 			// insert
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			jdbcTemplate.update(INSERT, paramSrc, keyHolder);
@@ -92,6 +111,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		}else {
 			// update
 			jdbcTemplate.update(UPDATE, paramSrc);
+			System.out.println("Update utilisateur : " + utilisateur);
 		}
 	}
 
@@ -115,6 +135,22 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		Utilisateur src = new Utilisateur(pseudo);
 		System.out.println(src);
 		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
+		System.out.println("USER RECUPERE "+utilisateur);
+		return utilisateur;
+	}
+
+	@Override
+	public List<Utilisateur> findAll() {
+		List<Utilisateur> utilisateurs;
+		utilisateurs = jdbcTemplate.query(SELECT_ALL, new BeanPropertyRowMapper<>(Utilisateur.class));
+		return utilisateurs;
+	}
+
+	@Override
+	public Utilisateur findByEmail(String email) {
+		Utilisateur src = new Utilisateur(email);
+		System.out.println(src);
+		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), email);
 		System.out.println("USER RECUPERE "+utilisateur);
 		return utilisateur;
 	}

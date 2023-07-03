@@ -3,6 +3,7 @@ package fr.eni.enchere.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -53,8 +54,26 @@ public class UtilisateurController {
 	            // L'utilisateur est connecté, récupérez ses informations et passez-les au modèle
 	            String pseudo = authentication.getName();
 	            System.out.println(pseudo);
-	            modele.addAttribute("utilisateur",utilisateurService.findByPseudo(pseudo));
+	            Utilisateur utilisateur = null;
+	            
+	            // accès au profil selon le pseudo ou selon l'email (l'information rentrée au moment de la connexion)
+	            try {
+	            	utilisateur = utilisateurService.findByPseudo(pseudo);
+	            } catch (EmptyResultDataAccessException ex){
+	            	utilisateur = utilisateurService.findByEmail(pseudo);
+	            }
+	            modele.addAttribute("utilisateur",utilisateur);
 	            return "profil-form";
+	            
+	            /*Utilisateur utilisateur = utilisateurService.findByPseudo(pseudo);
+	            System.out.println("accès au profil utilisateur" + utilisateur);
+	            if (utilisateur==null) {
+	            	utilisateur = utilisateurService.findByEmail(pseudo);
+	            	System.out.println("résultat findByEmail" + utilisateur);
+	            } 
+	            	modele.addAttribute("utilisateur",utilisateur);
+		            return "profil-form";*/
+	            
 	        } else {
 	            // Aucun utilisateur n'est connecté, redirigez vers le formulaire d'inscription ou une autre page appropriée
 	        	return "profil-form";
@@ -67,6 +86,18 @@ public class UtilisateurController {
 		System.out.println("postmapping supprimerProfil sur " + pseudo);
 		utilisateurService.supprimerProfil(pseudo);
 		return "redirect:/logout";
+	}
+	
+	@GetMapping("/usersList")
+	public String afficherListeUtilisateurs(Model modele) {
+		modele.addAttribute("utilisateurs",utilisateurService.findAllUsers());
+		return"users-list";
+	}
+	
+	@GetMapping("/afficherUtilisateur")
+	public String afficherUtilisateur(@RequestParam String pseudo, Model modele) {
+		modele.addAttribute("utilisateur",utilisateurService.findByPseudo(pseudo));
+		return "users-details";
 	}
 	
 }

@@ -35,8 +35,6 @@ dependencies {
 	testImplementation  'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	
-	implementation 'spring-boot-starter-async'
-	
 	/*
 	// frontend //
 	runtimeOnly  'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
