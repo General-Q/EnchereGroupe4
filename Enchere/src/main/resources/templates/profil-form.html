@@ -70,8 +70,9 @@
 
 </ul>
 
-<button type="submit">Créer</button>
+<button type="submit">Valider</button>
 <button type="cancel" onclick="javascript:window.location='http://localhost:8080/';">Annuler</button>
+<a  th:href="@{/supprimerProfil}" data-th-if="${#authorization.expression('isAuthenticated()')}">Supprimer le compte</a>
 </form>
 
 
