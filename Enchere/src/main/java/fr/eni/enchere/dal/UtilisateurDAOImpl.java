@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -26,7 +27,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
 	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo=:pseudo,nom=:nom, prenom=:prenom, email=:email, telephone=:telephone,rue=:rue, code_postal=:code_postal,ville=:ville,mot_de_passe=:mot_de_passe where no_utilisateur=:no_utilisateur";
-	private static final String DELETE = "DELETE UTILISATEURS where pseudo=:pseudo";
+	private static final String DELETE_BY_PSEUDO = "DELETE UTILISATEURS where pseudo=:pseudo";
+	private static final String DELETE_BY_EMAIL = "DELETE UTILISATEURS where email =:email";
 	private static final String SELECT_ALL = "select pseudo from UTILISATEURS";
 	private static final String VERIF_PSEUDO = "select count(*) FROM UTILISATEURS where pseudo =?";
 	private static final String VERIF_EMAIL = "select count(*) FROM UTILISATEURS where email =?";
@@ -125,9 +127,17 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	@Override
 	public void delete(String pseudo) {
 		System.out.println(pseudo);
-		Utilisateur user = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
-		System.out.println(user);
-		jdbcTemplate.update(DELETE, new BeanPropertySqlParameterSource(user));
+		Utilisateur user = null;
+		try {
+			user = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
+			System.out.println(user);
+			jdbcTemplate.update(DELETE_BY_PSEUDO, new BeanPropertySqlParameterSource(user));
+		} catch (EmptyResultDataAccessException ex) {
+			user = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
+			System.out.println(user);
+			jdbcTemplate.update(DELETE_BY_EMAIL, new BeanPropertySqlParameterSource(user));
+		}
+		
 	}
 
 	@Override
