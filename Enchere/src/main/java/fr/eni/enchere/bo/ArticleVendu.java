@@ -44,9 +44,10 @@ public class ArticleVendu {
 	public ArticleVendu() {
 	}
 	
-	public ArticleVendu(Integer noArticle) {
+	public ArticleVendu(Integer noArticle, Integer noCategorie) {
         super();
         this.no_article = noArticle;
+        this.noCategorie = noCategorie;
     }
 
 	public ArticleVendu(String nomE, String description, Date dateD, Date dateF, Integer prixI, Integer prixV) {
@@ -64,7 +65,7 @@ public class ArticleVendu {
 			@NotNull(message = "Merci de saisir une description d'article") @Size(max = 300) String description,
 			@NotNull(message = "Merci de saisir une date valide") @NotNull(message = "Merci de saisir une date valide") Date date_debut_encheres,
 			@NotNull(message = "Merci de saisir une date valide") @NotNull(message = "Merci de saisir une date valide") Date date_fin_encheres, Integer prix_initial,
-			Integer prix_vente, Boolean etatVente) {
+			Integer prix_vente) {
 		super();
 		this.no_article = no_article;
 		this.nom_article = nom_article;
@@ -168,6 +169,11 @@ public class ArticleVendu {
 
 	public void setNoUtilisateur(Utilisateur utilisateur) {
 		this.noUtilisateur = utilisateur.getNoUtilisateur();
+	}
+	
+	public void setNoStUtil(String util) {
+		Integer id = Integer.parseInt(util);
+		this.noUtilisateur = id;
 	}
 
 	public Integer getNoCategorie() {

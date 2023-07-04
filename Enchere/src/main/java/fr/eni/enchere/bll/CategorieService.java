@@ -8,4 +8,6 @@ public interface CategorieService {
 	List<Categorie> categories();
 
 	List<Categorie> getAllCategories();
+
+	Categorie findById(Integer id);
 }

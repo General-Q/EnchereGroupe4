@@ -4,7 +4,7 @@
 
 <html layout:decorate="~{layout.html}"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
+<link rel="stylesheet" data-th-href="@{/layout.css}">
 
 
 <head>
@@ -19,7 +19,7 @@
 
 
 
-	<main layout:fragment="main">
+	<main class ="main" layout:fragment="main">
 
 
 
@@ -39,6 +39,7 @@
 					placeholder="Le nom de l'article contient ?" /> <input
 					class="bouton" type="button" value="Valider" />
 			<div>
+			<br>
     			<label for="categorie">Catégorie :</label>
     				<select id="categorie" name="categorie">
         				<option value="">Toutes les catégories</option>
@@ -48,9 +49,8 @@
 			</div>
 			</form>
 <br>
-
-
 			<a href="nouvel_article">Vendre un article</a>
+<br>
 
 			<!-- <a th:if="${utilisateurConnecte}" href="nouvel_article">Vendre un article</a><a th:unless="${utilisateurConnecte}" href="inscription">Vendre un article</a> -->
 
@@ -59,9 +59,9 @@
 		</div>
 
 
-
-		<div id="articleList">
-			<table>
+<br>
+		<div>
+			<table class="articleList">
 				<tr>
 					<th>Nom de l'article</th>
 					<th>Description</th>
@@ -70,8 +70,8 @@
 				<tr th:each="article : ${articlesVendus}">
 					<td th:text="${article.nom_article}"></td>
 					<td th:text="${article.description}"></td>
-					<td><a th:href="@{/detail_vente(articleVendu=${article})}">Détail
-							de la Vente</a></td>
+					<td><img style=max-width:100px src="/images/mehdi.png"></img></td>
+					<td><a th:href="@{/detail_vente(articleVendu=${article.no_article})}">Détail de la Vente</a></td>
 				</tr>
 			</table>
 			<p th:if="${message}" th:text="${message}"></p>

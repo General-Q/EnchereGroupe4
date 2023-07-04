@@ -20,8 +20,8 @@ import fr.eni.enchere.bo.Retrait;
 import fr.eni.enchere.bo.Utilisateur;
 @Repository
 public class ArticleVenduDAOImpl implements ArticleVenduDAO{
-	private final String FIND_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_utilisateur=?";
-	private final String FIND_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente FROM ARTICLES_VENDUS";
+	private final String FIND_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_article=?";
+	private final String FIND_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS";
 	private final String INSERT = "insert into articles_vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"
 			+ " values (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
 	
@@ -42,7 +42,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	@Override
     public ArticleVendu findById(Integer id) {
 
-        ArticleVendu src = new ArticleVendu(id);
+        //TODO suppr ArticleVendu src = new ArticleVendu(id);
 
         ArticleVendu articleVendu = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_ID, new BeanPropertyRowMapper<>(ArticleVendu.class),id);
 
@@ -63,7 +63,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 		namedParameters.addValue("prix_vente", articleVendu.getPrix_vente());
 		namedParameters.addValue("no_utilisateur", articleVendu.getNoUtilisateur());
 		namedParameters.addValue("no_categorie", articleVendu.getNoCategorie());
-		
+		System.out.println(articleVendu.getNoCategorie());
 	    namedParameters.addValue("rue", utilisateur.getRue());
 	    namedParameters.addValue("code_postal", utilisateur.getCodePostal());
 	    namedParameters.addValue("ville", utilisateur.getVille());
@@ -96,6 +96,8 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 			aV.setDate_fin_encheres(rs.getDate("date_fin_encheres"));
 			aV.setPrix_initial(rs.getInt("prix_initial"));
 			aV.setPrix_vente(rs.getInt("prix_vente"));
+			aV.setNoUtilisateur(utilisateurService.findById(rs.getInt("no_utilisateur")));
+			aV.setNoCategorie(rs.getInt("no_categorie"));
 			
 			return aV;
 		}

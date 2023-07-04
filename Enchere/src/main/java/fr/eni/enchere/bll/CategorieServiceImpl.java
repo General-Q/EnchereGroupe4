@@ -28,4 +28,10 @@ public class CategorieServiceImpl implements CategorieService {
 		
 		return null;
 	}
+	
+	@Override
+	public Categorie findById(Integer id) {
+		return categorieDAO.findById(id);
+	}
+	
 }

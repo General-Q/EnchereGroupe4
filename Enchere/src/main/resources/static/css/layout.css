@@ -1,18 +1,68 @@
 @charset "UTF-8";
 
+
+*{
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-size: 15px;
+	letter-spacing: 0px;
+	word-spacing: 2px;
+	font-weight: 400;
+	text-decoration: none;
+	font-style: normal;
+	font-variant: normal;
+	text-transform: none;
+	text-transform: uppercase;
+}
+
 body {
 	font-family: 'Bebas Neue', sans-serif;
-	background-color: rgb(41, 41, 41);
+	background-color: #8c8c8c;
 	color: white;
 	font-size: 21px;
-	
+    
 }
-#en_tete {
+.corps {
+	background-color : white;
+	background-image: linear-gradient(to bottom, grey, #ff7979) ;
+	background-image: url("/images/balance.jpg");
+	background-repeat: no-repeat;
+	background-size:1200px ;
+	background-position:  right center;
+}
+
+.corps:hover{
+	background-color: #ff1717;
+	transition-property: background-color;
+    transition-duration: 5s;
+}
+
+
+#titre {
+	color : red;
+	text-shadow: 0px 10px 3px rgba(157,55,58,0.92);
+	text-transform: uppercase;	
+	font-size: 20px;
+	color: #FFF;
+	background-color: #232323;
+	text-shadow: 0 0 5px #ff0000, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #f00000, 0 0 30px #ff8080, 0 0 40px #f32342, 0 0 55px #d64188, 0 0 75px #d83f59
+}
+
+.en-tete #barre_nav {
+	display: flex;
+	color: red;
+}
+.en-tete {
+	padding: 60px;
+  	text-align: center;
+ 	background: #1b1b1b;
+ 	color: red;
+ 	font-size: 30px;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	padding: 20px 50px;
 	box-shadow: 0 1px 8px #ddd;
+	
 }
 
 #nav-title {
@@ -25,14 +75,66 @@ h1 {
 	font-size: 1.8em;
 }
 
-footer {
-	background-color: #777;
+
+/* .pied-accueil{ */
+/* background-color: black; */
+/* 	padding: 10px; */
+/* 	text-align: center; */
+/* 	color: white; */
+/* 	height: auto; */
+/* 	position:absolute; */
+/*    	bottom:auto;   */
+/* 	margin:0; */
+/*    	padding:0; */
+/*    	width:100%; */
+   	
+/* } */
+
+
+
+.pied-de-page {
+	background-color: black;
 	padding: 10px;
 	text-align: center;
 	color: white;
 	height: auto;
+	width:100%;
+	position:absolute;
+   	bottom:auto;  
+    margin:auto;
 }
 
 nav li {	
 	font-size: 1.5em;
+	display:inline-block;
+	margin: 0 30px;
+	}
+
+a{
+	color: #FFF;
+	text-shadow: 0 0 5px #ff0000, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #4f0000, 0 0 30px #ff8080, 0 0 40px #f32342, 0 0 55px #d64188, 0 0 75px #d83f59
+
+}
+
+a:hover{
+	background-color: white;
+    border: 2px solid red;
+    color: red;
+}
+
+.main{
+	color:black;
+	
+}
+.main:hover{
+    color: white;
+	transition-duration: 1s;
+}
+
+tbody{
+/*     display: grid; */
+/*     grid-template-columns: 1fr 1fr; */
+/*     grid-gap: 20px; */
+/*     border-radius: 2px; */
+/*     border-color: green; */
 }

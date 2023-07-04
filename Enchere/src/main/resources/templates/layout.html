@@ -3,15 +3,17 @@
 <head xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 <title>EniEnchere</title>
-<link rel="stylesheet" data-th-href="@{/layout.css}">
+<link rel="stylesheet" data-th-href="@{/css/layout.css}">
 </head>
-<body>
+<body class="corps">
 <header class ="en-tete">
 		<h1 id="nav-title">
-			<a href="/">Enchère et en os !</a>
+		 <img style=max-height:20px src="/images/iconsquelette.png"></img>
+			<a id="titre" href="/">Enchère et en os !</a>
+		 <img style=max-height:20px src="/images/iconsquelette.png"></img>	
 		</h1>
-		<nav>
-			<ul>
+		<nav id="barre_nav">
+			<ul id="list_nav">
 				<li><a th:href="@{/inscription}">S'inscrire</a></li>
 				<li><a th:href="@{/loginCustom}">Se connecter</a></li>
 				<li><a th:href="@{/logout}">Se déconnecter</a></li>
@@ -21,10 +23,11 @@
 			</ul>
 		</nav>
 	</header>
-<main layout:fragment="main"></main>
+	
+<main class="main" layout:fragment="main"></main>
 
-<hr>
-<footer>ENI</footer>
+
+<footer class="pied-de-page">Encherons Nous Infernalement</footer>
 
 </body>
 </html>
