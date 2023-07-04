@@ -16,4 +16,12 @@ public interface UtilisateurService {
 	void saveProfil(Utilisateur utilisateur);
 
 	List<Utilisateur> findAllUsers();
+
+	public Boolean pseudoUnique(String pseudo);
+	
+	public Boolean emailUnique(String pseudo);
+
+	Utilisateur findEmailByPseudo(String pseudo);
+
+	Utilisateur findPseudoByEmail(String pseudo);
 }
