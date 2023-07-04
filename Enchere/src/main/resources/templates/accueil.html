@@ -4,7 +4,7 @@
 
 <html layout:decorate="~{layout.html}"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
+<link rel="stylesheet" data-th-href="@{/layout.css}">
 
 
 <head>
@@ -19,7 +19,7 @@
 
 
 
-	<main layout:fragment="main">
+	<main class ="main" layout:fragment="main">
 
 
 
@@ -39,6 +39,7 @@
 					placeholder="Le nom de l'article contient ?" /> <input
 					class="bouton" type="button" value="Valider" />
 			<div>
+			<br>
     			<label for="categorie">Catégorie :</label>
     				<select id="categorie" name="categorie">
         				<option value="">Toutes les catégories</option>
@@ -70,6 +71,7 @@
 				<tr th:each="article : ${articlesVendus}">
 					<td th:text="${article.nom_article}"></td>
 					<td th:text="${article.description}"></td>
+					<td><img style=max-width:100px src="/images/mehdi.png"></img></td>
 					<td><a th:href="@{/detail_vente(articleVendu=${article})}">Détail
 							de la Vente</a></td>
 				</tr>
