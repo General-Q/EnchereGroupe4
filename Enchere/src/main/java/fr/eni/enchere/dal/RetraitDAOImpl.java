@@ -53,7 +53,7 @@ public RetraitDAOImpl(UtilisateurService utilisateurService) {
 //}
 
 public void adresseRetrait(Principal principal, Retrait retrait) {
-    Utilisateur utilisateur = utilisateurService.findByPseudo(principal.getName());
+    Utilisateur utilisateur = utilisateurService.findByPseudoOrEmail(principal.getName());
 
     MapSqlParameterSource namedParameters = new MapSqlParameterSource();
     namedParameters.addValue("no_article", retrait); // Remplacez "noArticle" par la valeur appropriée

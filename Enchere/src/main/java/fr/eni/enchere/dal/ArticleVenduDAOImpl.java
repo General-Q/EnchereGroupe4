@@ -52,7 +52,7 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	@Override
 	public void ajoutArticle(ArticleVendu articleVendu, Retrait retrait, Principal principal) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		Utilisateur utilisateur = utilisateurService.findByPseudo(principal.getName());
+		Utilisateur utilisateur = utilisateurService.findByPseudoOrEmail(principal.getName());
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
 
 		namedParameters.addValue("nom_article", articleVendu.getNom_article());

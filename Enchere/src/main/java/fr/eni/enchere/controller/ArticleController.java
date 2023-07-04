@@ -98,7 +98,7 @@ public class ArticleController {
 		model.addAttribute("articleVendu", new ArticleVendu());
 		  if (authentication != null && authentication.isAuthenticated()) {
             String pseudo = authentication.getName();
-        model.addAttribute("utilisateur",utilisateurService.findByPseudo(pseudo));
+        model.addAttribute("utilisateur",utilisateurService.findByPseudoOrEmail(pseudo));
 		return "nouvel_article";
 		  }else {
 			  return "nouvel_article"; 
@@ -126,7 +126,7 @@ public class ArticleController {
 			System.out.println("Bien vu !");
 			//System.out.println(noCategorie);
 			String pseudoUtil = principal.getName();
-			Utilisateur util = utilisateurService.findByPseudo(pseudoUtil);
+			Utilisateur util = utilisateurService.findByPseudoOrEmail(pseudoUtil);
 			articleVendu.setNoUtilisateur(util);
 			//articleVendu.setNoCategorie(noCategorie);
 			System.out.println("Méthode ajoutArticle appelée");
