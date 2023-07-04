@@ -65,10 +65,12 @@ public class Utilisateur {
 	private List<ArticleVendu> articlesVendus;
 	private List<Enchere> encheres;
 	
-
-	//Constructeur vide
 	public Utilisateur() {
-		this.credit=0;
+	// TODO Auto-generated constructor stub
+	}
+	//Constructeur vide
+	public Utilisateur(Integer credit, @NotNull Boolean administrateur) {
+		this.credit=credit;
 		this.administrateur=MEMBRE;
 	}
 

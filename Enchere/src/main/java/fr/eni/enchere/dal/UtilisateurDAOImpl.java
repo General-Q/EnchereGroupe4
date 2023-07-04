@@ -23,16 +23,14 @@ import fr.eni.enchere.bo.Utilisateur;
 public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private final String FIND_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE no_utilisateur=?";
 	private final String FIND_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE email =:email";
-	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe from UTILISATEURS WHERE pseudo=?";
+	private static final String SELECT_BY_PSEUDO_OR_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit from UTILISATEURS WHERE ? IN ( pseudo , email )";
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
 	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo=:pseudo,nom=:nom, prenom=:prenom, email=:email, telephone=:telephone,rue=:rue, code_postal=:code_postal,ville=:ville,mot_de_passe=:mot_de_passe where no_utilisateur=:no_utilisateur";
-	private static final String DELETE_BY_PSEUDO = "DELETE UTILISATEURS where pseudo=:pseudo";
-	private static final String DELETE_BY_EMAIL = "DELETE UTILISATEURS where email =:email";
+	private static final String DELETE_BY_PSEUDO_OR_EMAIL = "DELETE UTILISATEURS WHERE IN (pseudo=:pseudo , email=:email)";
 	private static final String SELECT_ALL = "select pseudo from UTILISATEURS";
 	private static final String VERIF_PSEUDO = "select count(*) FROM UTILISATEURS where pseudo =?";
 	private static final String VERIF_EMAIL = "select count(*) FROM UTILISATEURS where email =?";
-	private static final String SELECT_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe from UTILISATEURS WHERE email=?";
 	
 	@Autowired 
 	NamedParameterJdbcTemplate jdbcTemplate;
@@ -85,7 +83,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		paramSrc.addValue("code_postal", utilisateur.getCodePostal());
 		paramSrc.addValue("ville", utilisateur.getVille());
 		paramSrc.addValue("mot_de_passe", utilisateur.getMotDePasse());
-		paramSrc.addValue("credit", 0);
+		paramSrc.addValue("credit", 300);
 		paramSrc.addValue("administrateur", false);
 		System.out.println(utilisateur.getNoUtilisateur());
 		
@@ -128,23 +126,16 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	public void delete(String pseudo) {
 		System.out.println(pseudo);
 		Utilisateur user = null;
-		try {
-			user = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
+			user = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO_OR_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
 			System.out.println(user);
-			jdbcTemplate.update(DELETE_BY_PSEUDO, new BeanPropertySqlParameterSource(user));
-		} catch (EmptyResultDataAccessException ex) {
-			user = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
-			System.out.println(user);
-			jdbcTemplate.update(DELETE_BY_EMAIL, new BeanPropertySqlParameterSource(user));
-		}
-		
+			jdbcTemplate.update(DELETE_BY_PSEUDO_OR_EMAIL, new BeanPropertySqlParameterSource(user));
 	}
 
 	@Override
-	public Utilisateur findByPseudo(String pseudo) {
+	public Utilisateur findByPseudoOrEmail(String pseudo) {
 		Utilisateur src = new Utilisateur(pseudo);
 		System.out.println(src);
-		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
+		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO_OR_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
 		System.out.println("USER RECUPERE "+utilisateur);
 		return utilisateur;
 	}
@@ -156,13 +147,13 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		return utilisateurs;
 	}
 
-	@Override
+	/*@Override
 	public Utilisateur findByEmail(String email) {
 		Utilisateur src = new Utilisateur(email);
 		System.out.println(src);
 		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), email);
 		System.out.println("USER RECUPERE "+utilisateur);
 		return utilisateur;
-	}
+	}*/
 		
 }

@@ -40,8 +40,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	}
 
 	@Override
-	public Utilisateur findByPseudo(String pseudo) {
-		return utilisateurDAO.findByPseudo(pseudo);
+	public Utilisateur findByPseudoOrEmail(String pseudo) {
+		return utilisateurDAO.findByPseudoOrEmail(pseudo);
 	}
 
 	@Override
@@ -53,11 +53,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Override
 	public List<Utilisateur> findAllUsers() {
 		return utilisateurDAO.findAll();
-	}
-
-	@Override
-	public Utilisateur findByEmail(String email) {
-		return utilisateurDAO.findByEmail(email);
 	}
 
 }

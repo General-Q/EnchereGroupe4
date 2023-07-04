@@ -11,11 +11,9 @@ public interface UtilisateurService {
 
 	void supprimerProfil(String pseudo);
 
-	Utilisateur findByPseudo(String pseudo);
+	Utilisateur findByPseudoOrEmail(String pseudo);
 
 	void saveProfil(Utilisateur utilisateur);
 
 	List<Utilisateur> findAllUsers();
-
-	Utilisateur findByEmail(String email);
 }

@@ -16,10 +16,8 @@ public interface UtilisateurDAO {
 
 	void delete(String pseudo);
 
-	Utilisateur findByPseudo(String pseudo);
+	Utilisateur findByPseudoOrEmail(String pseudo);
 
 	List<Utilisateur> findAll();
-
-	Utilisateur findByEmail(String email);
 
 }

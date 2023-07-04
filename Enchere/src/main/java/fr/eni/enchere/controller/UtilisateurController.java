@@ -57,11 +57,7 @@ public class UtilisateurController {
 	            Utilisateur utilisateur = null;
 	            
 	            // accès au profil selon le pseudo ou selon l'email (l'information rentrée au moment de la connexion)
-	            try {
-	            	utilisateur = utilisateurService.findByPseudo(pseudo);
-	            } catch (EmptyResultDataAccessException ex){
-	            	utilisateur = utilisateurService.findByEmail(pseudo);
-	            }
+	            utilisateur = utilisateurService.findByPseudoOrEmail(pseudo);
 	            modele.addAttribute("utilisateur",utilisateur);
 	            return "profil-form";
 	            
@@ -96,8 +92,17 @@ public class UtilisateurController {
 	
 	@GetMapping("/afficherUtilisateur")
 	public String afficherUtilisateur(@RequestParam String pseudo, Model modele) {
-		modele.addAttribute("utilisateur",utilisateurService.findByPseudo(pseudo));
+		modele.addAttribute("utilisateur",utilisateurService.findByPseudoOrEmail(pseudo));
 		return "users-details";
+	}
+	
+	@GetMapping("/login")
+	public String connexion(Principal principal) {
+        if (principal != null) {
+        	return "redirect:/accueil";
+        }else {
+        	return "redirect:/login";
+        }
 	}
 	
 }

@@ -73,13 +73,12 @@ public class ApplicationSecurityConfig {
 						.anyRequest().authenticated();
 			});
 			//formulaire de connexion par défaut
-			http.formLogin(Customizer.withDefaults());
+			//http.formLogin(Customizer.withDefaults());
 			
 			  // Customiser le formulaire
-			/*http.formLogin(form -> {
-				form.loginPage("/login").permitAll();
+			http.formLogin(form -> {
 				form.defaultSuccessUrl("/accueil").permitAll();
-			});*/
+			});
 
 			// /logout --> vider la session et le contexte de sécurité
 			http.logout(logout -> 

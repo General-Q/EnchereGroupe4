@@ -63,10 +63,15 @@
 
 	
 <li><label for="inputMdp">Mot de passe : </label><input type="password" 
-	name ="motDePasse" id="inputMotDePasse" required
-	data-th-value="${utilisateur.motDePasse}"/></li>
+	name ="motDePasse" id="inputMotDePasse" required/>
+	<!--  data-th-value="${utilisateur.motDePasse}"--> </li>
 <br>	
 
+
+<div data-th-if="${#authorization.expression('isAuthenticated()')}">
+<p>Crédits : [[${utilisateur.credit}]]</p>
+</div>
+<br>
 
 </ul>
 
