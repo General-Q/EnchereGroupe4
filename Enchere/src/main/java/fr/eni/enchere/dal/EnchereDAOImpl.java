@@ -17,7 +17,7 @@ public class EnchereDAOImpl implements EnchereDAO{
             + " values (:no_utilisateur, :no_article, :date_enchere, :montant_enchere)";
 	private static final String FIND_BY_ID = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article=?";
 	private static final String FIND_ALL = "select no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
-	private static final String FIND_CAT = "SELECT * FROM ENCHERES WHERE no_categorie = :no_categorie";
+//	private static final String FIND_CAT = "SELECT * FROM ENCHERES WHERE no_categorie = :no_categorie";
 	
 	
 	@Autowired

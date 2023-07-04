@@ -21,13 +21,9 @@ import fr.eni.enchere.bll.EnchereService;
 import fr.eni.enchere.bll.UtilisateurService;
 import fr.eni.enchere.bo.ArticleVendu;
 import fr.eni.enchere.bo.Categorie;
-
-import fr.eni.enchere.bo.Retrait;
-
 import fr.eni.enchere.bo.Enchere;
-
+import fr.eni.enchere.bo.Retrait;
 import fr.eni.enchere.bo.Utilisateur;
-
 import fr.eni.enchere.controller.converter.StringToUtilisateurConverter;
 import jakarta.validation.Valid;
 
@@ -120,7 +116,7 @@ public class ArticleController {
 //		}else {
 			
 			public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu,
-			BindingResult bindingResult, Retrait retrait, Principal principal) {
+			BindingResult bindingResult, Retrait retrait, Principal principal, Categorie categorie) {
 			//,@RequestParam("categorie") int noCategorie
 		if (!bindingResult.hasErrors()) {
 			System.out.println("Bien vu !");
@@ -128,7 +124,7 @@ public class ArticleController {
 			String pseudoUtil = principal.getName();
 			Utilisateur util = utilisateurService.findByPseudoOrEmail(pseudoUtil);
 			articleVendu.setNoUtilisateur(util);
-			//articleVendu.setNoCategorie(noCategorie);
+			articleVendu.setNoCategorie(categorie.getNo_categorie());
 			System.out.println("Méthode ajoutArticle appelée");
 			articleVenduService.ajoutArticle(articleVendu,retrait, principal);
 			enchereService.ajouterVente(articleVendu);
@@ -149,11 +145,15 @@ public class ArticleController {
 //        return "nom-de-votre-page";
 
 	@GetMapping("/detail_vente")
-	public String detailVente(Model model, @RequestParam("articleVendu") ArticleVendu articleVendu) {
-		Integer idA = articleVendu.getNo_article();
-		Enchere enchere = enchereService.findById(idA);	
+	public String detailVente(@RequestParam("articleVendu")int noArticle, Model model) {
+		
+		ArticleVendu cible = articleVenduService.findById(noArticle);
+		Enchere enchere = enchereService.findById(noArticle);	
+		
+		
 		model.addAttribute("enchere", enchere);
-		model.addAttribute("articleVendu",articleVendu);
+		model.addAttribute("articleVendu",cible);
+		System.out.println(cible);
 		return "detail_vente";
 	}
 }
