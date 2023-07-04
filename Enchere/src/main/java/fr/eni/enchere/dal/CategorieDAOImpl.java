@@ -41,4 +41,16 @@ public class CategorieDAOImpl implements CategorieDAO{
 		return categorie;
 	}
 
+	@Override
+	public Categorie findById(Integer id) {
+
+        Categorie src = new Categorie(id);
+
+        Categorie categ = npjt.getJdbcOperations().queryForObject(FIND_BY_ID, new BeanPropertyRowMapper<>(Categorie.class),id);
+
+        return categ;
+
+    }
+	
+	
 }

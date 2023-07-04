@@ -38,8 +38,17 @@
 				<input class="champ" type="text"
 					placeholder="Le nom de l'article contient ?" /> <input
 					class="bouton" type="button" value="Valider" />
-
+			<div>
+    			<label for="categorie">Catégorie :</label>
+    				<select id="categorie" name="categorie">
+        				<option value="">Toutes les catégories</option>
+        				<option th:each="categorie : ${categories}" 
+       						    th:value="${categorie.no_categorie}" th:text="${categorie.libelle}"></option>
+    				</select>
+			</div>
 			</form>
+<br>
+
 
 			<a href="nouvel_article">Vendre un article</a>
 

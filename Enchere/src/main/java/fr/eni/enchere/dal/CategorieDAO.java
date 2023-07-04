@@ -9,4 +9,5 @@ public interface CategorieDAO {
 
 	List<Categorie>findAll();
 	Categorie read (Integer no_categorie) throws CategorieNotFoundException;
+	Categorie findById(Integer id);
 }

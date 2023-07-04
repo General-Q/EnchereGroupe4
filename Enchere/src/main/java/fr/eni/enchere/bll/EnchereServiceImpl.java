@@ -1,6 +1,7 @@
 package fr.eni.enchere.bll;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,12 @@ public class EnchereServiceImpl implements EnchereService{
 	@Override
 	public Enchere findById(Integer noE) {
 		return enchereDAO.findById(noE);
+	}
+
+	@Override
+	public List<Enchere> rechercherEncheresParCategorie(Integer no_categorie) {
+		// TODO Auto-generated method stub
+		return enchereDAO.getEncheresParCategorie(no_categorie);
 	}
 
 }

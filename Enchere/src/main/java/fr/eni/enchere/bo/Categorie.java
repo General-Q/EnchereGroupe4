@@ -43,6 +43,11 @@ public class Categorie {
 		this.articlesVendus = articlesVendus;
 	}
 	
+	public Categorie(Integer id) {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	// Getters et Setters
 	public Integer getNo_categorie() {
 		return no_categorie;
