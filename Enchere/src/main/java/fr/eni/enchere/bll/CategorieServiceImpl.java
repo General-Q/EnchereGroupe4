@@ -20,4 +20,12 @@ public class CategorieServiceImpl implements CategorieService {
 	public List<Categorie> categories(){
 		return categorieDAO.findAll();
 	}
+
+	
+	//a finir steph
+	@Override
+	public List<Categorie> getAllCategories() {
+		
+		return null;
+	}
 }

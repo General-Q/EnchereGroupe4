@@ -27,6 +27,7 @@ import fr.eni.enchere.bo.Retrait;
 import fr.eni.enchere.bo.Enchere;
 
 import fr.eni.enchere.bo.Utilisateur;
+
 import fr.eni.enchere.controller.converter.StringToUtilisateurConverter;
 import jakarta.validation.Valid;
 
@@ -39,6 +40,7 @@ public class ArticleController {
 	private EnchereService enchereService;
 	@Autowired
 	private StringToUtilisateurConverter stringToUtilisateurConverter;
+
 
 	@Autowired
 	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService,
@@ -63,6 +65,22 @@ public class ArticleController {
 		return "accueil";
 	}
 
+	@GetMapping("/encheres")
+	public String rechercherEncheres(@RequestParam(value = "categorie", required = false) Integer no_categorie, Model model) {
+	    
+	    List<Enchere> encheresFiltrees = enchereService.rechercherEncheresParCategorie(no_categorie);
+
+	    // Passez les enchères filtrées à la vue pour les afficher
+	    model.addAttribute("encheres", encheresFiltrees);
+
+	    // Passez également les options de catégorie à la vue pour afficher la liste déroulante ou les cases à cocher
+	    List<Categorie> categories = categorieService.getAllCategories();
+	    model.addAttribute("categories", categories);
+
+	    return "accueil";
+	}
+
+	
 	/*
 	 * @GetMapping("/detail_vente") public String detailVente(Integer id, Model
 	 * model) { Enchere enchere = enchereService.findById(id);
@@ -135,7 +153,7 @@ public class ArticleController {
 		Integer idA = articleVendu.getNo_article();
 		Enchere enchere = enchereService.findById(idA);	
 		model.addAttribute("enchere", enchere);
-		model.addAttribute("articleVendu", articleVendu);
+		model.addAttribute("articleVendu",articleVendu);
 		return "detail_vente";
 	}
 }

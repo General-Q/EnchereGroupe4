@@ -8,12 +8,14 @@
 
 <main layout:fragment="main">
 <h1>Détail vente</h1>
-<div class="contenerImg">
-<img class="imgDetail" th:src="@{'/image'+ ${articleVendu.no_article}++'jpg'}" alt ="image">
-</div>
+<!-- <div class="contenerImg"> -->
+<!-- <img class="imgDetail" th:src="@{'/image'+ ${articleVendu.no_article}++'jpg'}" alt ="image"> -->
+<!-- </div> -->
+
+
 <div class ="detail_vente">
 
-<h2 class ="NomArticle" th:text="${enchere.noArticleVendu}"></h2>
+<h2 class ="NomArticle" th:object="${enchere.noArticleVendu}"></h2>
 
 <p><a data-th-text="${articleVendu.description}"></a>Description : </p>
 <p><a data-th-text="${articleVendu.categorie.libelle}"></a>Catégorie : </p>

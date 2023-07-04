@@ -6,4 +6,6 @@ import fr.eni.enchere.bo.Categorie;
 
 public interface CategorieService {
 	List<Categorie> categories();
+
+	List<Categorie> getAllCategories();
 }

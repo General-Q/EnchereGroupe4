@@ -15,15 +15,19 @@ import fr.eni.enchere.bo.Enchere;
 public class EnchereDAOImpl implements EnchereDAO{
 	private static final String INSERT = "insert into ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere)"
             + " values (:no_utilisateur, :no_article, :date_enchere, :montant_enchere)";
-	private final String FIND_BY_ID = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article=?";
+	private static final String FIND_BY_ID = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article=?";
+	private static final String FIND_ALL = "select no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
+	private static final String FIND_CAT = "SELECT * FROM ENCHERES WHERE no_categorie = :no_categorie";
+	
 	
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	
 	@Override
 	public List<Enchere> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Enchere>encheres = jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Enchere.class));
+		
+		return encheres;
 	}
 	
 	@Override
@@ -42,5 +46,22 @@ public class EnchereDAOImpl implements EnchereDAO{
 		Enchere enchere = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_ID, new BeanPropertyRowMapper<>(Enchere.class),noE);
 		return enchere;
 	}
+//a finir Steph
+//	@Override
+//	public List<Enchere> getEncheresParCategorie(Integer no_categorie) {
+//		 MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+//	    namedParameters.addValue("idCategorie", no_categorie);
+//	    return jdbcTemplate.query(FIND_CAT, namedParameters, new EnchereRowMapper());
+//	}
+
+	
+	//juste pour pouvoir compiler modif à faire dans la méthode en commentaire
+	@Override
+	public List<Enchere> getEncheresParCategorie(Integer no_categorie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
+
+
