@@ -49,9 +49,8 @@
 			</div>
 			</form>
 <br>
-
-
 			<a href="nouvel_article">Vendre un article</a>
+<br>
 
 			<!-- <a th:if="${utilisateurConnecte}" href="nouvel_article">Vendre un article</a><a th:unless="${utilisateurConnecte}" href="inscription">Vendre un article</a> -->
 
@@ -60,9 +59,9 @@
 		</div>
 
 
-
-		<div id="articleList">
-			<table>
+<br>
+		<div>
+			<table class="articleList">
 				<tr>
 					<th>Nom de l'article</th>
 					<th>Description</th>
@@ -72,11 +71,7 @@
 					<td th:text="${article.nom_article}"></td>
 					<td th:text="${article.description}"></td>
 					<td><img style=max-width:100px src="/images/mehdi.png"></img></td>
-					<td><a th:href="@{/detail_vente(articleVendu=${article})}">Détail
-
-					<td><a th:href="@{/detail_vente(articleVendu=${article.no_article})}">Détail
-
-							de la Vente</a></td>
+					<td><a th:href="@{/detail_vente(articleVendu=${article.no_article})}">Détail de la Vente</a></td>
 				</tr>
 			</table>
 			<p th:if="${message}" th:text="${message}"></p>
