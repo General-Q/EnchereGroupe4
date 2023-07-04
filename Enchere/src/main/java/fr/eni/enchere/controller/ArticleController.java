@@ -148,9 +148,9 @@ public class ArticleController {
 	public String detailVente(@RequestParam("articleVendu")int noArticle, Model model) {
 		
 		ArticleVendu cible = articleVenduService.findById(noArticle);
-		Enchere enchere = enchereService.findById(noArticle);	
-		
-		
+		Enchere enchere = enchereService.findById(noArticle);
+		Categorie cat = categorieService.findById(cible.getNoCategorie());
+		model.addAttribute("categorie", cat);
 		model.addAttribute("enchere", enchere);
 		model.addAttribute("articleVendu",cible);
 		System.out.println(cible);
