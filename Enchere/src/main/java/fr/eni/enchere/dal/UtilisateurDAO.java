@@ -20,4 +20,12 @@ public interface UtilisateurDAO {
 
 	List<Utilisateur> findAll();
 
+	public Boolean pseudoUnique(String pseudo);
+	
+	public Boolean emailUnique(String email);
+
+	Utilisateur findEmailByPseudo(String pseudo);
+
+	Utilisateur findPseudoByEmail(String pseudo);
+
 }

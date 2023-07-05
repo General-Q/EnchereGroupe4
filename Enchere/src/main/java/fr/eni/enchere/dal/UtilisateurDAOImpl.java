@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 import java.security.Principal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -22,15 +24,18 @@ import fr.eni.enchere.bo.Utilisateur;
 @Repository
 public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private final String FIND_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE no_utilisateur=?";
-	private final String FIND_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE email =:email";
+	private final String FIND_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE pseudo=?";
+	private final String FIND_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, administrateur from UTILISATEURS WHERE email =?"; // attention j'ai modifié c'était email =:email
 	private static final String SELECT_BY_PSEUDO_OR_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit from UTILISATEURS WHERE ? IN ( pseudo , email )";
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
 	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo=:pseudo,nom=:nom, prenom=:prenom, email=:email, telephone=:telephone,rue=:rue, code_postal=:code_postal,ville=:ville,mot_de_passe=:mot_de_passe where no_utilisateur=:no_utilisateur";
 	private static final String DELETE_BY_PSEUDO_OR_EMAIL = "DELETE UTILISATEURS WHERE IN (pseudo=:pseudo , email=:email)";
 	private static final String SELECT_ALL = "select pseudo from UTILISATEURS";
-	private static final String VERIF_PSEUDO = "select count(*) FROM UTILISATEURS where pseudo =?";
-	private static final String VERIF_EMAIL = "select count(*) FROM UTILISATEURS where email =?";
+	private static final String VERIF_PSEUDO = "select count(*) FROM UTILISATEURS where pseudo =:pseudo";
+	private static final String VERIF_EMAIL = "select count(*) FROM UTILISATEURS where email =:email";
+	private static final String SELECT_EMAIL_BY_PSEUDO = "SELECT email FROM UTILISATEURS where pseudo =:pseudo";
+	private static final String SELECT_PSEUDO_BY_EMAIL = "SELECT pseudo FROM UTILISATEURS where email =:pseudo";
 	
 	@Autowired 
 	NamedParameterJdbcTemplate jdbcTemplate;
@@ -85,24 +90,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		paramSrc.addValue("mot_de_passe", utilisateur.getMotDePasse());
 		paramSrc.addValue("credit", 300);
 		paramSrc.addValue("administrateur", false);
-		System.out.println(utilisateur.getNoUtilisateur());
 		
 		if (utilisateur.getNoUtilisateur()==null) {
-			/*StringBuilder error = new StringBuilder();
-			Integer nbPseudo = jdbcTemplate.getJdbcOperations().queryForObject(VERIF_PSEUDO, Integer.class, utilisateur.getPseudo());
-			Integer nbEmail = jdbcTemplate.getJdbcOperations().queryForObject(VERIF_EMAIL, Integer.class, utilisateur.getEmail());
-			
-			if (nbPseudo > 0) {
-				error.append("Le pseudo n'est pas disponible");
-			}
-			if (nbEmail>0) {
-				error.append("L'e-mail n'est pas disponible");
-			}
-			if (error.length()>0) {
-				throw new IllegalStateException(error.toString());
-			}*/
-			
-			
 			// insert
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			jdbcTemplate.update(INSERT, paramSrc, keyHolder);
@@ -127,12 +116,13 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		System.out.println(pseudo);
 		Utilisateur user = null;
 			user = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO_OR_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
-			System.out.println(user);
+			System.out.println("delete " + user);
 			jdbcTemplate.update(DELETE_BY_PSEUDO_OR_EMAIL, new BeanPropertySqlParameterSource(user));
 	}
 
 	@Override
 	public Utilisateur findByPseudoOrEmail(String pseudo) {
+		System.out.println("je rentre dans fin by pseudo or email");
 		Utilisateur src = new Utilisateur(pseudo);
 		System.out.println(src);
 		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO_OR_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
@@ -145,6 +135,50 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		List<Utilisateur> utilisateurs;
 		utilisateurs = jdbcTemplate.query(SELECT_ALL, new BeanPropertyRowMapper<>(Utilisateur.class));
 		return utilisateurs;
+	}
+
+	@Override
+	public Boolean pseudoUnique(String pseudo) {
+		Map<String, Object> map = Collections.singletonMap("pseudo", pseudo);
+		Integer count = jdbcTemplate.queryForObject(VERIF_PSEUDO, map, Integer.class);
+		System.out.println("count pseudoUnique : " + count);
+		if (count>0) {
+			return true;
+		}
+		return false;			
+	}
+
+	@Override
+	public Boolean emailUnique(String email) {
+		Map<String, Object> map = Collections.singletonMap("email", email);
+		Integer count = jdbcTemplate.queryForObject(VERIF_EMAIL, map, Integer.class);
+		System.out.println("count emailUnique : " + count);
+		if (count>0) {
+			return true;
+		}
+		return false;	
+	}
+
+	@Override
+	public Utilisateur findEmailByPseudo(String pseudo) {
+		System.out.println("je rentre dans find Email by pseudo");
+		Utilisateur src = new Utilisateur(pseudo);
+		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_PSEUDO, new BeanPropertyRowMapper<>(Utilisateur.class),pseudo);
+		System.out.println("findEmailByPseudo "+utilisateur);
+		return utilisateur;
+	
+		/*Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_PSEUDO,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
+		System.out.println("findEmailByPseudo "+utilisateur);
+		return utilisateur;*/
+	}
+
+	@Override
+	public Utilisateur findPseudoByEmail(String pseudo) {
+		System.out.println("je rentre dans find pseudo by email");
+		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
+		System.out.println("findPseudoByEmail "+utilisateur);
+		
+		return utilisateur;
 	}
 
 	/*@Override
