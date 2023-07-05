@@ -11,7 +11,7 @@
 	font-style: normal;
 	font-variant: normal;
 	text-transform: none;
-	text-transform: uppercase;
+	
 }
 
 body {
@@ -55,7 +55,8 @@ body {
 	
 	padding: 60px;
   	text-align: center;
- 	background: #1b1b1b;
+ 	background-image:url("/images/simetierre.jpg");
+ 	background-size:250px ;
  	color: red;
  	font-size: 30px;
 	display: flex;
