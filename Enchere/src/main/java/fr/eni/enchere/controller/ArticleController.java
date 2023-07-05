@@ -160,24 +160,49 @@ public class ArticleController {
 		System.out.println(cible);
 		return "detail_vente";
 	}
-
-	@PostMapping("/encherir")
-	public String encherir(@RequestParam("encherir") int montant, @ModelAttribute("enchere") Enchere cible, Model model) {
+	@PostMapping("/detail_vente")
+	public String encherir(@ModelAttribute("enchere") Enchere enchere, @ModelAttribute("montant") int montant, Principal principal, Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null && authentication.isAuthenticated()) {
 			String pseudo = authentication.getName();
 			Utilisateur util = utilisateurService.findByPseudoOrEmail(pseudo);
-			cible.setNoUtil(util.getNoUtilisateur());
-			cible.setMontant_enchere(montant);
+			int no = enchere.getNoArticleVendu();
+			enchere.setNoUtil(util.getNoUtilisateur());
+			enchere.setNoArticleVendu(no);
+			enchere.setMontant_enchere(montant);
 			Calendar calendar = Calendar.getInstance();
 			Date now = calendar.getTime();
 			java.sql.Date sqlDate = new java.sql.Date(now.getTime());
-			cible.setDateEnchere(sqlDate);
+			enchere.setDateEnchere(sqlDate);
 			System.out.println("encherir");
-			enchereService.encherir(cible);
+			model.addAttribute(enchere);
+			enchereService.encherir(enchere);
 			return "accueil";
 		} else {
 			return "redirect:/";
 		}
 	}
+
+//	@PostMapping("/detail_vente")
+//	public String encherir(@RequestParam("encherir") int montant, @ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("enchere") Enchere cible, Principal principal) {
+////		if(utilisateurService.findByPseudoOrEmail(principal.getName()) != null){
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		if (authentication != null && authentication.isAuthenticated()) {
+//			String pseudo = authentication.getName();
+//			Utilisateur util = utilisateurService.findByPseudoOrEmail(pseudo);
+//			int no = articleVendu.getNo_article();
+//			cible.setNoUtil(util.getNoUtilisateur());
+//			cible.setNoArticleVendu(no);
+//			cible.setMontant_enchere(montant);
+//			Calendar calendar = Calendar.getInstance();
+//			Date now = calendar.getTime();
+//			java.sql.Date sqlDate = new java.sql.Date(now.getTime());
+//			cible.setDateEnchere(sqlDate);
+//			System.out.println("encherir");
+//			enchereService.encherir(cible);
+//			return "accueil";
+//		} else {
+//			return "redirect:/";
+//		}
+//	}
 }

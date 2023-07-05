@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html layout:decoration="~{layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decoration="~{layout.html}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <link rel="stylesheet" data-th-href="@{/layout.css}">
 <head>
 
@@ -8,38 +9,73 @@
 </head>
 <body>
 
-<main class ="main" layout:fragment="main">
-<h1>Détail vente</h1>
-<!-- <div class="contenerImg"> -->
-<!-- <img class="imgDetail" th:src="@{'/image'+ ${articleVendu.no_article}++'jpg'}" alt ="image"> -->
-<!-- </div> -->
+	<main class="main" layout:fragment="main">
+		<h1>Détail vente</h1>
+		<!-- <div class="contenerImg"> -->
+		<!-- <img class="imgDetail" th:src="@{'/image'+ ${articleVendu.no_article}++'jpg'}" alt ="image"> -->
+		<!-- </div> -->
 
 
-<div class ="detail_vente">
+		<!-- <div class ="detail_vente"> -->
 
-<h2 class ="NomArticle" th:object="${enchere.noArticleVendu}"></h2>
+		<!-- <h2 class ="NomArticle" th:object="${enchere.noArticleVendu}"></h2> -->
 
-<p>Description : <a data-th-text="${articleVendu.description}"></a></p>
-<p>Catégorie : <a data-th-text="${categorie.libelle}"></a></p>
-<p>Meilleure offre : <a data-th-text="${enchere.montant_enchere}"></a></p>
-<p>Mise à prix : <a data-th-text="${articleVendu.prix_initial}"></a></p>
-<p>Fin de l'enchère : <a data-th-text="${articleVendu.date_fin_encheres}"></a></p>
-<!-- <p><a data-th-text="${enchere.retrait?.adresseRetrait}">Retrait :</a></p> -->
-<p>Vendeur : <a data-th-text="${enchere.noUtil}"></a></p>
+		<!-- <p>Description : <a data-th-text="${articleVendu.description}"></a></p> -->
+		<!-- <p>Catégorie : <a data-th-text="${categorie.libelle}"></a></p> -->
+		<!-- <p>Meilleure offre : <a data-th-text="${enchere.montant_enchere}"></a></p> -->
+		<!-- <p>Mise à prix : <a data-th-text="${articleVendu.prix_initial}"></a></p> -->
+		<!-- <p>Fin de l'enchère : <a data-th-text="${articleVendu.date_fin_encheres}"></a></p> -->
+		<!-- <!-- <p><a data-th-text="${enchere.retrait?.adresseRetrait}">Retrait :</a></p> -->
+		-->
+		<!-- <p>Vendeur : <a data-th-text="${enchere.noUtil}"></a></p> -->
 
-<br>
- <form action="/encherir" th:object ="${enchere}" method="post"><!-- a modifier lorsque la methode sera faite -->
- <label for="encherir">Ma proposition :</label> <input type="number"
- id="encherir" name="encherir" required>
- 
- <button type="submit">Enchérir</button>
- </form>
-</div>
+		<!-- <br> -->
+		<!--  <form th:action="@{/detail_vente}" th:object ="${enchere}" method="post">a modifier lorsque la methode sera faite -->
+		<!--  <label for="encherir">Ma proposition :</label> <input type="number" -->
+		<!--  id="encherir" name="encherir" required> -->
+
+		<!--  <button type="submit">Enchérir</button> -->
+		<!--  </form> -->
+		<!-- </div> -->
+
+		<div class="detail_vente">
+    		
+    		<input type="hidden" name="no_article" th:value="${articleVendu}">
+
+			<p>
+				Description : <a data-th-text="${articleVendu.description}"></a>
+			</p>
+			<p>
+				Catégorie : <a data-th-text="${categorie.libelle}"></a>
+			</p>
+			<p>
+				Meilleure offre : <a data-th-text="${enchere.montant_enchere}"></a>
+			</p>
+			<p>
+				Mise à prix : <a data-th-text="${articleVendu.prix_initial}"></a>
+			</p>
+			<p>
+				Fin de l'enchère : <a
+					data-th-text="${articleVendu.date_fin_encheres}"></a>
+			</p>
+			<!-- <p><a data-th-text="${enchere.retrait?.adresseRetrait}">Retrait :</a></p> -->
+			<p>
+				Vendeur : <a data-th-text="${enchere.noUtil}"></a>
+			</p>
+
+			<br>
+			<form
+				th:action="@{/detail_vente(enchere=${enchere}, montant=${montant})}"
+				th:object="${enchere}" method="post">
+				<label for="montant">Ma proposition :</label> <input type="number"
+					id="montant" name="montant" required>
+				<button type="submit">Enchérir</button>
+			</form>
+		</div>
 
 
 
-
-</main>
+	</main>
 
 </body>
 </html>
