@@ -3,8 +3,10 @@ package fr.eni.enchere.bo;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class Utilisateur {
@@ -16,46 +18,54 @@ public class Utilisateur {
 	private Integer noUtilisateur;
 	
 	// Autres propriétés de l'utilisateur
-	@NotBlank(message = "Merci de saisir un pseudo valide")
+	@NotBlank
 	@Size(max=30)
+	@Pattern(regexp = "^[a-zA-Z0-9]+")
 	private String pseudo;
 	
-	@NotNull(message="Merci de saisir un nom")
+	@NotNull
 	@Size(max=30)
+	@Pattern(regexp = "^[a-zA-Z]+$")
 	private String nom;
 	
-	@NotNull(message="Merci de saisir un prenom")
+	@NotNull
 	@Size(max=30)
+	@Pattern(regexp = "^[a-zA-Z]+$")
 	private String prenom;
 	
-	@NotBlank(message = "Merci de saisir un email valide")
+	@NotBlank
 	@Size(max=20)
+	@Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
 	private String email;
 	
+	@NotNull
 	@Size(max=15)
+	@Pattern(regexp = "^[0-9]{10}")
 	private String telephone;
 	
-	@NotNull(message="Merci de saisir une adresse")
+	@NotNull
 	@Size(max=30)
 	private String rue;
 	
-	@NotNull(message="Merci de saisir un code postal")
+	@NotNull
 	@Size(max=10)
+	@Pattern(regexp = "^[0-9]{5}")
 	private String codePostal;
 	
-	@NotNull(message="Merci de saisir une ville")
+	@NotNull
 	@Size(max=30)
+	@Pattern(regexp = "^[a-zA-Z]+$")
 	private String ville;
 	
-	@NotNull(message="Merci de saisir un mot de passe valide")
+
 	@Size(max=30)
 	private String motDePasse;
 	
-	@NotNull(message="Merci de saisir un mot de passe valide")
+	@NotNull
 	@Size(max=30)
 	private String confirmMotDePasse;
 	
-	@NotNull(message="Merci de saisir un montant")
+	@NotNull
 	private Integer credit;
 	
 	@NotNull
@@ -75,18 +85,8 @@ public class Utilisateur {
 	}
 
 	// Constructeur sans association
-	public Utilisateur(Integer noUtilisateur,
-			@NotBlank(message = "Merci de saisir un pseudo valide") @Size(max = 30) String pseudo,
-			@NotNull(message = "Merci de saisir un nom") @Size(max = 30) String nom,
-			@NotNull(message = "Merci de saisir un prenom") @Size(max = 30) String prenom,
-			@NotBlank(message = "Merci de saisir un email valide") @Size(max = 20) String email,
-			@Size(max = 15) String telephone,
-			@NotNull(message = "Merci de saisir une adresse") @Size(max = 30) String rue,
-			@NotNull(message = "Merci de saisir un code postal") @Size(max = 10) String codePostal,
-			@NotNull(message = "Merci de saisir une ville") @Size(max = 30) String ville,
-			@NotNull(message = "Merci de saisir un mot de passe valide") @Size(max = 30) String motDePasse,
-			@NotNull(message = "Merci de saisir un mot de passe valide") @Size(max = 30) String confirmMotDePasse,
-			@NotNull(message = "Merci de saisir un montant") Integer credit, @NotNull Boolean administrateur) {
+	public Utilisateur(Integer noUtilisateur,String pseudo,String nom,String prenom,String email,String telephone,
+			String rue,String codePostal,String ville,String motDePasse,String confirmMotDePasse,Integer credit, Boolean administrateur) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -104,17 +104,8 @@ public class Utilisateur {
 	}
 	
 	// Constructeur avec associations
-	public Utilisateur(Integer noUtilisateur,
-			@NotBlank(message = "Merci de saisir un pseudo valide") @Size(max = 30) String pseudo,
-			@NotNull(message = "Merci de saisir un nom") @Size(max = 30) String nom,
-			@NotNull(message = "Merci de saisir un prenom") @Size(max = 30) String prenom,
-			@NotBlank(message = "Merci de saisir un email valide") @Size(max = 20) String email,
-			@Size(max = 15) String telephone,
-			@NotNull(message = "Merci de saisir une adresse") @Size(max = 30) String rue,
-			@NotNull(message = "Merci de saisir un code postal") @Size(max = 10) String codePostal,
-			@NotNull(message = "Merci de saisir une ville") @Size(max = 30) String ville,
-			@NotNull(message = "Merci de saisir un mot de passe valide") @Size(max = 30) String motDePasse,
-			@NotNull(message = "Merci de saisir un montant") Integer credit, @NotNull Boolean administrateur,
+	public Utilisateur(Integer noUtilisateur,String pseudo,String nom,String prenom,String email,String telephone,
+			String rue,String codePostal,String ville,String motDePasse,String confirmMotDePasse,Integer credit, Boolean administrateur,
 			List<ArticleVendu> articlesVendus, List<Enchere> encheres) {
 		super();
 		this.noUtilisateur = noUtilisateur;
