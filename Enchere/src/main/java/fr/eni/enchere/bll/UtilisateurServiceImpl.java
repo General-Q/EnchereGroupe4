@@ -58,14 +58,4 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return utilisateurDAO.emailUnique(email);
 	}
 
-	@Override
-	public Utilisateur findEmailByPseudo(String pseudo) {
-		return utilisateurDAO.findEmailByPseudo(pseudo);
-	}
-
-	@Override
-	public Utilisateur findPseudoByEmail(String pseudo) {
-		return utilisateurDAO.findPseudoByEmail(pseudo);
-	}
-
 }
