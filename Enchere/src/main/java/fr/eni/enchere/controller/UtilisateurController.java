@@ -95,17 +95,19 @@ public class UtilisateurController {
 					return "profil-form";
 				}
 				
+			}
 				// le Pseudo modifié et l'e-mail modifié sont diponibles
 				utilisateurService.saveProfil(utilisateur);
-				System.out.println("enregistrement du pseudo ou du mail modifié");
+				System.out.println("enregistrement des nouvelles données");
 				return "redirect:/logout";
+			
 				
 			// Ni le Pseudo ni l'e-mail n'ont été modifié donc je passe par la émthode save classique
-			} else {
+			/*else {
 				utilisateurService.saveProfil(utilisateur);
 				System.out.println("enregistrement des nouvelles données");
 				return "redirect:/accueil";
-			}
+			}*/
 			
 		// Inscription d'un nouveau profil
 		} catch (NullPointerException ex) {
@@ -173,15 +175,4 @@ public class UtilisateurController {
 		modele.addAttribute("utilisateur", utilisateurService.findByPseudoOrEmail(pseudo));
 		return "users-details";
 	}
-
-	@GetMapping("/loginCustom")
-	public String connexion(Principal principal) {
-		try {
-			String pseudo = principal.getName();
-			return "redirect:/accueil";
-		} catch (NullPointerException ex) {
-			return "redirect:/login";
-		}
-	}
-
 }
