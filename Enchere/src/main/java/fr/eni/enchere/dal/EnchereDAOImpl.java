@@ -17,6 +17,7 @@ public class EnchereDAOImpl implements EnchereDAO{
             + " values (:no_utilisateur, :no_article, :date_enchere, :montant_enchere)";
 	private static final String FIND_BY_ID = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article=?";
 	private static final String FIND_ALL = "select no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
+	private static final String UPDATE = "UPDATE enchere SET no_utilisateur = ?, date_enchere = ?, montant_enchere = ? WHERE no_article = ?";
 //	private static final String FIND_CAT = "SELECT * FROM ENCHERES WHERE no_categorie = :no_categorie";
 	
 	
@@ -38,6 +39,16 @@ public class EnchereDAOImpl implements EnchereDAO{
 		namedParameters.addValue("date_enchere", enchere.getDateEnchere());
 		namedParameters.addValue("montant_enchere", enchere.getMontant_enchere());
 		jdbcTemplate.update(INSERT, namedParameters);
+	}
+	
+	@Override
+	public void encherir(Enchere cible) {
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		Integer id = cible.getNoArticleVendu();
+		namedParameters.addValue("no_utilisateur", cible.getNoUtil());
+		namedParameters.addValue("date_enchere", cible.getDateEnchere());
+		namedParameters.addValue("montant_enchere", cible.getMontant_enchere());
+		jdbcTemplate.update(UPDATE, namedParameters);
 	}
 
 	@Override

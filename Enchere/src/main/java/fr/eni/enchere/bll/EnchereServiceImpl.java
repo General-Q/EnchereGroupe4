@@ -50,5 +50,10 @@ public class EnchereServiceImpl implements EnchereService{
 		// TODO Auto-generated method stub
 		return enchereDAO.getEncheresParCategorie(no_categorie);
 	}
+	
+	@Override
+	public void encherir(Enchere cible) {
+		enchereDAO.encherir(cible);
+	}
 
 }
