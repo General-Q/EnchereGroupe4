@@ -111,7 +111,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 
 	@Override
 	public void delete(String pseudo) {
-		System.out.println(pseudo);
 		Utilisateur user = null;
 			user = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO_OR_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
 			System.out.println("delete " + user);
@@ -120,7 +119,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 
 	@Override
 	public Utilisateur findByPseudoOrEmail(String pseudo) {
-		System.out.println("je rentre dans find by pseudo or email");
 		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO_OR_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
 		System.out.println("résultat de findByPseudoOrEmail "+utilisateur);
 		return utilisateur;

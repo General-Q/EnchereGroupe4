@@ -46,13 +46,6 @@ public class UtilisateurController {
 		return "redirect:/accueil";
 	}
 
-	/*
-	 * @PostMapping("/enregistrerProfil") public String
-	 * EnregistrerProfil(Utilisateur utilisateur) {
-	 * System.out.println("postmapping enregistrerProfil OK");
-	 * utilisateurService.saveProfil(utilisateur); return"redirect:/accueil"; }
-	 */
-
 	@PostMapping("/enregistrerProfil")
 	public String EnregistrerProfil(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult bindingResult,
 			Principal principal) {
@@ -64,13 +57,6 @@ public class UtilisateurController {
 			System.out.println("ouverture du process de modification");
 			String pseudo = utilisateur.getPseudo();
 			String email = utilisateur.getEmail();
-			System.out.println("username = " + username);
-			System.out.println("utilisateur.getPseudo() = " + pseudo);
-			System.out.println("utilisateur.getEmail() = " + email);
-			System.out.println("utilisateurService.findByPseudoOrEmail(username).getEmail() = "
-					+ utilisateurService.findByPseudoOrEmail(username).getEmail());
-			System.out.println("utilisateurService.findByPseudoOrEmail(username).getPseudo() = "
-					+ utilisateurService.findByPseudoOrEmail(username).getPseudo());
 
 			// Vérification si le Pseudo a été modifié (je rentre dans le if si le Pseudo a été modifié)
 			if (!username.equals(pseudo)
@@ -80,18 +66,17 @@ public class UtilisateurController {
 				// Vérification si le Pseudo modifié est disponible (je rentre dans le if si le Pseudo modifié n'est pas disponible)
 				if (utilisateurService.pseudoUnique(pseudo)) {
 					System.out.println("le pseudo modifié n'est pas disponible");
-					bindingResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo modifié est déjà pris");
+					bindingResult.rejectValue("pseudo", "Le pseudo modifié est déjà pris");
 					return "profil-form";
 				}
 			}
 			// Vérification si l'e-mail a été modifié (je rentre dans le if si l'email a été modifié)
 			if (!username.equals(email) && !utilisateurService.findByPseudoOrEmail(username).getEmail().equals(email)) {
-				System.out.println("l'e-mail a été modifié");
+				System.out.println("l'email a été modifié");
 				// Vérification si l'email modifié est disponible (je rentre dans le if si l'e-mail modifié n'est pas disponible)
 				if (utilisateurService.emailUnique(email)) {
 					System.out.println("l'email modifié n'est pas disponible");
-					bindingResult.rejectValue("email", "email.alreadyTaken",
-							"Ce mail modifié est déjà associé à un autre utilisateur");
+					bindingResult.rejectValue("email","Ce mail modifié est déjà associé à un autre utilisateur");
 					return "profil-form";
 				}
 				
@@ -100,14 +85,6 @@ public class UtilisateurController {
 				utilisateurService.saveProfil(utilisateur);
 				System.out.println("enregistrement des nouvelles données");
 				return "redirect:/logout";
-			
-				
-			// Ni le Pseudo ni l'e-mail n'ont été modifié donc je passe par la émthode save classique
-			/*else {
-				utilisateurService.saveProfil(utilisateur);
-				System.out.println("enregistrement des nouvelles données");
-				return "redirect:/accueil";
-			}*/
 			
 		// Inscription d'un nouveau profil
 		} catch (NullPointerException ex) {
@@ -142,7 +119,6 @@ public class UtilisateurController {
 		if (authentication != null && authentication.isAuthenticated()) {
 			// L'utilisateur est connecté, récupérez ses informations et passez-les au modèle
 			String pseudo = authentication.getName();
-			System.out.println(pseudo);
 			Utilisateur utilisateur = null;
 
 			// accès au profil selon le pseudo ou selon l'email (l'information rentrée au moment de la connexion)
