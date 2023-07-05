@@ -76,19 +76,19 @@ h1 {
 }
 
 
-.pied-accueil{
-background-color: black;
-	padding: 10px;
-	text-align: center;
-	color: white;
-	height: auto;
-	position:absolute;
-   	bottom:auto;  
-	margin:0;
-   	padding:0;
-   	width:100%;
+/* .pied-accueil{ */
+/* background-color: black; */
+/* 	padding: 10px; */
+/* 	text-align: center; */
+/* 	color: white; */
+/* 	height: auto; */
+/* 	position:absolute; */
+/*    	bottom:auto;   */
+/* 	margin:0; */
+/*    	padding:0; */
+/*    	width:100%; */
    	
-}
+/* } */
 
 
 
@@ -100,8 +100,8 @@ background-color: black;
 	height: auto;
 	width:100%;
 	position:absolute;
-   	bottom:0;  
-   
+   	bottom:auto;  
+    margin:auto;
 }
 
 nav li {	
@@ -129,4 +129,12 @@ a:hover{
 .main:hover{
     color: white;
 	transition-duration: 1s;
+}
+
+tbody{
+/*     display: grid; */
+/*     grid-template-columns: 1fr 1fr; */
+/*     grid-gap: 20px; */
+/*     border-radius: 2px; */
+/*     border-color: green; */
 }
