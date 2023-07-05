@@ -13,16 +13,34 @@
 		 <img style=max-height:20px src="/images/iconsquelette.png"></img>	
 		</h1>
 		<nav id="barre_nav">
+		<div class="etat" sec:authorize="isAnonymous()">
+    <p> Vous êtes déconnecté</p>
+</div>
+<div  class="etat" sec:authorize="isAuthenticated()">
+    <p> Vous êtes bien connecté</p>
+</div>
+		
 			<ul id="list_nav">
-				<li><a th:href="@{/inscription}">S'inscrire</a></li>
-				<li><a th:href="@{/loginCustom}">Se connecter</a></li>
-				<li><a th:href="@{/logout}">Se déconnecter</a></li>
-				<li><a th:href="@{/modifierProfil}">Accéder à son profil</a></li>
-				<li><a th:href="@{/usersList}">Afficher la liste des utilisateurs</a></li>
+				<li sec:authorize="isAnonymous()"><a th:href="@{/inscription}">S'inscrire</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Se connecter</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Se déconnecter</a></li>    
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/modifierProfil}">Accéder à son profil</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/usersList}">Afficher la liste des utilisateurs</a></li>
 				
 			</ul>
 		</nav>
 	</header>
+<div id="caroussel">
+	<div class="images">
+		<img src="/images/maison.jpg" alt ="maison">
+		<img src="/images/tableau.jpg"  alt ="tableau">
+		<img src="/images/avion.jpg"  alt ="avion">
+		<img src="/images/voitureabandonnee.jpg" alt ="voiture">
+		
+	</div>
+</div>
+
+
 	
 <main class="main" layout:fragment="main"></main>
 
