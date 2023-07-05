@@ -17,7 +17,7 @@ import fr.eni.enchere.execptions.CategorieNotFoundException;
 public class CategorieDAOImpl implements CategorieDAO{
 
 	private static final String FIND_ALL = "select no_categorie, libelle FROM CATEGORIES";
-	private static final String FIND_BY_ID= "Select * from CATEGORIES where id=:id";
+	private static final String FIND_BY_ID= "Select * from CATEGORIES where no_categorie= ?";
 	@Autowired
 	private NamedParameterJdbcTemplate npjt;
 	
