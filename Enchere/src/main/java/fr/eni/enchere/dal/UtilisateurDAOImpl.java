@@ -34,8 +34,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private static final String SELECT_ALL = "select pseudo from UTILISATEURS";
 	private static final String VERIF_PSEUDO = "select count(*) FROM UTILISATEURS where pseudo =:pseudo";
 	private static final String VERIF_EMAIL = "select count(*) FROM UTILISATEURS where email =:email";
-	private static final String SELECT_EMAIL_BY_PSEUDO = "SELECT email FROM UTILISATEURS where pseudo =:pseudo";
-	private static final String SELECT_PSEUDO_BY_EMAIL = "SELECT pseudo FROM UTILISATEURS where email =:pseudo";
 	
 	@Autowired 
 	NamedParameterJdbcTemplate jdbcTemplate;
@@ -122,11 +120,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 
 	@Override
 	public Utilisateur findByPseudoOrEmail(String pseudo) {
-		System.out.println("je rentre dans fin by pseudo or email");
-		Utilisateur src = new Utilisateur(pseudo);
-		System.out.println(src);
+		System.out.println("je rentre dans find by pseudo or email");
 		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_PSEUDO_OR_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
-		System.out.println("USER RECUPERE "+utilisateur);
+		System.out.println("résultat de findByPseudoOrEmail "+utilisateur);
 		return utilisateur;
 	}
 
@@ -158,36 +154,5 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 		}
 		return false;	
 	}
-
-	@Override
-	public Utilisateur findEmailByPseudo(String pseudo) {
-		System.out.println("je rentre dans find Email by pseudo");
-		Utilisateur src = new Utilisateur(pseudo);
-		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_PSEUDO, new BeanPropertyRowMapper<>(Utilisateur.class),pseudo);
-		System.out.println("findEmailByPseudo "+utilisateur);
-		return utilisateur;
 	
-		/*Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_PSEUDO,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
-		System.out.println("findEmailByPseudo "+utilisateur);
-		return utilisateur;*/
-	}
-
-	@Override
-	public Utilisateur findPseudoByEmail(String pseudo) {
-		System.out.println("je rentre dans find pseudo by email");
-		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(FIND_BY_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), pseudo);
-		System.out.println("findPseudoByEmail "+utilisateur);
-		
-		return utilisateur;
-	}
-
-	/*@Override
-	public Utilisateur findByEmail(String email) {
-		Utilisateur src = new Utilisateur(email);
-		System.out.println(src);
-		Utilisateur utilisateur = jdbcTemplate.getJdbcOperations().queryForObject(SELECT_BY_EMAIL,new BeanPropertyRowMapper<>(Utilisateur.class), email);
-		System.out.println("USER RECUPERE "+utilisateur);
-		return utilisateur;
-	}*/
-		
 }

@@ -24,8 +24,4 @@ public interface UtilisateurDAO {
 	
 	public Boolean emailUnique(String email);
 
-	Utilisateur findEmailByPseudo(String pseudo);
-
-	Utilisateur findPseudoByEmail(String pseudo);
-
 }

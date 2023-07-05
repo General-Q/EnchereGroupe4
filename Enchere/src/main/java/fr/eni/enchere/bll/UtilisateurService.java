@@ -21,7 +21,4 @@ public interface UtilisateurService {
 	
 	public Boolean emailUnique(String pseudo);
 
-	Utilisateur findEmailByPseudo(String pseudo);
-
-	Utilisateur findPseudoByEmail(String pseudo);
 }

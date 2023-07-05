@@ -29,13 +29,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	public Utilisateur findById(Integer id) {
-		/*Utilisateur utilisateur = null;
-		try {
-			utilisateur = utilisateurDAO.read(id);
-		}catch(UtilisateurNotFoundException e) {
-			
-		}*/
-		
 		return utilisateurDAO.findById(id);
 	}
 
@@ -63,16 +56,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 	@Override
 	public Boolean emailUnique(String email) {
 		return utilisateurDAO.emailUnique(email);
-	}
-
-	@Override
-	public Utilisateur findEmailByPseudo(String pseudo) {
-		return utilisateurDAO.findEmailByPseudo(pseudo);
-	}
-
-	@Override
-	public Utilisateur findPseudoByEmail(String pseudo) {
-		return utilisateurDAO.findPseudoByEmail(pseudo);
 	}
 
 }

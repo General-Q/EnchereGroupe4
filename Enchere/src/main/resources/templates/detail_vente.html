@@ -19,13 +19,13 @@
 
 <h2 class ="NomArticle" th:object="${enchere.noArticleVendu}"></h2>
 
-<p><a data-th-text="${articleVendu.description}"></a>Description : </p>
-<p><a data-th-text="${categorie.libelle}"></a>Catégorie : </p>
-<p><a data-th-text="${enchere.montant_enchere}">Meilleure offre : </a></p>
-<p><a data-th-text="${articleVendu.prix_initial}">Mise à prix : </a></p>
-<p><a data-th-text="${articleVendu.date_fin_encheres}">Fin de l'enchère : </a></p>
+<p>Description : <a data-th-text="${articleVendu.description}"></a></p>
+<p>Catégorie : <a data-th-text="${categorie.libelle}"></a></p>
+<p>Meilleure offre : <a data-th-text="${enchere.montant_enchere}"></a></p>
+<p>Mise à prix : <a data-th-text="${articleVendu.prix_initial}"></a></p>
+<p>Fin de l'enchère : <a data-th-text="${articleVendu.date_fin_encheres}"></a></p>
 <!-- <p><a data-th-text="${enchere.retrait?.adresseRetrait}">Retrait :</a></p> -->
-<p><a data-th-text="${enchere.noUtil}">Vendeur :</a></p>
+<p>Vendeur : <a data-th-text="${enchere.noUtil}"></a></p>
 
 <br>
  <form action="/encherir" th:object ="${enchere}" method="post"><!-- a modifier lorsque la methode sera faite -->

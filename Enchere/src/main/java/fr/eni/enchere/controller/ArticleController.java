@@ -149,7 +149,8 @@ public class ArticleController {
 		
 		ArticleVendu cible = articleVenduService.findById(noArticle);
 		Enchere enchere = enchereService.findById(noArticle);
-		Categorie cat = categorieService.findById(cible.getNoCategorie());
+		Integer idCat = cible.getNoCategorie();
+		Categorie cat = categorieService.findById(idCat);
 		model.addAttribute("categorie", cat);
 		model.addAttribute("enchere", enchere);
 		model.addAttribute("articleVendu",cible);
