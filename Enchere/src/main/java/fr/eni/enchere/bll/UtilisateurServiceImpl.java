@@ -29,13 +29,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 	@Override
 	public Utilisateur findById(Integer id) {
-		/*Utilisateur utilisateur = null;
-		try {
-			utilisateur = utilisateurDAO.read(id);
-		}catch(UtilisateurNotFoundException e) {
-			
-		}*/
-		
 		return utilisateurDAO.findById(id);
 	}
 

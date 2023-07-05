@@ -68,7 +68,7 @@ public class UtilisateurController {
 			System.out.println("utilisateur.getEmail() = " + email);
 			
 			// Vérification si le Pseudo a été modifié (je rentre dans le if si le Pseudo a été modifié)
-			if (!username.equals(pseudo) && !utilisateurService.findEmailByPseudo(username).getEmail().equals(email)) {
+			if (!username.equals(pseudo) && !utilisateurService.findByPseudoOrEmail(username).getEmail().equals(email)) {
 				System.out.println("le pseudo a été modifié");
 				System.out.println("utilisateurService.findEmailByPseudo(username).getEmail() = " + utilisateurService.findEmailByPseudo(username).getEmail());
 				
@@ -79,7 +79,7 @@ public class UtilisateurController {
 					}
 			}
 			// Vérification si l'e-mail a été modifié (je rentre dans le if si l'email a été modifié)
-			if(!username.equals(email) && !utilisateurService.findPseudoByEmail(username).equals(pseudo)) {
+			if(!username.equals(email) && !utilisateurService.findByPseudoOrEmail(username).getPseudo().equals(pseudo)) {
 				System.out.println("l'e-mail a été modifié");
 				// Vérification si l'email modifié est disponible (je rentre dans le if si l'e-mail modifié n'est pas disponible)
 				if (utilisateurService.emailUnique(email)) {
