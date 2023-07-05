@@ -19,19 +19,54 @@ body {
 	background-color: #8c8c8c;
 	color: white;
 	font-size: 21px;
-    
+}
+.etat{
+	color:white;
+	
+}
+.images{
+	display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+	animation-duration:20s;
+	animation-name:mesImages;
+	animation-iteration-count:infinite;
+}
+@keyframes mesImages{
+	0%{
+	transform:translateX(35%);
+	}
+/* 	25%{ */
+/* 	transform:translateX(10%); */
+/* 	} */
+	50%{
+	transform:translateX(-25%);
+	}
+/* 	75%{ */
+/* 	transform:translateX(-40%); */
+/* 	} */
+	100%{
+	transform:translateX(24%);
+	}
+}
+#caroussel{
+	height:350px;
+	width :1100px;
+	overflow:hidden;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	margin: 0 auto;
+  	margin-top:10px;
 }
 .corps {
 	background-color : white;
-	background-image: linear-gradient(to bottom, grey, #ff7979) ;
-	background-image: url("/images/balance.jpg");
-	background-repeat: no-repeat;
-	background-size:1200px ;
-	background-position:right center;
+
 }
 
 .corps:hover{
-	background-color: #ff1717;
+	background-color: #c0c0c0;
 	transition-property: background-color;
     transition-duration: 5s;
 }
@@ -55,8 +90,7 @@ body {
 	
 	padding: 60px;
   	text-align: center;
- 	background-image:url("/images/simetierre.jpg");
- 	background-size:250px ;
+	background-color:black;
  	color: red;
  	font-size: 30px;
 	display: flex;
@@ -104,7 +138,7 @@ background-color: black;
 	width:100%;
 	position:absolute;
    	bottom:auto;  
-    margin:auto;
+    margin:bottom;
 }
 
 nav li {	
@@ -114,7 +148,7 @@ nav li {
 	}
 
 a{
-	color: #FFF;
+	color: #000000;
 	text-shadow: 0 0 5px #ff0000, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #4f0000, 0 0 30px #ff8080, 0 0 40px #f32342, 0 0 55px #d64188, 0 0 75px #d83f59
 
 }
@@ -130,8 +164,48 @@ a:hover{
 	
 }
 .main:hover{
-    color: white;
+    color: #c0c0c0;
 	transition-duration: 1s;
+}
+
+table {
+
+	border-collapse: collapse;
+	width: 90%;
+}
+
+table td, table th {
+	border: 1px solid #c0c0c0;
+	padding: 8px;
+}
+
+table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+table tr:hover {
+	background-color: black;
+}
+
+table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #000000;
+	color: #c0c0c0;
+}
+
+table a:link, table a:visited {
+	background-color: #008080;
+	color: white;
+	padding: 14px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+table a:hover, table a:active {
+	background-color: #004040;
 }
 
 /* tbody{ */
