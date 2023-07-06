@@ -65,7 +65,7 @@
 
 			<br>
 			<form
-				th:action="@{/detail_vente(enchere=${enchere}, montant=${montant})}"
+				th:action="@{/detail_vente(enchere=${enchere})}"
 				th:object="${enchere}" method="post">
 				<label for="montant">Ma proposition :</label> <input type="number"
 					id="montant" name="montant" required>

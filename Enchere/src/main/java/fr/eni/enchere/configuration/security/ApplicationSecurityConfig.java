@@ -87,9 +87,10 @@ public class ApplicationSecurityConfig {
 					.clearAuthentication(true)
 					.deleteCookies("JSESSIONID")
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-					.logoutSuccessUrl("/").permitAll())
+					.logoutSuccessUrl("/accueil").permitAll())
 			//.httpBasic(Customizer.withDefaults())
 			;
+
 
 			return http.build();
 			

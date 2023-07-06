@@ -2,7 +2,7 @@
 
 
 *{
-	font-family: "Comic Sans MS", cursive, sans-serif;
+	font-family: "OCR A Std",  monospace;
 	font-size: 15px;
 	letter-spacing: 0px;
 	word-spacing: 2px;
@@ -11,7 +11,7 @@
 	font-style: normal;
 	font-variant: normal;
 	text-transform: none;
-	text-transform: uppercase;
+	
 }
 
 body {
@@ -19,21 +19,57 @@ body {
 	background-color: #8c8c8c;
 	color: white;
 	font-size: 21px;
-    
+}
+.etat{
+	color:white;
+	
+}
+.images{
+	display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+	animation-duration:20s;
+	animation-name:mesImages;
+	animation-iteration-count:infinite;
+}
+@keyframes mesImages{
+	0%{
+	transform:translateX(35%);
+	}
+/* 	25%{ */
+/* 	transform:translateX(10%); */
+/* 	} */
+	50%{
+	transform:translateX(-25%);
+	}
+/* 	75%{ */
+/* 	transform:translateX(-40%); */
+/* 	} */
+	100%{
+	transform:translateX(24%);
+	}
+}
+#caroussel{
+	height:350px;
+	width :1100px;
+	overflow:hidden;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	margin: 0 auto;
+  	margin-top:10px;
 }
 .corps {
 	background-color : white;
-	background-image: linear-gradient(to bottom, grey, #ff7979) ;
-	background-image: url("/images/balance.jpg");
-	background-repeat: no-repeat;
-	background-size:1200px ;
-	background-position:  right center;
+
 }
 
 .corps:hover{
-	background-color: #ff1717;
+	background-color: #c0c0c0;
 	transition-property: background-color;
     transition-duration: 5s;
+	
 }
 
 
@@ -52,9 +88,10 @@ body {
 	color: red;
 }
 .en-tete {
+	
 	padding: 60px;
   	text-align: center;
- 	background: #1b1b1b;
+	background-color:black;
  	color: red;
  	font-size: 30px;
 	display: flex;
@@ -68,6 +105,7 @@ body {
 #nav-title {
 	margin-right: auto;
 	font-size: 1.1em;
+
 }
 
 
@@ -76,19 +114,19 @@ h1 {
 }
 
 
-/* .pied-accueil{ */
-/* background-color: black; */
-/* 	padding: 10px; */
-/* 	text-align: center; */
-/* 	color: white; */
-/* 	height: auto; */
-/* 	position:absolute; */
-/*    	bottom:auto;   */
-/* 	margin:0; */
-/*    	padding:0; */
-/*    	width:100%; */
+.pied-accueil{
+background-color: black;
+	padding: 10px;
+	text-align: center;
+	color: white;
+	height: auto;
+	position:absolute;
+   	bottom:auto;  
+	margin:0;
+   	padding:0;
+   	width:100%;
    	
-/* } */
+}
 
 
 
@@ -101,7 +139,7 @@ h1 {
 	width:100%;
 	position:absolute;
    	bottom:auto;  
-    margin:auto;
+    margin:bottom;
 }
 
 nav li {	
@@ -111,7 +149,7 @@ nav li {
 	}
 
 a{
-	color: #FFF;
+	color: #ffffff;
 	text-shadow: 0 0 5px #ff0000, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #4f0000, 0 0 30px #ff8080, 0 0 40px #f32342, 0 0 55px #d64188, 0 0 75px #d83f59
 
 }
@@ -127,14 +165,57 @@ a:hover{
 	
 }
 .main:hover{
-    color: white;
+    color: #000000;
 	transition-duration: 1s;
 }
 
-tbody{
-/*     display: grid; */
-/*     grid-template-columns: 1fr 1fr; */
-/*     grid-gap: 20px; */
-/*     border-radius: 2px; */
-/*     border-color: green; */
+table {
+
+	border-collapse: collapse;
+	width: 90%;
 }
+
+table td, table th {
+	border: 1px solid #c0c0c0;
+	padding: 8px;
+/* border-color:black; */
+}
+
+table tr:nth-child(even) {
+	background-color: #c0c0c0;
+	
+}
+
+table tr:hover {
+	background-color: #c0c0c0;
+	
+}
+
+table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #000000;
+	color: #c0c0c0;
+}
+
+table a:link, table a:visited {
+	background-color: #c10000;
+	color: white;
+	padding: 14px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+
+table a:hover, table a:active {
+	background-color: #004040;
+}
+
+/* tbody{ */
+/* /*     display: grid; */ */
+/* /*     grid-template-columns: 1fr 1fr; */ */
+/* /*     grid-gap: 20px; */ */
+/* /*     border-radius: 2px; */ */
+/* /*     border-color: green; */ */
+/* } */
