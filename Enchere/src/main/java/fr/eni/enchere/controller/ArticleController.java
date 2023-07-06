@@ -157,6 +157,7 @@ public class ArticleController {
 		model.addAttribute("categorie", cat);
 		model.addAttribute("enchere", enchere);
 		model.addAttribute("articleVendu", cible);
+		
 		System.out.println(cible);
 		return "detail_vente";
 	}
