@@ -42,9 +42,8 @@ public class EnchereDAOImpl implements EnchereDAO{
 	}
 	
 	@Override
-	public void encherir(Enchere cible, int noArticle) {
+	public void encherir(Enchere cible) {
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-		System.out.println("id = " + noArticle);
 		namedParameters.addValue("no_utilisateur", cible.getNoUtil());
 		namedParameters.addValue("date_enchere", cible.getDateEnchere());
 		namedParameters.addValue("montant_enchere", cible.getMontant_enchere());

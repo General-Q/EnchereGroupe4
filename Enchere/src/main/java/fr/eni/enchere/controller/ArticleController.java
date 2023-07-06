@@ -175,7 +175,7 @@ public class ArticleController {
 	        enchere.setDateEnchere(sqlDate);
 	        enchere.setMontant_enchere(montant);
 	        System.out.println("encherir");
-	        enchereService.encherir(enchere, noArticle);
+	        enchereService.encherir(enchere);
 	        return "accueil";
 	    } else {
 	        return "redirect:/";

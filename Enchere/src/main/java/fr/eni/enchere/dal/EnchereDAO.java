@@ -11,5 +11,5 @@ public interface EnchereDAO {
 	void ajouterVente(Enchere enchere);
 	public Enchere findById(Integer noE);
 	List<Enchere> getEncheresParCategorie(Integer no_categorie);
-	void encherir(Enchere cible, int noArticle);
+	void encherir(Enchere cible);
 }
