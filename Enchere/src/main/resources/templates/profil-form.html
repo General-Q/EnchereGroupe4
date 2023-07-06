@@ -135,14 +135,15 @@
 
 			</ul>
 
-			<button type="submit"
+			<button class ="utilisateur" type="submit"
 				th:text="${#authorization.expression('isAuthenticated()')} ? 'Enregistrer les modifications' : 'Créer le profil'"></button>
-			<button type="cancel"
+			<button class ="utilisateur" type="cancel"
 				onclick="javascript:window.location='http://localhost:8080/';">Annuler</button>
 			<a th:href="@{/supprimerProfil}"
 				data-th-if="${#authorization.expression('isAuthenticated()')}">Supprimer
 				le compte</a>
 		</form>
+		<br>
 
 
 
