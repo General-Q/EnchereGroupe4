@@ -137,8 +137,8 @@ background-color: black;
 	color: white;
 	height: auto;
 	width:100%;
-	position:absolute;
-   	bottom:auto;  
+	position: fixed;
+	bottom:0; 
     margin:bottom;
 }
 
@@ -212,6 +212,13 @@ table a:hover, table a:active {
 	background-color: #004040;
 }
 
+
+/* .container{ */
+/*   display: grid; */
+/*   grid-template-columns: repeat(3, 1fr); */
+/*   grid-auto-rows: 200px; */
+	
+/* } */
 /* tbody{ */
 /* /*     display: grid; */ */
 /* /*     grid-template-columns: 1fr 1fr; */ */

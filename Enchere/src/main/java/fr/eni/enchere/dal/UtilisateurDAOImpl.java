@@ -30,7 +30,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO{
 	private static final String INSERT = "insert into UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur)"
             + " values (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, :credit, :administrateur)";
 	private static final String UPDATE = "UPDATE UTILISATEURS set pseudo=:pseudo,nom=:nom, prenom=:prenom, email=:email, telephone=:telephone,rue=:rue, code_postal=:code_postal,ville=:ville,mot_de_passe=:mot_de_passe where no_utilisateur=:no_utilisateur";
-	private static final String DELETE_BY_PSEUDO_OR_EMAIL = "DELETE UTILISATEURS WHERE IN (pseudo=:pseudo , email=:email)";
+	private static final String DELETE_BY_PSEUDO_OR_EMAIL = "DELETE UTILISATEURS WHERE ? IN (pseudo=? , email=?)";
 	private static final String SELECT_ALL = "select pseudo from UTILISATEURS";
 	private static final String VERIF_PSEUDO = "select count(*) FROM UTILISATEURS where pseudo =:pseudo";
 	private static final String VERIF_EMAIL = "select count(*) FROM UTILISATEURS where email =:email";
