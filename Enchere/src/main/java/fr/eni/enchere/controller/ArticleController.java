@@ -1,6 +1,8 @@
 package fr.eni.enchere.controller;
 
 import java.security.Principal;
+import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,6 @@ public class ArticleController {
 	@Autowired
 	private StringToUtilisateurConverter stringToUtilisateurConverter;
 
-
 	@Autowired
 	public ArticleController(ArticleVenduService articleVenduService, CategorieService categorieService,
 			UtilisateurService utilisateurService, EnchereService enchereService) {
@@ -62,21 +63,22 @@ public class ArticleController {
 	}
 
 	@GetMapping("/encheres")
-	public String rechercherEncheres(@RequestParam(value = "categorie", required = false) Integer no_categorie, Model model) {
-	    
-	    List<Enchere> encheresFiltrees = enchereService.rechercherEncheresParCategorie(no_categorie);
+	public String rechercherEncheres(@RequestParam(value = "categorie", required = false) Integer no_categorie,
+			Model model) {
 
-	    // Passez les enchères filtrées à la vue pour les afficher
-	    model.addAttribute("encheres", encheresFiltrees);
+		List<Enchere> encheresFiltrees = enchereService.rechercherEncheresParCategorie(no_categorie);
 
-	    // Passez également les options de catégorie à la vue pour afficher la liste déroulante ou les cases à cocher
-	    List<Categorie> categories = categorieService.getAllCategories();
-	    model.addAttribute("categories", categories);
+		// Passez les enchères filtrées à la vue pour les afficher
+		model.addAttribute("encheres", encheresFiltrees);
 
-	    return "accueil";
+		// Passez également les options de catégorie à la vue pour afficher la liste
+		// déroulante ou les cases à cocher
+		List<Categorie> categories = categorieService.getAllCategories();
+		model.addAttribute("categories", categories);
+
+		return "accueil";
 	}
 
-	
 	/*
 	 * @GetMapping("/detail_vente") public String detailVente(Integer id, Model
 	 * model) { Enchere enchere = enchereService.findById(id);
@@ -92,14 +94,15 @@ public class ArticleController {
 		List<Categorie> categories = categorieService.categories();
 		model.addAttribute("categories", categories);
 		model.addAttribute("articleVendu", new ArticleVendu());
-		  if (authentication != null && authentication.isAuthenticated()) {
-            String pseudo = authentication.getName();
-        model.addAttribute("utilisateur",utilisateurService.findByPseudoOrEmail(pseudo));
-		return "nouvel_article";
-		  }else {
-			  return "nouvel_article"; 
-		  }
+		if (authentication != null && authentication.isAuthenticated()) {
+			String pseudo = authentication.getName();
+			model.addAttribute("utilisateur", utilisateurService.findByPseudoOrEmail(pseudo));
+			return "nouvel_article";
+		} else {
+			return "nouvel_article";
+		}
 	}
+
 	@PostMapping("/nouvel_article")
 //	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("retrait")Retrait retrait, BindingResult bindingResult, Principal principal, @RequestParam("categorie") int noCategorie) {
 //		if(!bindingResult.hasErrors()) {
@@ -114,19 +117,19 @@ public class ArticleController {
 //				enchereService.ajouterVente(articleVendu);
 //				return "redirect:/accueil";
 //		}else {
-			
-			public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu,
-			BindingResult bindingResult, Retrait retrait, Principal principal, Categorie categorie) {
-			//,@RequestParam("categorie") int noCategorie
+
+	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("categorie") int categorie,
+			BindingResult bindingResult, Retrait retrait, Principal principal) {
+		// ,@RequestParam("categorie") int noCategorie
 		if (!bindingResult.hasErrors()) {
 			System.out.println("Bien vu !");
-			//System.out.println(noCategorie);
+			// System.out.println(noCategorie);
 			String pseudoUtil = principal.getName();
 			Utilisateur util = utilisateurService.findByPseudoOrEmail(pseudoUtil);
 			articleVendu.setNoUtilisateur(util);
-			articleVendu.setNoCategorie(categorie.getNo_categorie());
+			articleVendu.setNoCategorie(categorie);
 			System.out.println("Méthode ajoutArticle appelée");
-			articleVenduService.ajoutArticle(articleVendu,retrait, principal);
+			articleVenduService.ajoutArticle(articleVendu, retrait, principal);
 			enchereService.ajouterVente(articleVendu);
 			return "redirect:/accueil";
 		} else {
@@ -145,16 +148,61 @@ public class ArticleController {
 //        return "nom-de-votre-page";
 
 	@GetMapping("/detail_vente")
-	public String detailVente(@RequestParam("articleVendu")int noArticle, Model model) {
-		
+	public String detailVente(@RequestParam("articleVendu") int noArticle, Model model) {
+
 		ArticleVendu cible = articleVenduService.findById(noArticle);
 		Enchere enchere = enchereService.findById(noArticle);
 		Integer idCat = cible.getNoCategorie();
 		Categorie cat = categorieService.findById(idCat);
 		model.addAttribute("categorie", cat);
 		model.addAttribute("enchere", enchere);
-		model.addAttribute("articleVendu",cible);
+		model.addAttribute("articleVendu", cible);
 		System.out.println(cible);
 		return "detail_vente";
 	}
+	@PostMapping("/detail_vente")
+	public String encherir(@ModelAttribute("enchere") Enchere enchere, @ModelAttribute("montant") int montant, Principal principal, Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.isAuthenticated()) {
+			String pseudo = authentication.getName();
+			Utilisateur util = utilisateurService.findByPseudoOrEmail(pseudo);
+			int no = enchere.getNoArticleVendu();
+			enchere.setNoUtil(util.getNoUtilisateur());
+			enchere.setNoArticleVendu(no);
+			enchere.setMontant_enchere(montant);
+			Calendar calendar = Calendar.getInstance();
+			Date now = calendar.getTime();
+			java.sql.Date sqlDate = new java.sql.Date(now.getTime());
+			enchere.setDateEnchere(sqlDate);
+			System.out.println("encherir");
+			model.addAttribute(enchere);
+			enchereService.encherir(enchere);
+			return "accueil";
+		} else {
+			return "redirect:/";
+		}
+	}
+
+//	@PostMapping("/detail_vente")
+//	public String encherir(@RequestParam("encherir") int montant, @ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("enchere") Enchere cible, Principal principal) {
+////		if(utilisateurService.findByPseudoOrEmail(principal.getName()) != null){
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		if (authentication != null && authentication.isAuthenticated()) {
+//			String pseudo = authentication.getName();
+//			Utilisateur util = utilisateurService.findByPseudoOrEmail(pseudo);
+//			int no = articleVendu.getNo_article();
+//			cible.setNoUtil(util.getNoUtilisateur());
+//			cible.setNoArticleVendu(no);
+//			cible.setMontant_enchere(montant);
+//			Calendar calendar = Calendar.getInstance();
+//			Date now = calendar.getTime();
+//			java.sql.Date sqlDate = new java.sql.Date(now.getTime());
+//			cible.setDateEnchere(sqlDate);
+//			System.out.println("encherir");
+//			enchereService.encherir(cible);
+//			return "accueil";
+//		} else {
+//			return "redirect:/";
+//		}
+//	}
 }
