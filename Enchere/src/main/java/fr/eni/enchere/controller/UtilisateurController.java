@@ -47,13 +47,20 @@ public class UtilisateurController {
 	}
 
 	@PostMapping("/enregistrerProfil")
-	public String EnregistrerProfil(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult bindingResult,
+	public String EnregistrerProfil(@RequestParam String motDePasseConfirm, @Valid @ModelAttribute Utilisateur utilisateur, BindingResult bindingResult,
 			Principal principal) {
 
-		/*if(bindingResult.hasErrors()) {
+		// Validation des données (si Erreur, affichage de messages sous les input)
+		if(bindingResult.hasErrors()) {
 			System.out.println("erreurs");
 			return"profil-form";
-		}*/
+		}
+		
+		// Fonctionnalité pour contrôler la confirmation de MDP
+		if (!utilisateur.getMotDePasse().equals(motDePasseConfirm)) {
+			bindingResult.rejectValue("motDePasse", "motDePasse.isFalse", "Le mot de passe et la confirmation de mot de passe doivent être identiques");
+			return "profil-form";
+		}
 		
 		// Modification d'un profil existant
 		try {
@@ -71,7 +78,7 @@ public class UtilisateurController {
 				// Vérification si le Pseudo modifié est disponible (je rentre dans le if si le Pseudo modifié n'est pas disponible)
 				if (utilisateurService.pseudoUnique(pseudo)) {
 					System.out.println("le pseudo modifié n'est pas disponible");
-					bindingResult.rejectValue("pseudo", "Le pseudo modifié est déjà pris");
+					bindingResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo modifié est déjà pris test");
 					return "profil-form";
 				}
 			}
@@ -81,7 +88,7 @@ public class UtilisateurController {
 				// Vérification si l'email modifié est disponible (je rentre dans le if si l'e-mail modifié n'est pas disponible)
 				if (utilisateurService.emailUnique(email)) {
 					System.out.println("l'email modifié n'est pas disponible");
-					bindingResult.rejectValue("email","Ce mail modifié est déjà associé à un autre utilisateur");
+					bindingResult.rejectValue("email","email.alreadyTaken","Ce mail modifié est déjà associé à un autre utilisateur");
 					return "profil-form";
 				}
 				
