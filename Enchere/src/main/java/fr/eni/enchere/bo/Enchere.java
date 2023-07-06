@@ -39,9 +39,10 @@ public class Enchere {
 		super();
 		this.articleVendu = articleVendu;
 		this.noUtil = articleVendu.getNoUtilisateur();
+		this.noArticleVendu = articleVendu.getNo_article();
 		this.dateEnchere = articleVendu.getDate_debut_encheres();
 		this.montant_enchere = articleVendu.getPrix_vente();
-		this.noArticleVendu = articleVendu.getNo_article();
+		
 	}
 
 	// Getters et Setters

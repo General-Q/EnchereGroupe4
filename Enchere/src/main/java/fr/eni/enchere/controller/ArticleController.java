@@ -103,7 +103,7 @@ public class ArticleController {
 		}
 	}
 
-	@PostMapping("/nouvel_article")
+//	@PostMapping("/nouvel_article")
 //	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("retrait")Retrait retrait, BindingResult bindingResult, Principal principal, @RequestParam("categorie") int noCategorie) {
 //		if(!bindingResult.hasErrors()) {
 //				System.out.println("Bien vu !");
@@ -117,7 +117,7 @@ public class ArticleController {
 //				enchereService.ajouterVente(articleVendu);
 //				return "redirect:/accueil";
 //		}else {
-
+	@PostMapping("/nouvel_article")
 	public String ajoutArticle(@Valid @ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("categorie") int categorie,
 			BindingResult bindingResult, Retrait retrait, Principal principal) {
 		// ,@RequestParam("categorie") int noCategorie
@@ -139,7 +139,7 @@ public class ArticleController {
 			for (ObjectError err : bindingResult.getAllErrors()) {
 				System.out.println(err.toString());
 			}
-			return "nouvel_article";
+			return "redirect:/nouvel_article";
 		}
 	}
 //		Authentication auth = SecurityContextHolder.getContext().getAuthentication();//SpringSecurity
@@ -177,9 +177,10 @@ public class ArticleController {
 	        enchere.setMontant_enchere(montant);
 	        System.out.println("encherir");
 	        enchereService.encherir(enchere);
-	        return "accueil";
+	        model.addAttribute("articleVendu", noArticle);
+	        return "redirect:/accueil";
 	    } else {
-	        return "redirect:/";
+	        return "redirect:/detail_vente";
 	    }
 	}
 
