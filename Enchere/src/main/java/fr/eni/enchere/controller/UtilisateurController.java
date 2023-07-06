@@ -50,6 +50,11 @@ public class UtilisateurController {
 	public String EnregistrerProfil(@Valid @ModelAttribute Utilisateur utilisateur, BindingResult bindingResult,
 			Principal principal) {
 
+		/*if(bindingResult.hasErrors()) {
+			System.out.println("erreurs");
+			return"profil-form";
+		}*/
+		
 		// Modification d'un profil existant
 		try {
 			// Vérification si l'utilisateur est connecté

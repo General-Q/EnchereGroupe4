@@ -30,9 +30,7 @@
 
 				<li><label for="inputPseudo">Pseudo : </label><input
 					type="text" name="pseudo" id="inputPseudo" 
-					required pattern="[a-zA-Z0-9]+" 
-					oninvalid="this.setCustomValidity('Veuillez saisir un pseudo valide. Utilisez uniquement des caractères alphanumériques.')" 
-					onchange="this.setCustomValidity('')"
+					required
 					data-th-value="${utilisateur.pseudo}" 
 					placeholder="Entrez votre Pseudo"/></li>
 				<div data-th-if="${#fields.hasErrors('pseudo')}">
@@ -62,9 +60,7 @@
 				<li><label for="inputEmail">Email : </label>
 				<input type="text"
 					name="email" id="inputEmail" 
-					required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" 
-					oninvalid="this.setCustomValidity('Veuillez saisir une adresse email valide.')" 
-					onchange="this.setCustomValidity('')"
+					required
 					data-th-value="${utilisateur.email}" 
 					placeholder="Entrez votre email"/></li>
 				<div data-th-if="${#fields.hasErrors('email')}">
