@@ -34,10 +34,10 @@ public class Enchere {
 		this.montant_enchere = montant_enchere;
 	}
 
-	
 	// Constructeur avec associations
 	public Enchere(ArticleVendu articleVendu) {
 		super();
+		this.articleVendu = articleVendu;
 		this.noUtil = articleVendu.getNoUtilisateur();
 		this.dateEnchere = articleVendu.getDate_debut_encheres();
 		this.montant_enchere = articleVendu.getPrix_vente();

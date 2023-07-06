@@ -39,8 +39,6 @@
 		<!-- </div> -->
 
 		<div class="detail_vente">
-    		
-    		<input type="hidden" name="no_article" th:value="${articleVendu}">
 
 			<p>
 				Description : <a data-th-text="${articleVendu.description}"></a>
@@ -64,16 +62,17 @@
 			</p>
 
 			<br>
-			<form
-				th:action="@{/detail_vente(enchere=${enchere})}"
-				th:object="${enchere}" method="post">
-				<label for="montant">Ma proposition :</label> <input type="number"
-					id="montant" name="montant" required>
+			<form th:action="@{/detail_vente}" th:object="${enchere}"
+				method="post">
+				<!-- ... autres champs de formulaire ... -->
+				<input type="hidden" id="articleVendu" name="articleVendu"
+					th:value="${articleVendu.no_article}" /> <label for="montant">Ma
+					proposition :</label> <input type="number" id="montant" name="montant"
+					required>
 				<button type="submit">Enchérir</button>
 			</form>
+
 		</div>
-
-
 
 	</main>
 

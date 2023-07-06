@@ -52,8 +52,10 @@ public class EnchereServiceImpl implements EnchereService{
 	}
 	
 	@Override
-	public void encherir(Enchere cible) {
-		enchereDAO.encherir(cible);
+	public void encherir(Enchere cible, int noArticle) {
+		System.out.println(cible.getNoUtil() + " " + cible.getMontant_enchere() + " " + cible.getDateEnchere() + " " + noArticle);
+		cible.setNoArticleVendu(noArticle);
+		enchereDAO.encherir(cible, noArticle);
 	}
 
 }

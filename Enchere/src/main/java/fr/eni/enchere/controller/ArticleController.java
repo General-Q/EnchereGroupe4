@@ -161,27 +161,27 @@ public class ArticleController {
 		return "detail_vente";
 	}
 	@PostMapping("/detail_vente")
-	public String encherir(@ModelAttribute("enchere") Enchere enchere, @ModelAttribute("montant") int montant, Principal principal, Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null && authentication.isAuthenticated()) {
-			String pseudo = authentication.getName();
-			Utilisateur util = utilisateurService.findByPseudoOrEmail(pseudo);
-			int no = enchere.getNoArticleVendu();
-			enchere.setNoUtil(util.getNoUtilisateur());
-			enchere.setNoArticleVendu(no);
-			enchere.setMontant_enchere(montant);
-			Calendar calendar = Calendar.getInstance();
-			Date now = calendar.getTime();
-			java.sql.Date sqlDate = new java.sql.Date(now.getTime());
-			enchere.setDateEnchere(sqlDate);
-			System.out.println("encherir");
-			model.addAttribute(enchere);
-			enchereService.encherir(enchere);
-			return "accueil";
-		} else {
-			return "redirect:/";
-		}
+	public String encherir(@RequestParam("articleVendu") int noArticle, @RequestParam("montant") int montant, @ModelAttribute("enchere") Enchere enchere, Principal principal, Model model) {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication != null && authentication.isAuthenticated()) {
+	        String pseudo = authentication.getName();
+	        Utilisateur util = utilisateurService.findByPseudoOrEmail(pseudo);
+	        
+	        Calendar calendar = Calendar.getInstance();
+	        Date now = calendar.getTime();
+	        java.sql.Date sqlDate = new java.sql.Date(now.getTime());
+	        enchere.setNoUtil(util.getNoUtilisateur());
+	        enchere.setNoArticleVendu(noArticle);
+	        enchere.setDateEnchere(sqlDate);
+	        enchere.setMontant_enchere(montant);
+	        System.out.println("encherir");
+	        enchereService.encherir(enchere, noArticle);
+	        return "accueil";
+	    } else {
+	        return "redirect:/";
+	    }
 	}
+
 
 //	@PostMapping("/detail_vente")
 //	public String encherir(@RequestParam("encherir") int montant, @ModelAttribute("articleVendu") ArticleVendu articleVendu, @ModelAttribute("enchere") Enchere cible, Principal principal) {
