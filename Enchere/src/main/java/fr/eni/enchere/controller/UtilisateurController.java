@@ -53,13 +53,13 @@ public class UtilisateurController {
 		// Validation des données (si Erreur, affichage de messages sous les input)
 		if(bindingResult.hasErrors()) {
 			System.out.println("erreurs");
-			return"profil-form";
+			return"redirect:/profil-form";
 		}
 		
 		// Fonctionnalité pour contrôler la confirmation de MDP
 		if (!utilisateur.getMotDePasse().equals(motDePasseConfirm)) {
 			bindingResult.rejectValue("motDePasse", "motDePasse.isFalse", "Le mot de passe et la confirmation de mot de passe doivent être identiques");
-			return "profil-form";
+			return"redirect:/profil-form";
 		}
 		
 		// Modification d'un profil existant
@@ -79,7 +79,7 @@ public class UtilisateurController {
 				if (utilisateurService.pseudoUnique(pseudo)) {
 					System.out.println("le pseudo modifié n'est pas disponible");
 					bindingResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo modifié est déjà pris test");
-					return "profil-form";
+					return"redirect:/profil-form";
 				}
 			}
 			// Vérification si l'e-mail a été modifié (je rentre dans le if si l'email a été modifié)
@@ -89,7 +89,7 @@ public class UtilisateurController {
 				if (utilisateurService.emailUnique(email)) {
 					System.out.println("l'email modifié n'est pas disponible");
 					bindingResult.rejectValue("email","email.alreadyTaken","Ce mail modifié est déjà associé à un autre utilisateur");
-					return "profil-form";
+					return"redirect:/profil-form";
 				}
 				
 			}
@@ -106,7 +106,7 @@ public class UtilisateurController {
 			if (utilisateurService.pseudoUnique(utilisateur.getPseudo())) {
 				System.out.println(utilisateur.getPseudo());
 				bindingResult.rejectValue("pseudo", "pseudo.alreadyTaken", "Le pseudo est déjà pris");
-				return "profil-form";
+				return"redirect:/profil-form";
 			}
 
 			// Vérification si l'email est disponible (je rentre dans le if si l'e-mail est déjà pris)
@@ -114,7 +114,7 @@ public class UtilisateurController {
 				System.out.println(utilisateur.getEmail());
 				bindingResult.rejectValue("email", "email.alreadyTaken",
 						"Ce mail est déjà associé à un autre utilisateur");
-				return "profil-form";
+				return"redirect:/profil-form";
 			}
 
 			// Ok pour l'inscription

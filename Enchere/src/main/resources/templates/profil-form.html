@@ -17,18 +17,18 @@
 		<h1
 			th:text="${#authorization.expression('isAuthenticated()')} ? 'Modification de mon profil' : 'Inscription'"></h1>
 
-		<form th:action="enregistrerProfil" th:object="${utilisateur}"
+		<form  th:action="enregistrerProfil" th:object="${utilisateur}"
 			method="post">
 
 
 
-			<ul>
-				<label for="inputNoUtilisateur"></label>
+			<ul >
+				<label  for="inputNoUtilisateur"></label>
 				<input type="hidden" name="noUtilisateur" id="inputNoUtilisateur"
 					required data-th-value="${utilisateur.noUtilisateur}"/>
 				<br>
-
-				<li><label for="inputPseudo">Pseudo : </label><input
+			<div class= "forminscription">
+				<li class="luinscription"><label for="inputPseudo">Pseudo : </label><input class="cta"
 					type="text" name="pseudo" id="inputPseudo" 
 					required
 					data-th-value="${utilisateur.pseudo}" 
@@ -39,7 +39,7 @@
 				</div>
 				<br>
 
-				<li><label for="inputNom">Nom : </label><input type="text"
+				<li class="luinscription"><label for="inputNom">Nom : </label><input type="text"
 					name="nom" id="inputNom" required
 					data-th-value="${utilisateur.nom}" placeholder="Entrez votre Nom"/></li>
 				<div data-th-if="${#fields.hasErrors('nom')}">
@@ -48,7 +48,7 @@
 				</div>
 				<br>
 
-				<li><label for="inputPrenom">Prénom : </label><input
+				<li class="luinscription"><label for="inputPrenom">Prénom : </label><input
 					type="text" name="prenom" id="inputPrenom" required
 					data-th-value="${utilisateur.prenom}" placeholder="Entrez votre Prénom"/></li>
 				<div data-th-if="${#fields.hasErrors('prenom')}">
@@ -57,7 +57,7 @@
 				</div>
 				<br>
 
-				<li><label for="inputEmail">Email : </label>
+				<li class="luinscription"><label for="inputEmail">Email : </label>
 				<input type="text"
 					name="email" id="inputEmail" 
 					required
@@ -69,7 +69,7 @@
 				</div>
 				<br>
 
-				<li><label for="inputTelephone">Téléphone : </label><input
+				<li class="luinscription"><label for="inputTelephone">Téléphone : </label><input
 					type="text" name="telephone" id="inputTelephone" required
 					data-th-value="${utilisateur.telephone}" placeholder="Entrez votre téléphone"/></li>
 				<div data-th-if="${#fields.hasErrors('telephone')}">
@@ -78,7 +78,7 @@
 				</div>
 				<br>
 
-				<li><label for="inputRue">Rue : </label><input type="text"
+				<li class="luinscription"><label for="inputRue">Rue : </label><input type="text"
 					name="rue" id="inputRue" required
 					data-th-value="${utilisateur.rue}" placeholder="Entrez votre rue"/></li>
 				<div data-th-if="${#fields.hasErrors('rue')}">
@@ -87,7 +87,7 @@
 				</div>
 				<br>
 
-				<li><label for="inputCodePostal">Code Postal : </label><input
+				<li class="luinscription"><label for="inputCodePostal">Code Postal : </label><input
 					type="text" name="codePostal" id="inputCodePostal" required
 					data-th-value="${utilisateur.codePostal}" placeholder="Entrez votre code postal"/></li>
 				<div data-th-if="${#fields.hasErrors('codePostal')}">
@@ -97,7 +97,7 @@
 				<br>
 
 
-				<li><label for="inputVille">Ville : </label><input type="text"
+				<li class="luinscription"><label for="inputVille">Ville : </label><input type="text"
 					name="ville" id="inputVille" required
 					data-th-value="${utilisateur.ville}" placeholder="Entrez votre ville"/></li>
 				<div data-th-if="${#fields.hasErrors('ville')}">
@@ -107,7 +107,7 @@
 				<br>
 
 
-				<li><label for="inputMdp">Mot de passe : </label><input
+				<li class="luinscription"><label for="inputMdp">Mot de passe : </label><input
 					type="password" name="motDePasse" id="inputMotDePasse" required placeholder="Entrez un mot de passe"/>
 					<!--  data-th-value="${utilisateur.motDePasse}"--></li>
 				<div data-th-if="${#fields.hasErrors('motDePasse')}">
@@ -117,7 +117,7 @@
 				<br>
 
 
-				<li><label for="inputMdpConfirm">Confirmation du mot de passe : </label> <input 
+				<li class="luinscription"><label for="inputMdpConfirm">Confirmation du mot de passe : </label> <input 
 				type="password" name="motDePasseConfirm" id="inputMotDePasseConfirm" required placeholder="Confirmez le mot de passe"/></li>
 				<br>
 
@@ -132,17 +132,18 @@
 					<p>Crédits : [[${utilisateur.credit}]]</p>
 				</div>
 				<br>
-
+</div>
 			</ul>
 
-			<button type="submit"
+			<button class ="utilisateur" type="submit"
 				th:text="${#authorization.expression('isAuthenticated()')} ? 'Enregistrer les modifications' : 'Créer le profil'"></button>
-			<button type="cancel"
+			<button class ="utilisateur" type="cancel"
 				onclick="javascript:window.location='http://localhost:8080/';">Annuler</button>
-			<a th:href="@{/supprimerProfil}"
+			<a  id="supp" th:href="@{/supprimerProfil}"
 				data-th-if="${#authorization.expression('isAuthenticated()')}">Supprimer
 				le compte</a>
 		</form>
+		<br>
 
 
 
