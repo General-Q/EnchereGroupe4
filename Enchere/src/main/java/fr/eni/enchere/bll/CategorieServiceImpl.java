@@ -24,9 +24,9 @@ public class CategorieServiceImpl implements CategorieService {
 	
 	//a finir steph
 	@Override
-	public List<Categorie> getAllCategories() {
+	public List<Categorie> findAll() {
 		
-		return null;
+		return ;
 	}
 	
 	@Override

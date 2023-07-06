@@ -65,7 +65,7 @@ public class ArticleController {
 	@GetMapping("/encheres")
 	public String rechercherEncheres(@RequestParam(value = "categorie", required = false) Integer no_categorie,
 			Model model) {
-
+		
 		List<Enchere> encheresFiltrees = enchereService.rechercherEncheresParCategorie(no_categorie);
 
 		// Passez les enchères filtrées à la vue pour les afficher
@@ -73,7 +73,7 @@ public class ArticleController {
 
 		// Passez également les options de catégorie à la vue pour afficher la liste
 		// déroulante ou les cases à cocher
-		List<Categorie> categories = categorieService.getAllCategories();
+		List<Categorie> categories = categorieService.findAll();
 		model.addAttribute("categories", categories);
 
 		return "accueil";

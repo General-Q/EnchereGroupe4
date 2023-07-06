@@ -11,5 +11,5 @@ public interface ArticleVenduDAO {
 		List<ArticleVendu> findAll();
 		void ajoutArticle(ArticleVendu articleVendu, Retrait retrait, Principal principal);
 		ArticleVendu findById(Integer id);
-		
+		List<ArticleVendu> findByCat(Integer noC);
 }

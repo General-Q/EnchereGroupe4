@@ -46,9 +46,9 @@ public class EnchereServiceImpl implements EnchereService{
 	}
 
 	@Override
-	public List<Enchere> rechercherEncheresParCategorie(Integer no_categorie) {
+	public List<Enchere> rechercherEncheresParCategorie(Integer no_article) {
 		// TODO Auto-generated method stub
-		return enchereDAO.getEncheresParCategorie(no_categorie);
+		return enchereDAO.getEncheresParCategorie(no_article);
 	}
 	
 	@Override

@@ -12,5 +12,5 @@ public interface ArticleVenduService {
 	void ajoutArticle(ArticleVendu articleVendu, Retrait retrait, Principal principal);
 	ArticleVendu findById(Integer id);
 	Retrait getRetrait();
-	
+	List<ArticleVendu> findByCat(Integer noC);
 }

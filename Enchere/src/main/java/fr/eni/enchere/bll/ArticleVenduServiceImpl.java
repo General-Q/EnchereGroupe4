@@ -39,6 +39,11 @@ public class ArticleVenduServiceImpl implements ArticleVenduService{
 	public ArticleVendu findById(Integer id) {
 		return articleVenduDAO.findById(id);
 	}
+	
+	@Override
+	public List<ArticleVendu> findByCat(Integer noC){
+		return articleVenduDAO.findByCat(noC);
+	}
 
 	public Retrait getRetrait() {
 		return retrait;

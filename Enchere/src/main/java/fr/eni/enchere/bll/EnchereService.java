@@ -11,6 +11,6 @@ public interface EnchereService {
 
 void ajouterVente(@Valid ArticleVendu articleVendu);
 Enchere findById(Integer noE);
-List<Enchere> rechercherEncheresParCategorie(Integer no_categorie);
+List<Enchere> rechercherEncheresParCategorie(Integer no_article);
 void encherir(Enchere cible);
 }

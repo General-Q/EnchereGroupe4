@@ -16,8 +16,9 @@ public class EnchereDAOImpl implements EnchereDAO{
 	private static final String INSERT = "insert into ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere)"
             + " values (:no_utilisateur, :no_article, :date_enchere, :montant_enchere)";
 	private static final String FIND_BY_ID = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article=?";
-	private static final String FIND_ALL = "select no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
+	private static final String FIND_ALL = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES";
 	private static final String UPDATE = "UPDATE ENCHERES SET no_utilisateur = :no_utilisateur, date_enchere = :date_enchere, montant_enchere = :montant_enchere WHERE no_article = :no_article";
+	private static final String FIND_CAT = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article = :no_article";
 	//	private static final String FIND_CAT = "SELECT * FROM ENCHERES WHERE no_categorie = :no_categorie";
 	
 	
@@ -69,8 +70,8 @@ public class EnchereDAOImpl implements EnchereDAO{
 	
 	//juste pour pouvoir compiler modif à faire dans la méthode en commentaire
 	@Override
-	public List<Enchere> getEncheresParCategorie(Integer no_categorie) {
-		// TODO Auto-generated method stub
+	public List<Enchere> getEncheresParCategorie(Integer no_article) {
+		
 		return null;
 	}
 
