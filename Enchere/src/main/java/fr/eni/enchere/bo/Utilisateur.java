@@ -57,18 +57,13 @@ public class Utilisateur {
 	@Pattern(regexp = "^[a-zA-Z]+$")
 	private String ville;
 	
-
+	@NotNull
 	@Size(max=30)
+	@Size(min=6)
 	private String motDePasse;
 	
-	@NotNull
-	@Size(max=30)
-	private String confirmMotDePasse;
-	
-	@NotNull
 	private Integer credit;
 	
-	@NotNull
 	private Boolean administrateur;
 	
 	// Associations
@@ -86,7 +81,7 @@ public class Utilisateur {
 
 	// Constructeur sans association
 	public Utilisateur(Integer noUtilisateur,String pseudo,String nom,String prenom,String email,String telephone,
-			String rue,String codePostal,String ville,String motDePasse,String confirmMotDePasse,Integer credit, Boolean administrateur) {
+			String rue,String codePostal,String ville,String motDePasse,Integer credit, Boolean administrateur) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
@@ -98,14 +93,13 @@ public class Utilisateur {
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.motDePasse = motDePasse;
-		this.confirmMotDePasse = confirmMotDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
 	
 	// Constructeur avec associations
 	public Utilisateur(Integer noUtilisateur,String pseudo,String nom,String prenom,String email,String telephone,
-			String rue,String codePostal,String ville,String motDePasse,String confirmMotDePasse,Integer credit, Boolean administrateur,
+			String rue,String codePostal,String ville,String motDePasse,Integer credit, Boolean administrateur,
 			List<ArticleVendu> articlesVendus, List<Enchere> encheres) {
 		super();
 		this.noUtilisateur = noUtilisateur;
@@ -211,15 +205,6 @@ public class Utilisateur {
 
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
-	}
-	
-	
-	public String getConfirmMotDePasse() {
-		return confirmMotDePasse;
-	}
-
-	public void setConfirmMotDePasse(String confirmMotDePasse) {
-		this.confirmMotDePasse = confirmMotDePasse;
 	}
 
 	public Integer getCredit() {
