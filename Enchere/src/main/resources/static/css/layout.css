@@ -152,17 +152,66 @@ a:hover{
 	transition-duration: 1s;
 }
 .utilisateur{
+	font-size:20px;
 	margin-bottom:50px;
+	align-items: center;
+	margin-left:38%;
+	margin-right:-38%;
+	}
+#supp{
+	font-size:20px;
+	margin-left:38%;
 }
 
-
 .container{
-  background-color:#880000;	
+  background-color:grey;
+  margin-bottom: 20px;	
  }
-/* tbody{ */
-/* /*     display: grid; */ */
-/* /*     grid-template-columns: 1fr 1fr; */ */
-/* /*     grid-gap: 20px; */ */
-/* /*     border-radius: 2px; */ */
-/* /*     border-color: green; */ */
+/* .inscription{ */
+/*   list-style: none; */
+/*   margin: 2em; */
+/*   display: grid; */
+/*   grid-gap: 20px; */
+/*   grid-template-columns: 60px 60px; */
+
+/*   border-top: 1px solid #c0c0c0; */
+/*   padding: 10px; */
+/*   text-align: center; */
+  
+/*   } */
+
+/* .inscription li { */
+/*   border: 1px solid #000000; */
+/*   border-radius: 5px; */
+/*   display: flex; */
+/*   flex-direction: column; */
 /* } */
+.forminscription {
+font-size:20px;
+display : grid;
+
+padding-top:20px;
+
+grid-template-columns: repeat(4, 0fr);
+
+gap:100px;
+
+justify-content : center;
+
+}
+
+ label{
+ font-size:20px;
+ }
+
+.luinscription {
+	font-size:20px;
+    display: grid;
+
+    align-items: center;
+	justify-items: center;
+}
+ input{
+width:300px;
+height:50px;
+}
