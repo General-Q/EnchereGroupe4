@@ -37,10 +37,11 @@
 				<label for="prix_initial">Prix initial :</label> <input
 					type="number" id="prix_initial" name="prix_initial" required>
 			</div>
-			<div>
-				<label for="prix_vente">Prix de vente :</label> <input type="number"
-					id="prix_vente" name="prix_vente" required>
-			</div>
+			<div th:if="${prix_initial != null}" type="hidden">
+                <label for="prix_vente">Prix de vente :</label> <input type="number"
+                    id="prix_vente" name="prix_vente" required th:value="${prix_initial}" th:attr="data-prix-initial=${prix_initial}">
+
+            </div>
 			<div>
 				<label for="date_debut_encheres">Début des enchères :</label> <input
 					type="date" id="date_debut_encheres" name="date_debut_encheres"
@@ -85,7 +86,7 @@
 </table>
 
 			
-			<button type="submit">Créer l'article</button>
+			<button class ="utilisateur" type="submit">Créer l'article</button>
 		</form>
 
 	</main>
