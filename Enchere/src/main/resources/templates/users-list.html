@@ -12,10 +12,10 @@
 <h1>Liste des utilisateurs</h1>
 
  <div id="usersList">
-            <table>
+            <table class="formlisteuser">
         <tr th:each="utilisateur:${utilisateurs}">
         <td>[[${utilisateur.pseudo}]]</td>
-        <td><a th:href="@{/afficherUtilisateur(pseudo=${utilisateur.pseudo})}">Afficher le profil de l'utilisateur</a>
+        <td><a th:href="@{/afficherUtilisateur(pseudo=${utilisateur.pseudo})}">Afficher le profil</a>
             </table>
         </div>
 
