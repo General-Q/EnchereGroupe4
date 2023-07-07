@@ -51,6 +51,8 @@ public class ArticleController {
 	@GetMapping({ "/", "/accueil" })
 	public String afficherEncheres(Model model) {
 		List<ArticleVendu> articlesVendus = articleVenduService.consulterAV();
+		List<Categorie> categories = categorieService.findAll();
+		model.addAttribute("categories", categories);
 		if (articlesVendus == null) {
 			// Gérer le cas où la liste est nulle, par exemple, afficher un message d'erreur
 			model.addAttribute("message", "Aucun article vendu disponible.");
@@ -65,8 +67,8 @@ public class ArticleController {
 	@GetMapping("/encheres")
 	public String rechercherEncheres(@RequestParam(value = "categorie", required = false) Integer no_categorie,
 			Model model) {
-		
-		List<Enchere> encheresFiltrees = enchereService.rechercherEncheresParCategorie(no_categorie);
+		List<ArticleVendu> lstA = articleVenduService.findByCat(no_categorie);
+		List<Enchere> encheresFiltrees = enchereService.rechercherEncheresParCategorie(lstA);
 
 		// Passez les enchères filtrées à la vue pour les afficher
 		model.addAttribute("encheres", encheresFiltrees);

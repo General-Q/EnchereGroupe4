@@ -1,6 +1,9 @@
 package fr.eni.enchere.dal;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -70,9 +73,23 @@ public class EnchereDAOImpl implements EnchereDAO{
 	
 	//juste pour pouvoir compiler modif à faire dans la méthode en commentaire
 	@Override
-	public List<Enchere> getEncheresParCategorie(Integer no_article) {
-		
-		return null;
+	public List<Enchere> getEncheresParCategorie(List<ArticleVendu> lstA) {
+	    List<Enchere> encheres = new ArrayList<>();
+
+	    for (ArticleVendu articleVendu : lstA) {
+	        Integer noCategorie = articleVendu.getNoCategorie(); // Récupérer le numéro de catégorie de l'article
+
+	        Map<String, Object> param = new HashMap<>();
+	        param.put("no_categorie", noCategorie);
+
+	        // Exécuter la requête FIND_CAT pour la catégorie de l'article
+	        List<Enchere> encheresParCategorie = jdbcTemplate.query(FIND_CAT, param, new BeanPropertyRowMapper<>(Enchere.class));
+
+	        // Ajouter les résultats à la liste d'enchères
+	        encheres.addAll(encheresParCategorie);
+	    }
+
+	    return encheres;
 	}
 
 }

@@ -31,18 +31,22 @@
 
 			<h2>Filtres :</h2>
 
-			<form action="" class="formulaire">
+			<form action="/encheres" class="formulaire">
 
 				<input class="champ" type="text"
 					placeholder="Le nom de l'article contient ?" /> <input
-					class="bouton" type="button" value="Valider" />
+					class="bouton" type="submit" value="Valider" />
 			<div>
+			</form>
 			<br>
+			<form action="/encheres" class="formulaire">
     			<label for="categorie">Catégorie :</label>
     				<select id="categorie" name="categorie">
         				<option value="">Toutes les catégories</option>
         				<option th:each="categorie : ${categories}" 
        						    th:value="${categorie.no_categorie}" th:text="${categorie.libelle}"></option>
+       						    <input
+					class="bouton" type="submit" value="Valider" />
     				</select>
 			</div>
 			</form>

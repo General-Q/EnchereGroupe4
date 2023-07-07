@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -21,7 +23,7 @@ import fr.eni.enchere.bo.Utilisateur;
 @Repository
 public class ArticleVenduDAOImpl implements ArticleVenduDAO{
 	private final String FIND_BY_ID = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_article=?";
-	private final String FIND_BY_CAT = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_categorie=?";
+	private final String FIND_BY_CAT = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS WHERE no_categorie= :no_categorie";
 	private final String FIND_ALL = "SELECT no_article, nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie FROM ARTICLES_VENDUS";
 	private final String INSERT = "insert into articles_vendus(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"
 			+ " values (:nom_article, :description, :date_debut_encheres, :date_fin_encheres, :prix_initial, :prix_vente, :no_utilisateur, :no_categorie)";
@@ -51,7 +53,10 @@ public class ArticleVenduDAOImpl implements ArticleVenduDAO{
     } 
 	@Override
 	public List<ArticleVendu> findByCat(Integer noC) {
-		return jdbcTemplate.query(FIND_BY_CAT, new ArticleVenduRowMapper());
+		Map<String, Object> param = new HashMap<>();
+		param.put("no_categorie", noC);
+		List<ArticleVendu> lstA = jdbcTemplate.query(FIND_BY_CAT, param, new ArticleVenduRowMapper());
+		return lstA;
 	}
 	
 	@Override
