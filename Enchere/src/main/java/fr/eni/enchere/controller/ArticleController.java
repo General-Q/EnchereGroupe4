@@ -91,7 +91,7 @@ public class ArticleController {
 	public String ajoutArticle(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		List<Categorie> categories = categorieService.categories();
+		List<Categorie> categories = categorieService.findAll();
 		model.addAttribute("categories", categories);
 		model.addAttribute("articleVendu", new ArticleVendu());
 		if (authentication != null && authentication.isAuthenticated()) {

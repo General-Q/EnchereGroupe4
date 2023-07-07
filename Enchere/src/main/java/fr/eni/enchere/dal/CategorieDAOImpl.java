@@ -23,8 +23,7 @@ public class CategorieDAOImpl implements CategorieDAO{
 	
 	@Override
 	public List<Categorie> findAll() {
-		List<Categorie>categories = npjt.query(FIND_ALL, new BeanPropertyRowMapper<>(Categorie.class));
-		
+		List<Categorie>categories = npjt.query(FIND_ALL, new BeanPropertyRowMapper<>(Categorie.class));	
 		return categories;
 	}
 

@@ -15,18 +15,11 @@ public class CategorieServiceImpl implements CategorieService {
 	public CategorieServiceImpl(CategorieDAO categorieDAO) {
 		this.categorieDAO = categorieDAO;
 	}
-	
-	@Override
-	public List<Categorie> categories(){
-		return categorieDAO.findAll();
-	}
 
-	
 	//a finir steph
 	@Override
 	public List<Categorie> findAll() {
-		
-		return ;
+		return categorieDAO.findAll();
 	}
 	
 	@Override
