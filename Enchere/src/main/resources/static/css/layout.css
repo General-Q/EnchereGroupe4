@@ -153,14 +153,18 @@ a:hover{
 }
 .utilisateur{
 	font-size:20px;
-	margin-bottom:50px;
-	align-items: center;
-	margin-left:38%;
-	margin-right:-38%;
+	margin-top:50px; 
+	margin-bottom:100px;
+	height : 60px;
+	width : 250px;
 	}
+
+.boutonsprofil {
+	text-align:center;
+}	
+	
 #supp{
 	font-size:20px;
-	margin-left:38%;
 }
 
 .container{
@@ -189,15 +193,18 @@ a:hover{
 .forminscription {
 font-size:20px;
 display : grid;
-
 padding-top:20px;
+grid-template-columns: repeat(2, 0fr);
+gap:75px;
+justify-content : space-evenly;
 
-grid-template-columns: repeat(4, 0fr);
+}
 
-gap:100px;
-
-justify-content : center;
-
+.formlisteuser {
+font-size:20px;
+display : grid;
+padding-top:20px;
+justify-content : space-evenly;
 }
 
  label{
@@ -205,13 +212,12 @@ justify-content : center;
  }
 
 .luinscription {
-	font-size:20px;
+	font-size:18px;
     display: grid;
-
     align-items: center;
 	justify-items: center;
 }
  input{
-width:300px;
+width:400px;
 height:50px;
 }

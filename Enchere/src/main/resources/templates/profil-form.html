@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html layout:decorate="~{/layout.html}"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <meta charset="UTF-8">
 <title>EniEnchere</title>
@@ -11,139 +10,137 @@
 
 
 
-<main class ="main" layout:fragment="main">
+	<main class="main" layout:fragment="main">
 
 
 		<h1
 			th:text="${#authorization.expression('isAuthenticated()')} ? 'Modification de mon profil' : 'Inscription'"></h1>
 
-		<form  th:action="enregistrerProfil" th:object="${utilisateur}"
+		<form th:action="enregistrerProfil" th:object="${utilisateur}"
 			method="post">
 
 
 
-			<ul >
-				<label  for="inputNoUtilisateur"></label>
+			<ul>
+				<label for="inputNoUtilisateur"></label>
 				<input type="hidden" name="noUtilisateur" id="inputNoUtilisateur"
-					required data-th-value="${utilisateur.noUtilisateur}"/>
-				<br>
-			<div class= "forminscription">
-				<li class="luinscription"><label for="inputPseudo">Pseudo : </label><input class="cta"
-					type="text" name="pseudo" id="inputPseudo" 
-					required
-					data-th-value="${utilisateur.pseudo}" 
-					placeholder="Entrez votre Pseudo"/></li>
-				<div data-th-if="${#fields.hasErrors('pseudo')}">
-					<p data-th-each="erreur: ${#fields.errors('pseudo')}"
-						data-th-text="${erreur}"></p>
+					required data-th-value="${utilisateur.noUtilisateur}" />
+
+				<div class="forminscription">
+					<li class="luinscription"><label for="inputPseudo">Pseudo
+							: </label><input class="cta" type="text" name="pseudo" id="inputPseudo"
+						required data-th-value="${utilisateur.pseudo}"
+						placeholder="Entrez votre Pseudo" />
+					<div data-th-if="${#fields.hasErrors('pseudo')}">
+						<p data-th-each="erreur: ${#fields.errors('pseudo')}"
+							data-th-text="${erreur}"></p>
+					</div></li>
+
+
+					<li class="luinscription"><label for="inputNom">Nom :
+					</label><input type="text" name="nom" id="inputNom" required
+						data-th-value="${utilisateur.nom}" placeholder="Entrez votre Nom" />
+					<div data-th-if="${#fields.hasErrors('nom')}">
+						<p data-th-each="erreur: ${#fields.errors('nom')}"
+							data-th-text="${erreur}"></p>
+					</div></li>
+
+
+					<li class="luinscription"><label for="inputPrenom">Prénom
+							: </label><input type="text" name="prenom" id="inputPrenom" required
+						data-th-value="${utilisateur.prenom}"
+						placeholder="Entrez votre Prénom" />
+					<div data-th-if="${#fields.hasErrors('prenom')}">
+						<p data-th-each="erreur: ${#fields.errors('prenom')}"
+							data-th-text="${erreur}"></p>
+					</div></li>
+
+
+					<li class="luinscription"><label for="inputEmail">Email
+							: </label> <input type="text" name="email" id="inputEmail" required
+						data-th-value="${utilisateur.email}"
+						placeholder="Entrez votre email" />
+					<div data-th-if="${#fields.hasErrors('email')}">
+						<p data-th-each="erreur: ${#fields.errors('email')}"
+							data-th-text="${erreur}"></p>
+					</div></li>
+
+
+					<li class="luinscription"><label for="inputTelephone">Téléphone
+							: </label><input type="text" name="telephone" id="inputTelephone"
+						required data-th-value="${utilisateur.telephone}"
+						placeholder="Entrez votre téléphone" />
+					<div data-th-if="${#fields.hasErrors('telephone')}">
+						<p data-th-each="erreur: ${#fields.errors('telephone')}"
+							data-th-text="${erreur}"></p>
+					</div></li>
+
+
+					<li class="luinscription"><label for="inputRue">Rue :
+					</label><input type="text" name="rue" id="inputRue" required
+						data-th-value="${utilisateur.rue}" placeholder="Entrez votre rue" />
+					<div data-th-if="${#fields.hasErrors('rue')}">
+						<p data-th-each="erreur: ${#fields.errors('rue')}"
+							data-th-text="${erreur}"></p>
+					</div></li>
+
+
+					<li class="luinscription"><label for="inputCodePostal">Code
+							Postal : </label><input type="text" name="codePostal"
+						id="inputCodePostal" required
+						data-th-value="${utilisateur.codePostal}"
+						placeholder="Entrez votre code postal" />
+					<div data-th-if="${#fields.hasErrors('codePostal')}">
+						<p data-th-each="erreur: ${#fields.errors('codePostal')}"
+							data-th-text="${erreur}"></p>
+					</div></li>
+
+
+
+					<li class="luinscription"><label for="inputVille">Ville
+							: </label><input type="text" name="ville" id="inputVille" required
+						data-th-value="${utilisateur.ville}"
+						placeholder="Entrez votre ville" />
+					<div data-th-if="${#fields.hasErrors('ville')}">
+						<p data-th-each="erreur: ${#fields.errors('ville')}"
+							data-th-text="${erreur}"></p>
+					</div></li>
+
+
+
+					<li class="luinscription"><label for="inputMdp">Mot de
+							passe : </label><input type="password" name="motDePasse"
+						id="inputMotDePasse" required placeholder="Entrez un mot de passe" />
+						<!--  data-th-value="${utilisateur.motDePasse}"-->
+					<div data-th-if="${#fields.hasErrors('motDePasse')}">
+						<p data-th-each="erreur: ${#fields.errors('motDePasse')}"
+							data-th-text="${erreur}"></p>
+					</div></li>
+
+
+
+					<li class="luinscription"><label for="inputMdpConfirm">Confirmation
+							du mot de passe : </label> <input type="password"
+						name="motDePasseConfirm" id="inputMotDePasseConfirm" required
+						placeholder="Confirmez le mot de passe" /></li>
+
+					<div data-th-if="${#authorization.expression('isAuthenticated()')}">
+						<p>Crédits : [[${utilisateur.credit}]]</p>
+					</div>
+
 				</div>
-				<br>
-
-				<li class="luinscription"><label for="inputNom">Nom : </label><input type="text"
-					name="nom" id="inputNom" required
-					data-th-value="${utilisateur.nom}" placeholder="Entrez votre Nom"/></li>
-				<div data-th-if="${#fields.hasErrors('nom')}">
-					<p data-th-each="erreur: ${#fields.errors('nom')}"
-						data-th-text="${erreur}"></p>
-				</div>
-				<br>
-
-				<li class="luinscription"><label for="inputPrenom">Prénom : </label><input
-					type="text" name="prenom" id="inputPrenom" required
-					data-th-value="${utilisateur.prenom}" placeholder="Entrez votre Prénom"/></li>
-				<div data-th-if="${#fields.hasErrors('prenom')}">
-					<p data-th-each="erreur: ${#fields.errors('prenom')}"
-						data-th-text="${erreur}"></p>
-				</div>
-				<br>
-
-				<li class="luinscription"><label for="inputEmail">Email : </label>
-				<input type="text"
-					name="email" id="inputEmail" 
-					required
-					data-th-value="${utilisateur.email}" 
-					placeholder="Entrez votre email"/></li>
-				<div data-th-if="${#fields.hasErrors('email')}">
-					<p data-th-each="erreur: ${#fields.errors('email')}"
-						data-th-text="${erreur}"></p>
-				</div>
-				<br>
-
-				<li class="luinscription"><label for="inputTelephone">Téléphone : </label><input
-					type="text" name="telephone" id="inputTelephone" required
-					data-th-value="${utilisateur.telephone}" placeholder="Entrez votre téléphone"/></li>
-				<div data-th-if="${#fields.hasErrors('telephone')}">
-					<p data-th-each="erreur: ${#fields.errors('telephone')}"
-						data-th-text="${erreur}"></p>
-				</div>
-				<br>
-
-				<li class="luinscription"><label for="inputRue">Rue : </label><input type="text"
-					name="rue" id="inputRue" required
-					data-th-value="${utilisateur.rue}" placeholder="Entrez votre rue"/></li>
-				<div data-th-if="${#fields.hasErrors('rue')}">
-					<p data-th-each="erreur: ${#fields.errors('rue')}"
-						data-th-text="${erreur}"></p>
-				</div>
-				<br>
-
-				<li class="luinscription"><label for="inputCodePostal">Code Postal : </label><input
-					type="text" name="codePostal" id="inputCodePostal" required
-					data-th-value="${utilisateur.codePostal}" placeholder="Entrez votre code postal"/></li>
-				<div data-th-if="${#fields.hasErrors('codePostal')}">
-					<p data-th-each="erreur: ${#fields.errors('codePostal')}"
-						data-th-text="${erreur}"></p>
-				</div>
-				<br>
-
-
-				<li class="luinscription"><label for="inputVille">Ville : </label><input type="text"
-					name="ville" id="inputVille" required
-					data-th-value="${utilisateur.ville}" placeholder="Entrez votre ville"/></li>
-				<div data-th-if="${#fields.hasErrors('ville')}">
-					<p data-th-each="erreur: ${#fields.errors('ville')}"
-						data-th-text="${erreur}"></p>
-				</div>
-				<br>
-
-
-				<li class="luinscription"><label for="inputMdp">Mot de passe : </label><input
-					type="password" name="motDePasse" id="inputMotDePasse" required placeholder="Entrez un mot de passe"/>
-					<!--  data-th-value="${utilisateur.motDePasse}"--></li>
-				<div data-th-if="${#fields.hasErrors('motDePasse')}">
-					<p data-th-each="erreur: ${#fields.errors('motDePasse')}"
-						data-th-text="${erreur}"></p>
-				</div>
-				<br>
-
-
-				<li class="luinscription"><label for="inputMdpConfirm">Confirmation du mot de passe : </label> <input 
-				type="password" name="motDePasseConfirm" id="inputMotDePasseConfirm" required placeholder="Confirmez le mot de passe"/></li>
-				<br>
-
-				<!--  
-<div th:if="${#fields.hasErrors('motDePasseConfirmation')}">
-    <p class="error" th:errors="*{motDePasseConfirmation}"></p>
-</div>
--->
-
-
-				<div data-th-if="${#authorization.expression('isAuthenticated()')}">
-					<p>Crédits : [[${utilisateur.credit}]]</p>
-				</div>
-				<br>
-</div>
 			</ul>
-
-			<button class ="utilisateur" type="submit"
-				th:text="${#authorization.expression('isAuthenticated()')} ? 'Enregistrer les modifications' : 'Créer le profil'"></button>
-			<button class ="utilisateur" type="cancel"
+		<div class ="boutonsprofil">
+			<button class="utilisateur" type="submit"
+				th:text="${#authorization.expression('isAuthenticated()')} ? 'Enregistrer' : 'Créer le profil'"></button>
+			<button class="utilisateur" type="cancel"
 				onclick="javascript:window.location='http://localhost:8080/';">Annuler</button>
-			<a  id="supp" th:href="@{/supprimerProfil}"
+			<a id="supp" th:href="@{/supprimerProfil}"
 				data-th-if="${#authorization.expression('isAuthenticated()')}">Supprimer
 				le compte</a>
+				</div>
 		</form>
-		<br>
+
 
 
 

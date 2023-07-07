@@ -69,6 +69,8 @@ public class ApplicationSecurityConfig {
 						.requestMatchers("/layout.css").permitAll()
 						.requestMatchers("/images/*").permitAll()
 						.requestMatchers("/resources/*").permitAll()
+						.requestMatchers("/error").permitAll()
+						.requestMatchers("/accueil").permitAll()
 						// Il faut être connecté pour toutes autres URLs
 						.anyRequest().authenticated();
 			});
